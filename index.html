@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>x0 (xZero) — HTTP Web Server and Framework</title>
+
+<!-- Charset -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8" />
+
+<!-- SEO -->
+<meta name="Author" content="Christian Parpart" />
+<meta property="og:description" content="x0 is a low-latency, opensource, scalable HTTP web server and web service framework written in modern C++">
+<meta property="og:site_name" content="xzero.io">
+<meta content="x0 is a low-latency, opensource, scalable HTTP web server and web service framework written in modern C++" name="description" />
+<meta content="x0, webserver, framework, api" name="keywords" />
+
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Ubuntu:400,500,700" rel="stylesheet" type="text/css" />
+
+<!-- 
+<script src="http://static.matelife.local/mljs/ml.modernizr.min.js" type="text/javascript"></script>
+<link href="http://static.matelife.local/mlcss/home.css" rel="stylesheet" type="text/css" />
+ -->
+
+<style media="screen" type="text/css">
+/* http://meyerweb.com/eric/tools/css/reset/ 
+     v2.0 | 20110126
+     License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Selection default color */
+::selection {
+    background:#000;
+    color:#ffffff;
+}
+::-moz-selection {
+    background:#000;
+    color:#ffffff;
+}
+::-webkit-selection {
+    background:#000;
+    color:#ffffff;
+}
+a {
+    color:#f6f6f6;
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+a:link {
+    text-decoration:none;
+}
+a.underline {
+    text-decoration:underline;
+}
+html {
+    width:100%;
+    height: 100%;
+    background: #f5f5f5;
+}
+body {
+    height:100%;
+    font:12px "Lucida Grande", "Lucida Sans Unicode",tahoma,"Trebuchet MS",verdana,arial,sans-serif;
+
+    font-weight:lighter;
+    color:#2f2f2f;
+    font-smooth:always;
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+/* Header */
+header {
+  width:986px;
+  margin:0 auto;
+
+  background-image: -ms-radial-gradient(center, circle farthest-side, #FFFFFF 0%, #F5F5F5 100%);
+  background-image: -moz-radial-gradient(center, circle farthest-side, #FFFFFF 0%, #F5F5F5 100%);
+  background-image: -o-radial-gradient(center, circle farthest-side, #FFFFFF 0%, #F5F5F5 100%);
+  background-image: -webkit-gradient(radial, center center, 0, center center, 477, color-stop(0, #FFFFFF), color-stop(1, #F5F5F5));
+  background-image: -webkit-radial-gradient(center, circle farthest-side, #FFFFFF 0%, #F5F5F5 100%);
+  background-image: radial-gradient(circle farthest-side at center, #FFFFFF 0%, #F5F5F5 100%);
+
+  outline:0;
+  border:0;
+  font-size:0px;
+
+  -webkit-text-shadow:0 1px 1px #ffffff;
+  -moz-text-shadow:0 1px 1px #ffffff;
+  -o-text-shadow:0 1px 1px #ffffff;
+  -ms-text-shadow:0 1px 1px #ffffff;
+  text-shadow:0 1px 1px #ffffff;
+
+  padding-top:40px;
+}
+header section.bigLogo {
+  height:490px;
+  width:100%;
+
+  outline:0;
+  border:0;
+  font-size:0px;
+
+  background: url('images/x0Logo.png') no-repeat top center;
+
+  /* Disable highlighting */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -khtml-user-drag: none;
+  -webkit-user-drag: none;
+  -o-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
+}
+header h1, header nav {
+  width:100%;
+
+  text-align:center;
+  font-family: 'Lucida Grande', 'Open Sans', 'Lucida Sans Unicode',tahoma,"Trebuchet MS",verdana,arial,sans-serif;
+  font-weight:bold;
+
+  font-smooth:always;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+
+  /* Enable 3D Acceleration */
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+header h1 {
+  font-weight:lighter;
+  font-size:14px;
+}
+header h5 {
+  margin-top:20px;
+  margin-bottom:10px;
+
+  font-weight:lighter;
+  font-size:11.5px;
+  color:#7a7a7a;
+}
+header nav {
+  font-weight:bold;
+  color:#8d8d8d;
+
+  cursor:pointer;
+
+  margin-top:10px;
+  font-size:15px;
+}
+header nav a {
+  color:#8d8d8d;
+
+  -webkit-transition:color 0.2s ease-in-out;
+  -moz-transition:color 0.2s ease-in-out;
+  -o-transition:color 0.2s ease-in-out;
+  -ms-transition:color 0.2s ease-in-out;
+  transition:color 0.2s ease-in-out;
+}
+header nav a:hover {
+    color:#2f2f2f;
+}
+header nav a:focus {
+  color:#4e4e4e;
+}
+
+/* Features */
+ul.listFeatures {
+  min-height:50px;
+}
+ul.listFeatures li.feature {
+  min-height:45px;
+  padding-top:20px;
+  padding-bottom:20px;
+
+  border-top: 1px solid #fff;
+
+  background: rgb(249,249,249);
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI3MCUiIHN0b3AtY29sb3I9IiNmOWY5ZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWRlZGVkIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+  background: -moz-linear-gradient(top,  rgba(249,249,249,1) 70%, rgba(237,237,237,1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(70%,rgba(249,249,249,1)), color-stop(100%,rgba(237,237,237,1)));
+  background: -webkit-linear-gradient(top,  rgba(249,249,249,1) 70%,rgba(237,237,237,1) 100%);
+  background: -o-linear-gradient(top,  rgba(249,249,249,1) 70%,rgba(237,237,237,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(249,249,249,1) 70%,rgba(237,237,237,1) 100%);
+  background: linear-gradient(to bottom,  rgba(249,249,249,1) 70%,rgba(237,237,237,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#ededed',GradientType=0 );
+}
+ul.listFeatures li.feature div {
+  width:986px;
+  margin:0 auto;
+
+  clear:both;
+}
+ul.listFeatures li.feature div section.assemble {
+  padding-left:45px;
+}
+ul.listFeatures li.feature div section.assemble h6 {
+  font-family: 'Open Sans', 'Lucida Grande', 'Lucida Sans Unicode',tahoma,"Trebuchet MS",verdana,arial,sans-serif;
+  font-weight:500;
+  color:#323232;
+
+  -webkit-text-shadow:0 1px 1px #ffffff;
+  -moz-text-shadow:0 1px 1px #ffffff;
+  -o-text-shadow:0 1px 1px #ffffff;
+  -ms-text-shadow:0 1px 1px #ffffff;
+  text-shadow:0 1px 1px #ffffff;
+
+  font-size:18px;
+}
+ul.listFeatures li.feature div section.assemble p {
+  display:block;
+}
+ul.listFeatures li.divider {
+  height:1px;
+  background:#ebeaea;
+  width:100%;
+}
+/* Footer */
+footer {
+  -webkit-text-shadow:0 1px 1px #ffffff;
+  -moz-text-shadow:0 1px 1px #ffffff;
+  -o-text-shadow:0 1px 1px #ffffff;
+  -ms-text-shadow:0 1px 1px #ffffff;
+  text-shadow:0 1px 1px #ffffff;
+
+  min-height:60px;
+  width:100%;
+
+  border-top: 1px solid #f6f6f6;
+
+  background: rgb(223,223,223);
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RmZGZkZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjI1JSIgc3RvcC1jb2xvcj0iI2Y0ZjRmNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+  background: -moz-linear-gradient(top,  rgba(223,223,223,1) 0%, rgba(244,244,244,1) 25%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(223,223,223,1)), color-stop(25%,rgba(244,244,244,1)));
+  background: -webkit-linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(244,244,244,1) 25%);
+  background: -o-linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(244,244,244,1) 25%);
+  background: -ms-linear-gradient(top,  rgba(223,223,223,1) 0%,rgba(244,244,244,1) 25%);
+  background: linear-gradient(to bottom,  rgba(223,223,223,1) 0%,rgba(244,244,244,1) 25%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dfdfdf', endColorstr='#f4f4f4',GradientType=0 );
+}
+footer aside {
+  width:986px;
+  margin:0 auto;
+
+  padding-bottom:20px;
+}
+footer aside section.whoUse {
+  font-family: 'Open Sans', 'Lucida Grande', 'Lucida Sans Unicode',tahoma,"Trebuchet MS",verdana,arial,sans-serif;
+
+  width:986px;
+  height:80px;
+}
+footer aside section.whoUse div.left {
+  float:left;
+  width:600px;
+  padding-top:5px;
+}
+footer aside section.whoUse div.left h2 {
+  float:left;
+  padding-top:20px;
+  font-size:15px;
+}
+footer aside section.whoUse div.left ul {
+  float:left;
+
+  padding-top:5px;
+  padding-left:5px;
+}
+footer aside section.whoUse div.left ul li {
+  display:inline;
+  
+  margin-left:15px;
+}
+footer aside section.whoUse div.left ul li img {
+  /* Disable highlighting */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -khtml-user-drag: none;
+  -webkit-user-drag: none;
+  -o-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
+
+  outline:0;
+  border:0;
+}
+footer aside section.whoUse div.right {
+  float:right;
+  padding-top:25px;
+}
+footer aside section.whoUse div.right a {
+  color:#8d8d8d;
+  font-weight:500;
+
+  -webkit-transition:color 0.2s ease-in-out;
+  -moz-transition:color 0.2s ease-in-out;
+  -o-transition:color 0.2s ease-in-out;
+  -ms-transition:color 0.2s ease-in-out;
+  transition:color 0.2s ease-in-out;
+}
+footer aside section.whoUse div.right a:hover {
+  color:#2f2f2f;
+}
+footer aside section.whoUse div.right a:focus {
+  color:#4e4e4e;
+}
+
+footer aside section.copyright {
+  clear:both;
+  padding-top:10px;
+
+  font-size:14px;
+  color:#7b7b7b;
+}
+
+/* Icons Framework */
+.icon {
+  float:left;
+  height:32px;
+  width:32px;
+  padding-top:6px;
+}
+.icon.star {
+  background: no-repeat left url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpCNzQyRUJCMTEyMjA2ODExODA4M0E2RTBCMkZGRTlFOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGQkJFQjYyQTFGNDIxMUUyQjA1N0Y2RERERTg1M0VBRSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGQkJFQjYyOTFGNDIxMUUyQjA1N0Y2RERERTg1M0VBRSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDg4MDExNzQwNzIwNjgxMThDMTRFNzk2MEI0ODYwRDciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Qjc0MkVCQjExMjIwNjgxMTgwODNBNkUwQjJGRkU5RTgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4RKNl9AAADfElEQVR42rSXW0gUURjHd8Yt6cWtoGVfkjUNtbJl3aLrk1lhFEQRQfVgCUVXIoOCeo+gsCKJHrIHsx4i7GYWWVEYRDKra+AlU1cNWgyKtavustv/k29tGM7snNH64MfoOd/t3L5zVkkmkw6jBAIBh4k4QS7IB9lgFbe/BoOgG/RqmhZ3SIoimcB8sANsAgvADBN/v0AnuA9uIpGeqSbgASfAbuBy2JMouA7OIpGImZKaxkEZaAZHJxHcwTZk24wBbbCbwH5Qz+s9VSEf9UjigNQSQJGCV1OfZICkpC7pHcRyXDGdAQRfh0+VjeCnQSmvt+V+AxcQY71wBtAxB583YJ5k8K98HD+DB2CjpF0/WI6ZGDbOwEkbwUmCHJykyYZdDsf6uwQYvRefCpub65nu75cgbsO2AjFz9DOwy+ZRS4AXuv+p+PTYsM8CO8f3QHFxsZPXPmDDQRgsAj90bVfBXhs+NNoLFNzL5VUkFCAmaH9kCE7yEGwTnCDFZHYpppcSKDCp7VSIKsGYoO+LoK0BLBQUN0pgC7hoaKeYhU6+1UQyxkfGzr74ND63mmYsbiMmNtnONEdvO5gFjoN3k6nBCDwTn1PgsIlKnmrhgyrjK16KaTaDr+XjSQPITHcZ9Vn4olGcA4+BTyL2bASv4j2x2EL3AyUwJDmoEh6NlSzha1hmxoYogS5+ycjIcwmdFvBRQu83FTCVd3qnhME3yQToknoioddBsVV+QN6VHNmgoW0lED007kj4u0exU6egDoxYGDTyoyIlW7n6VfPbL0vXR0+5AYvZrBs/BQokGAz2sxMzGcW74Sn0SJcq2zFwi+sESTnteujksc53PgVmUgOdPoo9UQdgfIYvGZEMx2KxjqKiIicuLzpi5wW7fDX8Nfn9/hL212zia4BjTdTpicsDxmVwQnfAdINRHEa1+M5Ff6nFUv2Ebg2+y6C71NAXQ9/m1tbWRmECnMQhGF5y/AdB8CMIflnflsHVMJWIEolEWjweDx2lNdz/L4Su9EoOrujJEL2AkcRbJBHCTKzgUjwVoTXf09bWVivqzDB7giOJ9263+7aqqnSRFKa7UNIctWvxeLyivb1dM448hSIzzT6fLx+JpH6c5qdJZpR/ITckEokboVCoW+bHgvQ6e73eTJfLlYulKQD0i3lf6j2Iae4BXdFotDccDo/K+vwjwAAosCLLGvb5rwAAAABJRU5ErkJggg==);
+}
+
+/* Tags Framework */
+.tag {
+  float:right;
+  display:inline-block;
+
+  padding:5px 8px 5px 8px;
+  margin-left:5px;
+
+  text-transform: uppercase;
+  font-family: 'Ubuntu', 'Open Sans', 'Lucida Grande', 'Lucida Sans Unicode',tahoma,"Trebuchet MS",verdana,arial,sans-serif;
+  font-weight:bold;
+
+  color:#fff;
+
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+
+  -moz-box-shadow: 1px 1px 0px #ffffff;
+  -webkit-box-shadow: 1px 1px 0px #ffffff;
+  box-shadow: 1px 1px 0px #ffffff;
+
+  cursor:pointer;
+}
+.tag.green {
+  background-color:#00a675;
+  -webkit-transition:background-color 0.2s ease-in-out;
+  -moz-transition:background-color 0.2s ease-in-out;
+  -o-transition:background-color 0.2s ease-in-out;
+  -ms-transition:background-color 0.2s ease-in-out;
+  transition:background-color 0.2s ease-in-out;
+}
+.tag.green:hover {
+  background-color:#00a675;
+}
+.tag.orange {
+  background-color:#fcac22;
+  -webkit-transition:background-color 0.2s ease-in-out;
+  -moz-transition:background-color 0.2s ease-in-out;
+  -o-transition:background-color 0.2s ease-in-out;
+  -ms-transition:background-color 0.2s ease-in-out;
+  transition:background-color 0.2s ease-in-out;
+}
+.tag.blue {
+  background-color:#4084c1;
+  -webkit-transition:background-color 0.2s ease-in-out;
+  -moz-transition:background-color 0.2s ease-in-out;
+  -o-transition:background-color 0.2s ease-in-out;
+  -ms-transition:background-color 0.2s ease-in-out;
+  transition:background-color 0.2s ease-in-out;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- x0 Header -->
+<header>
+  <section class="bigLogo"></section>
+  <h1>x0 is a low-latency, opensource, scalable HTTP web server and web service framework written in modern C++ <br />It can be up to 3 times faster than Apache.</h1>
+
+  <nav>
+    <a href="https://github.com/trapni/x0" target="_blank">GitHub Repository</a> &middot; 
+    <a href="https://github.com/trapni/x0/wiki" target="_blank">Wiki</a> &middot; 
+    <a href="https://www.ohloh.net/p/x0" target="_blank">Code Analysis</a> &middot; 
+    <a href="https://github.com/trapni/x0/issues?state=open" target="_blank">Create an issue</a> &middot; 
+    <a href="mailto:trapni@gentoo.org">Contact</a>
+  </nav>
+
+  <h5>features of x0 0.6.0 (november 2012)</h5>
+</header>
+
+<!-- Features -->
+<ul class="listFeatures">
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>HTTP/1.1, including pipelining</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Thin and clean core API with powerful plugin system</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Fully asynchronous response content generation support</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag orange">fixed</span> <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Directory Traversal self protection</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Response output filter API</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Zero-copy networking optimization through sendfile() system call</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Transmitting of static files with partial response support and cache-friendly</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Instant mode (configuration-less basic HTTP serving)</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>"Flow"-based configuration system, just-in-time compiled into native CPU instructions</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Automatic directory indexing</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Customizable error pages</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag green">in-core</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>On-the-fly executable upgrade with gracefully finishing currently active requests</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>CGI/1.1 &amp; FastCGI support</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>HTTP reverse proxy support</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Name based virtual hosting</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>SSL connection encryption</h6>
+        <p>&middot; SSL Server Name Indication (SNI) extension</p>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Dynamic content compression</h6>
+      </section>
+    </div>
+  </li>
+
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Basic authentication</h6>
+      </section>
+    </div>
+  </li>
+
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Advanced dynamic load balancer</h6>
+        <p>&middot; Supporting different backend protocols (HTTP and FastCGI)</p>
+        <p>&middot; Supporting different transport protocols (TCP/IP, and UNIX Domain Sockets)</p>
+        <p>&middot; Advanced health monitoring</p>
+        <p>&middot; JSON API for retrieving state, stats, and reconfiguring clusters (including adding/updating/removing backends)</p>
+        <p>&middot; Client side routing support</p>
+        <p>&middot; Sticky offline mode</p>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Request path aliasing</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Automatic directory listing generation</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Apache-style access log</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>User-directory support</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Browser match support</h6>
+      </section>
+    </div>
+  </li>
+
+  <li class="divider"></li>
+  <li class="feature">
+    <div>
+      <span class="tag blue">plugin</span>      
+      <span class="icon star"></span>
+      <section class="assemble">
+        <h6>Customized Expires and Cache-Control response header control</h6>
+      </section>
+    </div>
+  </li>
+</ul>
+
+<!-- Footer -->
+<footer>
+  <aside>
+    <section class="whoUse">
+      <div class="left">
+        <h2>x0 is proudly used by:</h2>
+        <ul>
+          <li><a href="http://dawanda.com" target="_blank"><img src="images/dawanda.png" alt="Dawanda" title="Dawanda" /></a></li>
+          <li><a href="http://matelife.net" target="_blank"><img src="images/matelife.png" alt="MateLife" title="MateLife" /></a></li>
+        </ul>
+      </div>
+      <div class="right">
+        <a href="mailto:trapni@gentoo.org">Want to be here ? Contact us here.</a>
+      </div>
+    </section>
+
+    <section class="copyright">Copyright © 2013 x0 by Christian Parpart</section>
+  </aside>
+</footer>
+
+</body>
+
+</html>
