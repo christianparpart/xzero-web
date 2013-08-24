@@ -351,11 +351,11 @@ nav.download div h4.active {
     opacity:1;
 }
 nav.download div button {
+    
     overflow: hidden;
 	position:relative;
 	border:0;
 	margin:0;
-	padding:.2rem 1rem;
     margin-right:10px;
     margin-top:.4rem;
 	cursor:pointer;
@@ -365,12 +365,11 @@ nav.download div button {
     height: 3.3em;
     outline:0;
     
-    color:rgba(255,255,255,.7);
+    color:#fff;
     
-   background:#191618;
+    background:url('../images/menus.jpg') #0d091f bottom center no-repeat;
     
-    text-shadow: 0px 1px 0px #000;
-    filter: dropshadow(color=#000, offx=0, offy=1);
+    text-shadow: 0 0 10px rgba(0,0,0,.6);
 
     -webkit-transition: 0.35s ease all;
     -moz-transition: 0.35s ease all;
@@ -384,10 +383,12 @@ nav.download div button {
     -ms-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     
-    border:1px solid rgba(255,255,255,.04);
+    border:1px solid rgba(0,0,0,.4);
     
-    -webkit-box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0px -1px 0px 0px #4a2ab4;
+    -webkit-box-shadow: inset 0px -1px 0px 0px #4a2ab4;
+    -o-box-shadow: inset 0px -1px 0px 0px #4a2ab4;
+    box-shadow: inset 0px -1px 0px 0px #4a2ab4;
     
     text-transform:uppercase;
 }
@@ -395,7 +396,8 @@ nav.download div button.right {
     float:right;
     margin-left:10px;
     margin-right:0px;
-    padding:.4rem 2rem;
+    padding:.4rem 1.2rem;
+    min-width:130px;
     
     text-transform:none;
 }
@@ -406,18 +408,22 @@ nav.download div button span.i {
 }
 
 nav.download div button.active {
-	background:#141213;
+    background-position:top center;
     cursor:default;
     color:#fff;
+    opacity:1;
     
-    border:1px solid rgba(255,255,255,.06);
+    -webkit-box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+    
+    border:1px solid rgba(0,0,0,.6);
 }
 
 nav.download div button span.c,
 nav.download div button span.d {
     display:block;
     overflow:hidden;
-        
+            
   -webkit-transition: 0.35s ease all;
   -moz-transition: 0.35s ease all;
   -o-transition: 0.35s ease all;
@@ -435,17 +441,31 @@ nav.download div button span.d {
 }
 nav.download div button span.c {
     padding-top:3px;
+    opacity:.7;
+}
+nav.download div button:hover span.c {
+    opacity:.5;
+    text-shadow: 0 0 10px #000;
 }
 nav.download div button span.d {
     width:100%;
     text-align:center;
     margin-top:-27px;
+    color:#130c2e;
+    
+  -webkit-transition: 0.35s ease all, 0.6 ease color;
+  -moz-transition: 0.35s ease all, 0.6 ease color;
+  -o-transition: 0.35s ease all, 0.6 ease color;
+  transition: 0.35s ease all, 0.6 ease color;
 }
 nav.download div button.active span.c {
     padding-top:50px;
 }
 nav.download div button.active span.d {
+    text-shadow: 0 0 10px rgba(0,0,0,.9);
+
     margin-top:5px;
+    color:#fff;
 }
 
 nav.download div button span.d a {
@@ -699,15 +719,6 @@ section.features div article ul.others li a:hover,
 section.features div article ul.others li a:active {
     color:rgba(255,255,255,.9);
 }
-/*footer.webApp {
-    width:100%;
-    min-width:1024px;
-    height:106px;
-}
-footer.webApp div {
-    width:960px;
-    margin:0 auto;
-}*/
 footer.webApp {
     background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(5,5,6,0.68) 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(5,5,6,0.68))); /* Chrome,Safari4+ */
@@ -737,11 +748,26 @@ footer.webApp div {
     width:960px;
     margin:0 auto;
 }
-footer.webApp span {
+footer.webApp span.credits {
     clear:both;
     display:block;
+        
+    opacity:.8;
+}
+footer.webApp span.credits span {
+    display:inline-block;
+    font-size:30px;
+    opacity:.3;
+    vertical-align:middle;
     
-    opacity:.6;
+    -webkit-text-shadow: 0px -1px 0px #000;
+    -moz-text-shadow: 0px -1px 0px #000;
+    -ms-text-shadow: 0px -1px 0px #000;
+    -o-text-shadow: 0px -1px 0px #000;
+    text-shadow: 0px -1px 0px #000;
+}
+footer.webApp span.credits p {
+    line-height:40px;
 }
 footer.webApp p {
     display:block;
