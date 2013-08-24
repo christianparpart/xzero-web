@@ -14,6 +14,10 @@ body {
     line-height: 1.4;
 }
 
+.cssLoading {
+    cursor: wait;
+}
+
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
@@ -128,6 +132,44 @@ textarea {
 }
 .font.extrabold {
     font-weight:700;
+}
+
+
+section#MLOverlay {
+    background-color:rgba(0,0,0,0);
+
+    background-position:top center;
+    background-repeat: no-repeat;
+        
+  display: none;
+  
+  height: 100%;
+  width: 100%;
+    
+  position: fixed;
+        
+    -webkit-transition:left .7s ease-in-out, right .7s ease-in-out;
+    -moz-transition:left .7s ease-in-out, right .7s ease-in-out;
+    -o-transition:left .7s ease-in-out, right .7s ease-in-out;
+    transition:left .7s ease-in-out, right .7s ease-in-out;
+    
+    -webkit-box-shadow: 0px 0px 300px 70px rgba(0,0,0,.3);
+    box-shadow: 0px 0px 300px 70px rgba(0,0,0,.3);
+        
+    z-index: 99999990;
+    
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+    
+    /* Enable 3D Acceleration */
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
 header {
@@ -387,6 +429,9 @@ nav.download div button span.d {
     -o-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+    
+    text-transform:uppercase;
+
 }
 nav.download div button span.c {
     padding-top:3px;
@@ -603,10 +648,7 @@ section.features div article ul.others {
 section.features div article ul.principal {
     margin-left:-40px;
 }
-section.features div article ul.principal li {
-    
-    opacity:0;
-    
+section.features div article ul.principal li {    
     padding:0;
     float: left;
     margin-right:20px;
@@ -617,6 +659,7 @@ section.features div article ul.principal li {
     background:url('../images/textSprite.png') no-repeat;
     background-position: 0 -397px;
     
+    opacity:0;
 }
 section.features div article ul.principal li:first-child {
     margin-left:2.5%;
@@ -679,6 +722,8 @@ footer.webApp {
     color:#fff;
     
     text-align:center;
+    
+    opacity:.8;
 
     /* Enable 3D Acceleration */
     -webkit-transform: translate3d(0, 0, 0);
@@ -692,15 +737,11 @@ footer.webApp div {
     width:960px;
     margin:0 auto;
 }
-footer.webApp aside:first-child {
-    /*float:left;*/
-}
-footer.webApp aside:nth-child(2) {
-    float:right;
-}
 footer.webApp span {
     clear:both;
     display:block;
+    
+    opacity:.6;
 }
 footer.webApp p {
     display:block;
@@ -746,9 +787,6 @@ footer.webApp p a, footer.webApp p a:active {
 }
 footer.webApp p a:hover {
     color:#c5c5c5;
-}
-footer.webApp p span.languageInformations {
-    display:none;
 }
 
 /* FlexSlider Necessary Styles

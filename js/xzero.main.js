@@ -41,7 +41,75 @@ jQuery(document).ready(function() {
     jQuery('section.welcome div aside:first-child').addClass('fadeInLeftBig');
     jQuery('section.welcome div aside:last-child').addClass('fadeInRightBig');
     
-    // Adding scroll detection
+    
+    var Core = {
+        
+        
+        
+        
+        // Still experimental
+        pageHandler: {
+            isAvailable: true,
+            
+            load: function(callback) {
+              if(!Core.pageHandler.isAvailable) {
+                return false;
+              }
+              Core.pageHandler.isAvailable = false;
+                
+              jQuery('nav.header div a').addClass('cssLoading');
+              jQuery('html, body').addClass('cssLoading').animate({ scrollTop: 0 }, 'slow', function() {
+                          
+                  html2canvas(document.body, {
+                    background: '#141414',
+                    allowTaint: true,
+                    taintTest: false,
+                    //letterRendering: true,
+                    onrendered: function(canvas) {
+
+                     // Set screenshot
+                     jQuery('section#MLOverlay').show().css({
+                         'background-image': 'url('+canvas.toDataURL('image/jpeg', 1)+')'
+                     });
+                        
+                     // Execute callback
+                     if(callback !== undefined) {
+                        callback();
+                     }
+                        
+                     Core.pageHandler.isAvailable = true;
+                    }
+                  });
+              });
+            },
+            
+            finish: function() {
+              setTimeout(function() {
+                    
+                jQuery('section#MLOverlay').css({'right': jQuery(window).width()+300});
+                setTimeout(function() {
+                  jQuery('html, body, nav.header div a').removeClass('cssLoading');
+                  jQuery('section#MLOverlay').hide().css({'right': 0, 'background-image': 'none'});
+                }, 1200);
+              }, 1000);
+            }
+        }
+    };
+    
+    // Test loader
+    jQuery('nav.header div a:nth-child(2)').on('click', function(e) {
+        e.preventDefault();
+        Core.pageHandler.load(function() {
+            // do pAjax request here
+            console.log('callback executed');
+            setTimeout(function() {
+                jQuery('nav.download, section.welcome').hide();
+            }, 10);
+            Core.pageHandler.finish(); 
+        });
+    });
+
+    // Adding scroll detection for features animations
     var lastScrollTop = 0;
     jQuery(document).on('scroll', function() {
        var st = $(this).scrollTop();
