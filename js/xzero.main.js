@@ -35,10 +35,46 @@ jQuery(document).ready(function() {
         slideshowSpeed: 10000,
         slideshow: false
     });
+        
+    // Add effect for welcome section
+    jQuery('section.welcome div aside').addClass('active animated');
+    jQuery('section.welcome div aside:first-child').addClass('fadeInLeftBig');
+    jQuery('section.welcome div aside:last-child').addClass('fadeInRightBig');
     
-    // Sprite Transitions
+    // Adding scroll detection
+    var lastScrollTop = 0;
+    jQuery(document).on('scroll', function() {
+       var st = $(this).scrollTop();
+       // Downscroll detection
+       if (st > lastScrollTop && lastScrollTop > 0){
+           var timeOutConfig = 500;
+           var timeOut = 200;
+           jqueryEachSelect = [];
+           
+           // Show prominent features
+           jQuery.each(jQuery('section.features div article ul.principal li'), function(index) {
+               jqueryEachSelect[index] = jQuery(this);
+               setTimeout(function() {
+                   jqueryEachSelect[index].addClass('animated fadeIn');
+               }, timeOut);
+               timeOut = timeOut + timeOutConfig;
+           });
+           
+           // Show non prominent features
+           setTimeout(function() {
+               jQuery('section.features div article ul.others').addClass('animated fadeIn');
+           }, timeOut);
+           
+           // Job finished (destroy listener for better performance)
+           jQuery(document).off('scroll');
+       }
+       lastScrollTop = st;
+    });
+    
+    // Sprites
     setTimeout(function() {
         
+        // Sprite Transitions
         spriteHandler.animationStart('header ul.slides li div#homepageLogo span', {
             fps: 7,
             frames: 7,
@@ -52,7 +88,8 @@ jQuery(document).ready(function() {
             vertical: 1,
             reverse: true
         });
-    }, 1000);
+        
+    }, 500);
     
     // x0 Logo: Motio toggle listener
     jQuery('header ul.slides li div#homepageLogo span').on('click', function(e) {
