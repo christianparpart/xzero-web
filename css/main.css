@@ -367,7 +367,7 @@ nav.download div button {
     
     color:#fff;
     
-    background:url('../images/menus.jpg') #0d091f bottom center no-repeat;
+    background:url('../images/menus.jpg') #0d091f bottom left no-repeat;
     
     text-shadow: 0 0 10px rgba(0,0,0,.6);
 
@@ -391,9 +391,6 @@ nav.download div button {
     box-shadow: inset 0px -1px 0px 0px #4a2ab4;
     
     text-transform:uppercase;
-}
-nav.download div button:nth-child(0) {
-     background-position:top left;
 }
 nav.download div button:nth-child(2) {
      background-position:bottom right;
@@ -450,7 +447,7 @@ nav.download div button span.c {
     opacity:.7;
 }
 nav.download div button:hover span.c {
-    opacity:.5;
+    opacity:.9;
     text-shadow: 0 0 10px #000;
 }
 nav.download div button span.d {
