@@ -101,7 +101,6 @@ jQuery(document).ready(function() {
         e.preventDefault();
         Core.pageHandler.load(function() {
             // do pAjax request here
-            console.log('callback executed');
             setTimeout(function() {
                 jQuery('nav.download, section.welcome').hide();
             }, 10);
@@ -123,14 +122,14 @@ jQuery(document).ready(function() {
            jQuery.each(jQuery('section.features div article ul.principal li'), function(index) {
                jqueryEachSelect[index] = jQuery(this);
                setTimeout(function() {
-                   jqueryEachSelect[index].addClass('animated fadeIn');
+                   jqueryEachSelect[index].addClass('animated fadeInUp');
                }, timeOut);
                timeOut = timeOut + timeOutConfig;
            });
            
            // Show non prominent features
            setTimeout(function() {
-               jQuery('section.features div article ul.others').addClass('animated fadeIn');
+               jQuery('section.features div article ul.others').addClass('animated fadeInUp');
            }, timeOut);
            
            // Job finished (destroy listener for better performance)

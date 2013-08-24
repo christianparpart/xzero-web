@@ -392,6 +392,12 @@ nav.download div button {
     
     text-transform:uppercase;
 }
+nav.download div button:nth-child(0) {
+     background-position:top left;
+}
+nav.download div button:nth-child(2) {
+     background-position:bottom right;
+}
 nav.download div button.right {
     float:right;
     margin-left:10px;
@@ -588,12 +594,14 @@ section.welcome div aside.presentation input {
 	border-radius:.4rem;
     
     height: 2.2em;
-    width:425px;
+    width:430px;
     
     font-size:12px;
     
     color:#505050;
     background: #141213;
+    
+    text-align:center;
     
     text-shadow: 0px 1px 0px #000;
     filter: dropshadow(color=#000, offx=0, offy=1);
