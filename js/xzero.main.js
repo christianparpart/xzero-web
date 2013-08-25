@@ -59,6 +59,10 @@ var Core = {
             jQuery('nav.header div a').addClass('cssLoading');
             jQuery('html, body').addClass('cssLoading');
           }
+            
+          // Work around a strange bug
+          // "Uncaught SecurityError: An attempt was made to break through the security policy of the user agent."
+          jQuery('header ul.slides li div#homepageFork ul li').hide();
         
           jQuery('html, body').animate({ scrollTop: 0 }, 'slow', function() {
                       
@@ -73,6 +77,10 @@ var Core = {
                  jQuery('section#MLOverlay').show().css({
                      'background-image': 'url('+canvas.toDataURL('image/jpeg', 1)+')'
                  });
+                    
+                setTimeout(function() {
+                    jQuery('header ul.slides li div#homepageFork ul li').show();
+                },50);
                     
                  // Execute callback
                  if(callback !== undefined) {
@@ -127,10 +135,11 @@ jQuery(document).ready(function() {
             
             // Slider
             jQuery('header').flexslider({
+                
                 animation: 'slide',
+                direction: 'vertical',
                 directionNav: false,
                 pauseOnHover: false,
-                itemWidth: 1920,
                 slideshowSpeed: 10000,
                 //Callback: function(slider) - Fires after each slider animation completes
                 before: function(slider) {
@@ -143,7 +152,7 @@ jQuery(document).ready(function() {
                     switch(slider.animatingTo) {
                         case 1:
                         // Reset
-                        jQuery('header ul.slides li div#homepageFork ul li.a span a').removeClass('active');
+                        jQuery('header ul.slides li div#homepageFork ul li.a span a').css('background', 'transparent').removeClass('active');
                         break;
                     }
                     
@@ -163,11 +172,16 @@ jQuery(document).ready(function() {
                            var timeOut = 100;
                            jqueryEachSelect = [];
                            
-                           // Show prominent features
+                           // Show staff
                            jQuery.each(jQuery('header ul.slides li div#homepageFork ul li.a span a'), function(index) {
                                jqueryEachSelect[index] = jQuery(this);
                                setTimeout(function() {
-                                   jqueryEachSelect[index].addClass('active');
+                                    jQuery.cacheImage(jqueryEachSelect[index].attr('data-img') + '&s=72', {
+                                        // Complete callback is called on load, error and abort
+                                        complete: function(e) {
+                                            jqueryEachSelect[index].css({'background-image': 'url(' + jqueryEachSelect[index].attr('data-img') + '&s=72' + ')'}).addClass('active');
+                                        }
+                                    });
                                }, timeOut);
                                timeOut = timeOut + timeOutConfig;
                            });
