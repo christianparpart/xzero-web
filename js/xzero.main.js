@@ -154,6 +154,11 @@ jQuery(document).ready(function() {
                         // Reset
                         jQuery('header ul.slides li div#homepageFork ul li.a span a').css('background', 'transparent').removeClass('active');
                         break;
+                            
+                        // Toggle Motio on logo
+                        case 0:
+                        spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
+                        break;
                     }
                     
                     return true;
@@ -185,6 +190,11 @@ jQuery(document).ready(function() {
                                }, timeOut);
                                timeOut = timeOut + timeOutConfig;
                            });
+                        break;
+                            
+                        // Toggle Motio on logo
+                        case 0:
+                        spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
                         break;
                     }
                     
