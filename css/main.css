@@ -347,9 +347,9 @@ section#MLAlert div.uiBoards button:hover {
 section#MLAlert div.uiDocumentation button:active,
 section#MLAlert div.uiPlugins button:active,
 section#MLAlert div.uiBoards button:active {
-    background:#fff;
-    -webkit-box-shadow: inset 0px 0px 12px 4px rgba(0,0,0,.05);
-    box-shadow: inset 0px 0px 12px 4px rgba(0,0,0,.05);
+    background:transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 section#MLAlert div.uiDocumentation button span,
 section#MLAlert div.uiPlugins button span,
