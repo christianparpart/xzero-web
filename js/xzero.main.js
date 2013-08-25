@@ -140,7 +140,7 @@ jQuery(document).ready(function() {
                 direction: 'vertical',
                 directionNav: false,
                 pauseOnHover: false,
-                slideshowSpeed: 10000,
+                slideshowSpeed: 6500,
                 //Callback: function(slider) - Fires after each slider animation completes
                 before: function(slider) {
                     
