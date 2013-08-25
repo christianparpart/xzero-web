@@ -16,6 +16,10 @@ var spriteHandler = {
 
 var Core = {
     
+    deepMemory: {
+        'header ul.slides li div#homepageLogo span': { 'isAvailable': true },
+        'cacheImg': { 'countNumbers': 0 }
+    },
     backgroundImages: x0Map.backgroundImages,
     
     // Spinner management
@@ -105,7 +109,12 @@ jQuery(document).ready(function() {
     jQuery.cacheImage(Core.backgroundImages, {
         // Complete callback is called on load, error and abort
         complete: function(e) {
-            
+        
+            Core.deepMemory['cacheImg']['countNumbers'] = Core.deepMemory['cacheImg']['countNumbers'] + 1;
+            if(Core.deepMemory['cacheImg']['countNumbers'] != Core.backgroundImages.length) {
+                return false;
+            }
+                                    
             // Download package menus listener
             jQuery('nav.download div button.right').on('click', function() {
                 jQuery(this).addClass('active');
@@ -218,10 +227,13 @@ jQuery(document).ready(function() {
             }, 500);
             
             // x0 Logo: Motio toggle listener
+            Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = true;
             jQuery('header ul.slides li div#homepageLogo span').on('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
+                if(Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable']) {
+                    Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = false;
+                    spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
+                    Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = true;
+                }
             });
             
             // Toggle spinner
