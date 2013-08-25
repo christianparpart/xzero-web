@@ -18,6 +18,7 @@ var Core = {
     
     deepMemory: {
         'header ul.slides li div#homepageLogo span': { 'isAvailable': true },
+        'section#MLOverlay': { 'isAvailable': true },
         'cacheImg': { 'countNumbers': 0 }
     },
     backgroundImages: x0Map.backgroundImages,
@@ -48,16 +49,16 @@ var Core = {
         isAvailable: true,
         
         load: function(type, callback) {
-          if(!Core.pageHandler.isAvailable) {
+          if(!Core.deepMemory['section#MLOverlay']['isAvailable']) {
             return false;
           }
-          Core.pageHandler.isAvailable = false;
+          Core.deepMemory['section#MLOverlay']['isAvailable'] = false;
         
           if(type == 'transition') {
             jQuery('nav.header div a').addClass('cssLoading');
             jQuery('html, body').addClass('cssLoading');
           }
-            
+        
           jQuery('html, body').animate({ scrollTop: 0 }, 'slow', function() {
                       
               html2canvas(document.body, {
@@ -77,7 +78,7 @@ var Core = {
                     callback();
                  }
                     
-                 Core.pageHandler.isAvailable = true;
+                 Core.deepMemory['section#MLOverlay']['isAvailable'] = true;
                 }
               });
           });
@@ -138,7 +139,7 @@ jQuery(document).ready(function() {
             // Add effect for welcome section
             jQuery('section.welcome div aside:first-child').addClass('active animated bounceInLeft');
             setTimeout(function() {
-                jQuery('section.welcome div aside:last-child').addClass('active animated fadeInRight');
+                jQuery('section.welcome div aside:last-child').addClass('active animated fadeIn');
             }, 800);
             
             // Test loader
