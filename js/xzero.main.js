@@ -239,6 +239,16 @@ jQuery(document).ready(function() {
                 });
             });
             
+            // Handle <a> links
+            jQuery('a[rel=x0-history]').on('click', function(e) {
+                e.preventDefault();
+                Core.pageHandler.load('transition', function() {
+                    setTimeout(function() {
+                        Core.pageHandler.finish('transition');
+                    }, 4000);
+                });
+            });
+            
             // Exit button close
             jQuery('section#MLAlert div button.close').on('click', function(e) {
                 e.preventDefault();

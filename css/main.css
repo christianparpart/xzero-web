@@ -1018,6 +1018,7 @@ section.features div article ul.principal li {
   -moz-transition: 0.35s ease-in-out opacity;
   -o-transition: 0.35s ease-in-out opacity;
   transition: 0.35s ease-in-out opacity;
+
     /* Enable 3D Acceleration */
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
