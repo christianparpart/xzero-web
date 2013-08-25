@@ -14,6 +14,10 @@ body {
     line-height: 1.4;
 }
 
+a {
+    outline:0;
+}
+
 .cssLoading {
     cursor: wait;
 }
@@ -256,9 +260,8 @@ section#MLAlert div.uiBoards {
     -moz-border-radius: 10px;
     border-radius: 10px;
     
-    -webkit-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25), inset 0px 1px 0px 0px #fff;
-    -moz-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25), inset 0px 1px 0px 0px #fff;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25), inset 0px 1px 0px 0px #fff;
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 section#MLAlert div.uiDocumentation p,
 section#MLAlert div.uiPlugins p,
@@ -407,7 +410,7 @@ header ul.slides li aside.shadow {
 header ul.slides li div#homepageLogo {
     width:100%;
     
-    height:330px;
+    height:341px;
     
     background:url('../images/header.jpg') no-repeat top center;
 }
@@ -428,6 +431,117 @@ header ul.slides li div#homepageLogo span {
     margin:0 auto;
     
     opacity:1;
+}
+header ul.slides li div#homepageFork {
+    width:100%;
+    
+    height:341px;
+    
+    background:url('../images/header.jpg') no-repeat bottom center;
+}
+header ul.slides li div#homepageFork aside.shadow {
+    padding-top:10px;
+}
+header ul.slides li div#homepageFork ul {
+    height:74px;
+    
+    width:330px;
+    margin:0 auto;
+    
+    margin-bottom:48px;
+    
+    list-style:none;
+}
+header ul.slides li div#homepageFork ul li {
+    display:block;
+    float:left;
+    
+    height:74px;
+    
+    margin-left:15px;
+}
+header ul.slides li div#homepageFork ul li.a {
+    -webkit-border-radius: 72px;
+    -moz-border-radius: 72px;
+    border-radius: 72px;
+            
+    background:rgba(255,255,255,.15);
+}
+header ul.slides li div#homepageFork ul li.t,
+header ul.slides li div#homepageFork ul li.l {
+    line-height:72px;
+    text-transform:uppercase;
+    font-size:12px;
+}
+header ul.slides li div#homepageFork ul li.t {
+    font-size:16px;
+    color:rgba(255,255,255,.8);
+}
+header ul.slides li div#homepageFork ul li.l a {
+    text-decoration:none;
+    color:rgba(255,255,255,.5);
+    
+    -webkit-transition:color .2s ease-in-out;
+    -moz-transition:color .2s ease-in-out;
+    -o-transition:color .2s ease-in-out;
+    transition:color .2s ease-in-out;
+    
+    -webkit-text-shadow:  0px 2px 5px rgba(0,0,0,.4);
+    text-shadow: 0px 2px 5px rgba(0,0,0,.4);
+}
+header ul.slides li div#homepageFork ul li.l a:hover {
+    color:rgba(255,255,255,.8);
+}
+header ul.slides li div#homepageFork ul li.a span {
+    display:block;
+    
+    width:72px;
+    height:72px;
+    
+    margin:1px 1px;
+    
+    -webkit-border-radius: 72px;
+    -moz-border-radius: 72px;
+    border-radius: 72px;
+    
+    background:#141414;
+}
+
+header ul.slides li div#homepageFork ul li.a span a {
+    -webkit-border-radius: 72px;
+    -moz-border-radius: 72px;
+    border-radius: 72px;
+    
+    -webkit-transition: 0.35s ease all;
+    -moz-transition: 0.35s ease all;
+    -o-transition: 0.35s ease all;
+    transition: 0.35s ease all;
+    
+    opacity:0;
+    
+    display:block;
+    
+    width:72px;
+    height:72px;
+}
+header ul.slides li div#homepageFork ul li.a span a.active {
+    opacity:.8;
+}
+header ul.slides li div#homepageFork ul li span a:hover,
+header ul.slides li div#homepageFork ul li span a.active:hover {
+    opacity:1;
+}
+header ul.slides li div#homepageFork a.repo {
+    outline:0;
+    border:0;
+    
+    margin:0 auto;
+    padding:0;
+    
+    display:block;
+    
+    height:209px;
+    width:1039px;
 }
 
 nav.header {
@@ -461,7 +575,8 @@ nav.header div a {
     height: auto;
     display:inline-block;
     text-decoration:none;
-    
+    outline:0;
+
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-touch-callout: none;
     
@@ -520,9 +635,7 @@ nav.download div h4 {
     margin:0;
     margin-left:-6px;
     padding:0;
-    
-    opacity:.8;
-        
+            
     background-image:url(../images/textSprite.png);
     background-position:0 -270px;
     background-repeat:no-repeat;
@@ -584,11 +697,10 @@ nav.download div button {
     transform: translate3d(0, 0, 0);
     
     border:1px solid rgba(0,0,0,.4);
-    
-    -moz-box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .4);
-    -webkit-box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .4);
-    -o-box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .4);
-    box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .4);
+
+    -moz-box-shadow: inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
+    -webkit-box-shadow: inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
+    box-shadow: inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
     
     text-transform:uppercase;
 }
@@ -642,7 +754,6 @@ nav.download div button span.d {
     transform: translate3d(0, 0, 0);
     
     text-transform:uppercase;
-
 }
 nav.download div button span.c {
     padding-top:3px;
@@ -650,18 +761,16 @@ nav.download div button span.c {
 }
 nav.download div button:hover {
     border:1px solid rgba(0,0,0,.5);
-
-    -moz-box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .7);
-    -webkit-box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .7);
-    -o-box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .7);
-    box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .7);
+    
+    -moz-box-shadow: inset 0 -1px 0 rgba(105,60,255, .6), inset -1px -1px 0 rgba(105,60,255, .6), inset 1px -1px 0 rgba(105,60,255, .6);
+    -webkit-box-shadow: inset 0 -1px 0 rgba(105,60,255, .6), inset -1px -1px 0 rgba(105,60,255, .6), inset 1px -1px 0 rgba(105,60,255, .6);
+    box-shadow: inset 0 -1px 0 rgba(105,60,255, .6), inset -1px -1px 0 rgba(105,60,255, .6), inset 1px -1px 0 rgba(105,60,255, .6);
 }
 nav.download div button.active:hover,
 nav.download div button.active {
-    -moz-box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .2);
-    -webkit-box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .2);
-    -o-box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .2);
-    box-shadow: inset 0px -1px 0px 0px rgba(105,60,255, .2);
+    -moz-box-shadow: inset 0 -1px 0 rgba(105,60,255, .2), inset -1px -1px 0 rgba(105,60,255, .2), inset 1px -1px 0 rgba(105,60,255, .2);
+    -webkit-box-shadow: inset 0 -1px 0 rgba(105,60,255, .2), inset -1px -1px 0 rgba(105,60,255, .2), inset 1px -1px 0 rgba(105,60,255, .2);
+    box-shadow: inset 0 -1px 0 rgba(105,60,255, .2), inset -1px -1px 0 rgba(105,60,255, .2), inset 1px -1px 0 rgba(105,60,255, .2);
 }
 nav.download div button:hover span.c {
     opacity:.9;
@@ -687,21 +796,10 @@ nav.download div button.active span.d {
     margin-top:5px;
     color:#fff;
 }
-
 nav.download div button span.d a {
     text-decoration:none;
     color:inherit;
     text-transform:uppercase;
-}
-
-nav.download div button:before {
-  content: attr(data-text);
-  color: #DEEFF5;
-  position: absolute;
-  top: -2.75em;
-}
-nav.download div button:after {
-  top: 2.75em;
 }
 
 section.welcome,
@@ -1016,6 +1114,8 @@ footer.webApp span p {
     text-transform: none;
 }
 footer.webApp p a {
+    outline:0;
+    
     -webkit-transition:color 0.15s ease-in-out;
     -moz-transition:color 0.15s ease-in-out;
     -o-transition:color 0.15s ease-in-out;

@@ -17,6 +17,7 @@ var spriteHandler = {
 var Core = {
     
     deepMemory: {
+        'header': { 'animatingTo': 0 },
         'header ul.slides li div#homepageLogo span': { 'isAvailable': true },
         'section#MLOverlay': { 'isAvailable': true },
         'cacheImg': { 'countNumbers': 0 }
@@ -118,12 +119,9 @@ jQuery(document).ready(function() {
                                     
             // Download package menus listener
             jQuery('nav.download div button.right').on('click', function() {
-                jQuery(this).addClass('active');
-                jQuery('nav.download div h4').addClass('active');
-                
+                jQuery(this).addClass('active');                
                 jQuery(this).on('mouseleave', function() {
                     jQuery(this).removeClass('active');
-                    jQuery('nav.download div h4').removeClass('active');
                 });
             });
             
@@ -131,9 +129,55 @@ jQuery(document).ready(function() {
             jQuery('header').flexslider({
                 animation: 'slide',
                 directionNav: false,
+                pauseOnHover: false,
                 itemWidth: 1920,
                 slideshowSpeed: 10000,
-                slideshow: false
+                //Callback: function(slider) - Fires after each slider animation completes
+                before: function(slider) {
+                    
+                    if(Core.deepMemory['header']['animatingTo'] == slider.animatingTo) {
+                        return false;
+                    }
+                    
+                    // Slider custom events
+                    switch(slider.animatingTo) {
+                        case 1:
+                        // Reset
+                        jQuery('header ul.slides li div#homepageFork ul li.a span a').removeClass('active');
+                        break;
+                    }
+                    
+                    return true;
+                },
+                after: function(slider) {
+                    
+                    if(Core.deepMemory['header']['animatingTo'] == slider.animatingTo) {
+                        return false;
+                    }
+                    
+                    // Slider custom events
+                    switch(slider.animatingTo) {
+                        // Avatars animations
+                        case 1:
+                           var timeOutConfig = 300;
+                           var timeOut = 100;
+                           jqueryEachSelect = [];
+                           
+                           // Show prominent features
+                           jQuery.each(jQuery('header ul.slides li div#homepageFork ul li.a span a'), function(index) {
+                               jqueryEachSelect[index] = jQuery(this);
+                               setTimeout(function() {
+                                   jqueryEachSelect[index].addClass('active');
+                               }, timeOut);
+                               timeOut = timeOut + timeOutConfig;
+                           });
+                        break;
+                    }
+                    
+                    Core.deepMemory['header']['animatingTo'] = slider.animatingTo;
+                    return true;
+                }
+                //slideshow: false
             });
                 
             // Add effect for welcome section
