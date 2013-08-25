@@ -259,7 +259,7 @@ jQuery(document).ready(function() {
                    jQuery.each(jQuery('section.features div article ul.principal li'), function(index) {
                        jqueryEachSelect[index] = jQuery(this);
                        setTimeout(function() {
-                           jqueryEachSelect[index].addClass('animated fadeInUp');
+                           jqueryEachSelect[index].addClass('active');
                        }, timeOut);
                        timeOut = timeOut + timeOutConfig;
                    });
@@ -305,10 +305,11 @@ jQuery(document).ready(function() {
                 }
             });
             
+            // Fade out background
+            
             // Toggle spinner
             Core.spinnerMgr.destroy();
-            
-            // Fade out background
+                
             jQuery('section#MLSpinner').addClass('animated fadeOut');
             setTimeout(function() {
                 jQuery('section#MLSpinner').hide();
