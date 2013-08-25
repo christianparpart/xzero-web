@@ -198,10 +198,10 @@ section#MLOverlay {
     
   position: fixed;
         
-    -webkit-transition:left .7s ease-in-out, right .7s ease-in-out;
-    -moz-transition:left .7s ease-in-out, right .7s ease-in-out;
-    -o-transition:left .7s ease-in-out, right .7s ease-in-out;
-    transition:left .7s ease-in-out, right .7s ease-in-out;
+    -webkit-transition:left .6s ease-in-out, right .6s ease-in-out;
+    -moz-transition:left .6s ease-in-out, right .6s ease-in-out;
+    -o-transition:left .6s ease-in-out, right .6s ease-in-out;
+    transition:left .6s ease-in-out, right .6s ease-in-out;
     
     -webkit-box-shadow: 0px 0px 300px 70px rgba(0,0,0,.3);
     box-shadow: 0px 0px 300px 70px rgba(0,0,0,.3);
@@ -225,10 +225,10 @@ section#MLAlert {
     position:fixed;
     z-index: 99999991;
     
-    -webkit-transition:left .7s ease-in-out, right .7s ease-in-out;
-    -moz-transition:left .7s ease-in-out, right .7s ease-in-out;
-    -o-transition:left .7s ease-in-out, right .7s ease-in-out;
-    transition:left .7s ease-in-out, right .7s ease-in-out;
+    -webkit-transition:left .35s ease-in-out, right .35s ease-in-out;
+    -moz-transition:left .35s ease-in-out, right .35s ease-in-out;
+    -o-transition:left .35s ease-in-out, right .35s ease-in-out;
+    transition:left .35s ease-in-out, right .35s ease-in-out;
     
     width:100%;
     height:100%;
