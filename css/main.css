@@ -119,10 +119,13 @@ textarea {
     transform: translate3d(0, 0, 0);
 }
 .font.OpenSans {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', 'Lucida Grande', 'Helvetica', sans-serif;
+}
+.font.Ubuntu {
+    font-family: 'Ubuntu', 'Open Sans', 'Lucida Grande', 'Helvetica', sans-serif;
 }
 .font.System {
-    font-family: Monaco, "Liberation Mono", Courier, monospace, arial;
+    font-family: Monaco, 'Liberation Mono', Courier, monospace, arial;
 }
 
 .font.light {
@@ -142,13 +145,13 @@ textarea {
 section#MLSpinner {
     display:block;
     
-background: rgb(41,42,45);
-background: -moz-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%, rgba(20,20,20,1) 70%);
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(41,42,45,1)), color-stop(70%,rgba(20,20,20,1)));
-background: -webkit-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
-background: -o-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
-background: -ms-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
-background: radial-gradient(ellipse at center, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
+    background: rgb(41,42,45);
+    background: -moz-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%, rgba(20,20,20,1) 70%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(41,42,45,1)), color-stop(70%,rgba(20,20,20,1)));
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
+    background: -o-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
+    background: -ms-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
+    background: radial-gradient(ellipse at center, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
     
     position:fixed;
     height:101%;
@@ -676,10 +679,10 @@ nav.download div button {
 	border:0;
 	margin:0;
     margin-right:10px;
-    margin-top:.4rem;
+    margin-top:.5rem;
 	cursor:pointer;
-	font-size:0.95rem;
-	font-weight:bold;
+	font-size:.85rem;
+	font-weight:500;
 	border-radius:.25rem;
     height: 3.3em;
     outline:0;
@@ -704,7 +707,6 @@ nav.download div button {
     
     border:1px solid rgba(0,0,0,.4);
 
-    
     -moz-box-shadow: inset 0px 0px 40px 5px rgba(0,0,0,.3), inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
     -webkit-box-shadow: inset 0px 0px 40px 5px rgba(0,0,0,.3), inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
     box-shadow: inset 0px 0px 40px 5px rgba(0,0,0,.3), inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
@@ -727,6 +729,7 @@ nav.download div button span.i {
     display:block;
     text-transform:uppercase;
     font-size:0.7rem;
+    font-weight:400;
 }
 
 nav.download div button.active {
@@ -763,7 +766,7 @@ nav.download div button span.d {
     text-transform:uppercase;
 }
 nav.download div button span.c {
-    padding-top:3px;
+    padding-top:10px;
     opacity:.7;
 }
 nav.download div button:hover {
@@ -996,13 +999,19 @@ section.features div article ul.principal,
 section.features div article ul.others {
     list-style: none;
 }
-section.features div article ul.principal {
-    margin-left:-40px;
+section.features div article ul.principal {    
+    height:37px;
+    overflow:hidden;
+    margin-top:10px;
+    margin-bottom:20px;
+    
+    clear:both;
 }
 section.features div article ul.principal li {    
     padding:0;
     float: left;
     margin-right:20px;
+    margin-left:0;
     height:47px;
     padding-left:50px;
     line-height:47px;
@@ -1025,6 +1034,10 @@ section.features div article ul.principal li {
     -o-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+}
+section.features div article ul.principal li:first-child {
+    padding-left:0;
+    margin-left:-60px;
 }
 section.features div article ul.principal li.active {
     animation:opacity-principal-features 2s 1;
@@ -1049,6 +1062,7 @@ section.features div article ul.principal li:first-child {
     margin-left:2.5%;
 }
 section.features div article ul.others {
+    margin:0;
     display:block;
     float:left;
     width:192px;
