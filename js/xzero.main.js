@@ -66,11 +66,11 @@ var Core = {
         
           jQuery('html, body').animate({ scrollTop: 0 }, 'slow', function() {
                       
-              html2canvas(document.body, {
+              window.html2canvas([document.body], {
                 background: '#141414',
                 allowTaint: true,
                 taintTest: false,
-                //letterRendering: true,
+                letterRendering: false,
                 onrendered: function(canvas) {
 
                  // Set screenshot
