@@ -142,10 +142,16 @@ textarea {
 section#MLSpinner {
     display:block;
     
-    background:#141414;
+background: rgb(41,42,45);
+background: -moz-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%, rgba(20,20,20,1) 70%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(41,42,45,1)), color-stop(70%,rgba(20,20,20,1)));
+background: -webkit-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
+background: -o-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
+background: -ms-radial-gradient(center, ellipse cover, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
+background: radial-gradient(ellipse at center, rgba(41,42,45,1) 0%,rgba(20,20,20,1) 70%);
     
     position:fixed;
-    height:100%;
+    height:101%;
     width:100%;
     
     z-index:100000000000000000;
