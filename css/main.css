@@ -134,7 +134,53 @@ textarea {
     font-weight:700;
 }
 
+/* Spinner */
+section#MLSpinner {
+    display:block;
+    
+    background:#141414;
+    
+    position:fixed;
+    height:100%;
+    width:100%;
+    
+    z-index:100000000000000000;
+    
+    /* Enable 3D Acceleration */
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+section#MLSpinner div.spinnerLoad {
+    position:fixed;
 
+    top: 50%;
+    left: 50%;
+
+    background-image: url('../images/spinnerSprite.png');
+
+    height:42px;
+    width:42px;
+
+    z-index:100000000000000001;
+
+    -moz-animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    -ms-animation-duration: 0.3s;
+    -o-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    
+    /* Enable 3D Acceleration */
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+/* Overlay */
 section#MLOverlay {
     background-color:rgba(0,0,0,0);
 
@@ -171,7 +217,161 @@ section#MLOverlay {
     -ms-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
+section#MLAlert {
+    position:fixed;
+    z-index: 99999991;
+    
+    -webkit-transition:left .7s ease-in-out, right .7s ease-in-out;
+    -moz-transition:left .7s ease-in-out, right .7s ease-in-out;
+    -o-transition:left .7s ease-in-out, right .7s ease-in-out;
+    transition:left .7s ease-in-out, right .7s ease-in-out;
+    
+    width:100%;
+    height:100%;
 
+    display:none;
+}
+section#MLAlert div hr {
+    height:1px;
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    width:100%;
+    border-top:1px solid rgba(0,0,0,.03);
+}
+section#MLAlert div.uiDocumentation,
+section#MLAlert div.uiPlugins,
+section#MLAlert div.uiBoards {
+    display:none;
+    
+    width:300px;
+    
+    margin:120px auto;
+    
+    background:rgba(255,255,255,.9);
+    border:1px solid #fff;
+        
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    
+    -webkit-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25), inset 0px 1px 0px 0px #fff;
+    -moz-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25), inset 0px 1px 0px 0px #fff;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25), inset 0px 1px 0px 0px #fff;
+}
+section#MLAlert div.uiDocumentation p,
+section#MLAlert div.uiPlugins p,
+section#MLAlert div.uiBoards p {
+    text-shadow: 0px 0px 5px rgba(255,255,255,.9), 0px 0px 1px #000;
+}
+section#MLAlert div.uiDocumentation p.title,
+section#MLAlert div.uiPlugins p.title,
+section#MLAlert div.uiBoards p.title {
+    padding-top:30px;
+    padding-bottom:25px;
+    font-size:20px;
+    
+    width:80%;
+    margin:0 auto;
+    text-align:center;
+}
+section#MLAlert div.uiDocumentation p.text,
+section#MLAlert div.uiPlugins p.text,
+section#MLAlert div.uiBoards p.text {
+    padding-bottom:25px;
+    
+    font-size:17px;
+    width:80%;
+    
+    margin:0 auto;
+    text-align:center;
+}
+section#MLAlert div.uiDocumentation button,
+section#MLAlert div.uiPlugins button,
+section#MLAlert div.uiBoards button {
+    
+    background:none;
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.8)), color-stop(100%,rgba(255,255,255,0)));
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 100%);
+    background: -o-linear-gradient(top,  rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 100%);
+    background: -ms-linear-gradient(top,  rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 100%);
+    background: linear-gradient(to bottom,  rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccffffff', endColorstr='#00ffffff',GradientType=0 );
+
+    overflow: hidden;
+	position:relative;
+	border:0;
+	margin:0;
+    margin-right:10px;
+	cursor:pointer;
+	font-size:0.95rem;
+	font-weight:bold;
+    
+    height: 3.3em;
+    width:100%;
+    outline:0;
+    
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    
+    color:#1732a5;
+    
+    border-top:1px solid #fff;
+    
+    text-shadow: 0px 0px 1px #fff;   
+    
+    /* Enable 3D Acceleration */
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+        
+    text-transform:uppercase;
+}
+section#MLAlert div.uiDocumentation button:hover,
+section#MLAlert div.uiPlugins button:hover,
+section#MLAlert div.uiBoards button:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 4px #fff;
+    box-shadow: inset 0px 0px 12px 4px #fff;
+}
+section#MLAlert div.uiDocumentation button:active,
+section#MLAlert div.uiPlugins button:active,
+section#MLAlert div.uiBoards button:active {
+    background:#fff;
+    -webkit-box-shadow: inset 0px 0px 12px 4px rgba(0,0,0,.05);
+    box-shadow: inset 0px 0px 12px 4px rgba(0,0,0,.05);
+}
+section#MLAlert div.uiDocumentation button span,
+section#MLAlert div.uiPlugins button span,
+section#MLAlert div.uiBoards button span {
+    text-shadow:none;
+    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(19,41,139,1)), color-stop(100%,rgba(168,79,229,1)));
+    
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+section#MLAlert div.uiDocumentation button:hover span,
+section#MLAlert div.uiPlugins button:hover span,
+section#MLAlert div.uiBoards button:hover span {    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(27,59,201,1)), color-stop(100%,rgba(186,114,234,1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+section#MLAlert div.uiDocumentation button:active span,
+section#MLAlert div.uiPlugins button:active span,
+section#MLAlert div.uiBoards button:active span { 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(13,28,97,1)), color-stop(100%,rgba(124,28,188,1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 header {
     width:100%;
     height:auto;
@@ -504,10 +704,10 @@ section.welcome div {
     padding-top:15px;
 }
 section.welcome div aside {
-    -webkit-animation-duration: 2s;
-    -moz-animation-duration: 2s;
-    -o-animation-duration: 2s;
-    animation-duration: 2s;
+    -webkit-animation-duration: .8s;
+    -moz-animation-duration: .8s;
+    -o-animation-duration: .8s;
+    animation-duration: .8s;
 
     opacity:0;
     

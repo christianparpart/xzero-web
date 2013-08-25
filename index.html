@@ -1,4 +1,3 @@
-<!-- /* TODO: Waiting load of all images before showing the homepage */ -->
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -32,19 +31,58 @@
             Default: 'xzero.dev',
             Static: 'static.xzero.dev'
         };
+        var x0Map = {
+            backgroundImages: [
+                './images/header.jpg',
+                './images/terminalSprite.png',
+                './images/logoSprite.png',
+                './images/spinnerSprite.png',
+                './images/textSprite.png',
+                './images/menus.jpg',
+            ]
+        };
         </script>
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/xzero.dependencies.min.js"></script>
         <script src="js/xzero.main.js"></script>
     </head>
     <body>
+                
+        <!-- Spinner -->
+        <section id="MLSpinner">
+            <div class="animated bounceIn spinnerLoad"></div>
+        </section>
+            
+        <section id="MLAlert">
+            <div class="uiDocumentation">
+                <p class="title font OpenSans bold">Sorry, documentation is not available yet.</p>
+                <p class="text font OpenSans light">We’re working hard on that ! Try again later.</p>
+                <hr />
+                <button class="close font OpenSans bold"><span>Okay</span></button>
+            </div>
+            
+            <div class="uiPlugins">
+                <p class="title font OpenSans bold">Sorry, Plugins Center is not available yet.</p>
+                <p class="text font OpenSans light">We’re working hard on that ! Try again later.</p>
+                <hr />
+                <button class="close font OpenSans bold"><span>Okay</span></button>
+            </div>
+            
+            <div class="uiBoards">
+                <p class="title font OpenSans bold">Sorry, the board is not available yet.</p>
+                <p class="text font OpenSans light">We’re working hard on that ! Try again later.</p>
+                <hr />
+                <button class="close font OpenSans bold"><span>Okay</span></button>
+            </div>
+        </section>
+        
         <section id="MLOverlay"></section>
 
         <nav class="header">
             <aside class="shadow">
             <div>
                 <a href="#" class="font OpenSans active">Home</a>
-                <!--<a href="/docs" class="font OpenSans">Documentation</a>-->
+                <a href="/docs" class="font OpenSans">Documentation</a>
                 <a href="/plugins" class="font OpenSans">Plugins</a>
                 <a href="/community" class="font OpenSans">Community</a>
             </div>
