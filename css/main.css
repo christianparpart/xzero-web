@@ -611,7 +611,7 @@ nav.download div button span.i {
 }
 
 nav.download div button.active {
-    background-position:top center;
+    background-position:top left;
     cursor:default;
     color:#fff;
     opacity:1;
@@ -621,7 +621,9 @@ nav.download div button.active {
     
     border:1px solid rgba(0,0,0,.6);
 }
-
+nav.download div button.active:nth-child(2) {
+    background-position:top right;
+}
 nav.download div button span.c,
 nav.download div button span.d {
     display:block;
@@ -791,7 +793,7 @@ section.welcome div aside.presentation input {
 	border-radius:.4rem;
     
     height: 2.2em;
-    width:430px;
+    width:420px;
     
     font-size:12px;
     
@@ -806,7 +808,6 @@ section.welcome div aside.presentation input {
     border:1px solid rgba(255,255,255,.06);
     
     margin-bottom:25px;
-    margin-left:-10px;
 }
 section.features {
     padding-top:20px;
