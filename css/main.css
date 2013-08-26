@@ -1081,11 +1081,16 @@ section.features div article {
 }
 section.features div article ul.principal,
 section.features div article ul.others {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
     list-style: none;
 }
 section.features div article ul.principal {    
     height:37px;
     overflow:hidden;
+    margin:0;
     margin-top:10px;
     margin-bottom:20px;
     
@@ -1122,8 +1127,7 @@ section.features div article ul.principal li {
     transform: translate3d(0, 0, 0);
 }
 section.features div article ul.principal li:first-child {
-    padding-left:0;
-    margin-left:-60px;
+    padding-left:-20px;
 }
 section.features div article ul.principal li.active {
     animation:opacity-principal-features 2s 1;
@@ -1151,7 +1155,8 @@ section.features div article ul.others {
     margin:0;
     display:block;
     float:left;
-    width:192px;
+    width:210px;
+    margin-left:30px;
     min-height:160px;
     
     opacity:0;
