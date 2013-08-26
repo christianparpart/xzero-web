@@ -531,11 +531,11 @@ header ul.slides li div#homepageFork span.bigText.active {
 }
 header ul.slides li div#homepageFork span.bigText.active.next {
     
-    transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
-    -webkit-transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
-    -moz-transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
-    -o-transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
-    -ms-transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
+    transform: translate3d(0, 0, 0) scale(.7);
+    -webkit-transform: translate3d(0, 0, 0) scale(.7);
+    -moz-transform: translate3d(0, 0, 0) scale(.7);
+    -o-transform: translate3d(0, 0, 0) scale(.7);
+    -ms-transform: translate3d(0, 0, 0) scale(.7);
     
     height:131px;
     

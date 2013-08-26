@@ -313,7 +313,7 @@ jQuery(document).ready(function() {
                    
                    // Show non prominent features
                    setTimeout(function() {
-                       jQuery('section.features div article ul.others').addClass('animated fadeInUp');
+                       jQuery('section.features div article ul.others').addClass('animated fadeIn');
                    }, timeOut);
                    
                    // Job finished (destroy listener for better performance)
