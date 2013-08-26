@@ -16,13 +16,13 @@ var spriteHandler = {
 
 var Core = {
     
+    backgroundImages: x0Map.backgroundImages,
     deepMemory: {
         'header': { 'animatingTo': 0 },
         'header ul.slides li div#homepageLogo span': { 'isAvailable': true },
         'section#MLOverlay': { 'isAvailable': true },
         'cacheImg': { 'countNumbers': 0 }
     },
-    backgroundImages: x0Map.backgroundImages,
     
     // Spinner management
     spinnerMgr: {
@@ -62,15 +62,25 @@ var Core = {
             
           // Work around a strange bug
           // "Uncaught SecurityError: An attempt was made to break through the security policy of the user agent."
-          jQuery('header ul.slides li div#homepageFork ul li').hide();
+          //jQuery('header ul.slides li div#homepageFork ul li').hide();
             
             // Show invisible overlay
             jQuery('section#MLOverlay').show();
             jQuery('html, body').css({ scrollTop: 0 });
 
             //jQuery('html, body').animate({ scrollTop: 0 }, 'fast', function() {
-              
-              window.html2canvas([document.body], {
+            
+            // Prevent some css bugs while rendering
+            jQuery('body').addClass('canvasRendering');
+
+            // Freeze logo sprite
+            if(Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable']) {
+                Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = false;
+                spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
+                spriteHandler.animationContainer['section.welcome div aside.terminal'].toggle();
+            }
+            
+            window.html2canvas([document.body], {
                 background: '#141414',
                 allowTaint: true,
                 taintTest: false,
@@ -79,7 +89,7 @@ var Core = {
 
                     setTimeout(function() {
                         
-                        jQuery('header ul.slides li div#homepageFork ul li').show();
+                        jQuery('body').removeClass('canvasRendering');
                         
                          // Set screenshot
                          jQuery('section#MLOverlay').css({
@@ -102,6 +112,12 @@ var Core = {
         finish: function(type) {
             
             jQuery('section#MLOverlay' + (type == 'alert' ? ', section#MLAlert' : '')).css({'right': jQuery(window).width()+300});
+            
+            // Re-enable logo sprite
+            spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
+            spriteHandler.animationContainer['section.welcome div aside.terminal'].toggle();
+            Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = true;
+            
             setTimeout(function() {
               jQuery('html, body, nav.header div a').removeClass('cssLoading');
               jQuery('section#MLOverlay' + (type == 'alert' ? ', section#MLAlert' : '')).hide().css({'right': 0, 'background-image': 'none'});
@@ -110,7 +126,7 @@ var Core = {
               if(type == 'alert') {
                 jQuery('section#MLAlert div').hide().removeClass('showScale');
               }
-                    
+
             }, 1000);
         }
     }
@@ -123,6 +139,7 @@ jQuery(document).ready(function() {
     
     // Remove spinner once all images loaded
     jQuery.cacheImage(Core.backgroundImages, {
+        
         // Complete callback is called on load, error and abort
         complete: function(e) {
         
@@ -157,8 +174,6 @@ jQuery(document).ready(function() {
                     // Slider custom events
                     switch(slider.animatingTo) {
                         case 1:
-                        // Reset
-                        jQuery('header ul.slides li div#homepageFork ul li.a span a').css('background', 'transparent').removeClass('active');
                         break;
                             
                         // Toggle Motio on logo
@@ -179,7 +194,12 @@ jQuery(document).ready(function() {
                     switch(slider.animatingTo) {
                         // Avatars animations
                         case 1:
-                           var timeOutConfig = 300;
+                            jQuery('header ul.slides li div#homepageFork span.bigText').addClass('active');
+                            
+                            setTimeout(function() {
+                                jQuery('header ul.slides li div#homepageFork span.bigText.active, header ul.slides li div#homepageFork section.repo').addClass('next');
+                            }, 1000);
+                          /* var timeOutConfig = 300;
                            var timeOut = 100;
                            jqueryEachSelect = [];
                            
@@ -195,11 +215,16 @@ jQuery(document).ready(function() {
                                     });
                                }, timeOut);
                                timeOut = timeOut + timeOutConfig;
-                           });
+                           });*/
                         break;
                             
-                        // Toggle Motio on logo
+                        // First slide
                         case 0:
+                        
+                        // Reset 2nd slide
+                        jQuery('header ul.slides li div#homepageFork span.bigText, header ul.slides li div#homepageFork section.repo').removeClass('active next');
+                        
+                        // Stop motio sprite
                         spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
                         break;
                     }
