@@ -65,6 +65,9 @@ var Core = {
           jQuery('header ul.slides li div#homepageFork ul li').hide();
         
           jQuery('html, body').animate({ scrollTop: 0 }, 'slow', function() {
+              
+              // Show invisible overlay
+              jQuery('section#MLOverlay').show();
                       
               window.html2canvas([document.body], {
                 background: '#141414',
@@ -74,7 +77,7 @@ var Core = {
                 onrendered: function(canvas) {
 
                  // Set screenshot
-                 jQuery('section#MLOverlay').show().css({
+                 jQuery('section#MLOverlay').css({
                      'background-image': 'url('+canvas.toDataURL('image/jpeg', 1)+')'
                  });
                     
