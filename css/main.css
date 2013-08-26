@@ -494,8 +494,14 @@ header ul.slides li div#homepageFork {
     
     background:url('../images/header.jpg') no-repeat bottom center;
     
-    perspective:150;
     -webkit-perspective:150; /* Safari and Chrome */
+    -moz-perspective:150;
+    -o-perspective:150;
+    -ms-perspective:150;
+    perspective:150;
+}
+body.canvasRendering header ul.slides li div#homepageFork aside.shadow {
+    visibility:hidden;
 }
 header ul.slides li div#homepageFork span.bigText {
 
@@ -517,7 +523,7 @@ header ul.slides li div#homepageFork span.bigText {
     -o-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-
+    
     opacity:0;
 }
 header ul.slides li div#homepageFork span.bigText.active {
@@ -525,20 +531,15 @@ header ul.slides li div#homepageFork span.bigText.active {
 }
 header ul.slides li div#homepageFork span.bigText.active.next {
     
-    transform: scale(.7);
-    -webkit-transform: scale(.7);
-    -moz-transform: scale(.7);
-    -o-transform: scale(.7);
-    -ms-transform: scale(.7);
+    transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
+    -webkit-transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
+    -moz-transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
+    -o-transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
+    -ms-transform: translate3d(0, 0, 0) scale(.7) rotateX(2deg);
     
-    height:121px;
+    height:131px;
     
     opacity:1;
-}
-body.canvasRendering header ul.slides li div#homepageFork span.bigText,
-body.canvasRendering header ul.slides li div#homepageFork span.bigText.active,
-body.canvasRendering header ul.slides li div#homepageFork span.bigText.active.next{
-    visibility:hidden;
 }
 header ul.slides li div#homepageFork section.repo {
     outline:0;
@@ -556,21 +557,21 @@ header ul.slides li div#homepageFork section.repo {
     -o-transition: .6s ease-out all;
     transition: .6s ease-out all;
 
-    transform: scale(.5) rotateX(25deg);
-    -webkit-transform: scale(.5) rotateX(25deg);
-    -moz-transform: scale(.5) rotateX(25deg);
-    -o-transform: scale(.5) rotateX(25deg);
-    -ms-transform: scale(.5) rotateX(25deg);
+    transform: translate3d(0, 0, 0) scale(.5) rotateX(25deg);
+    -webkit-transform: translate3d(0, 0, 0) scale(.5) rotateX(25deg);
+    -moz-transform: translate3d(0, 0, 0) scale(.5) rotateX(25deg);
+    -o-transform: translate3d(0, 0, 0) scale(.5) rotateX(25deg);
+    -ms-transform: translate3d(0, 0, 0) scale(.5) rotateX(25deg);
     
     height:209px;
     width:100%;
 }
 header ul.slides li div#homepageFork section.repo.next {
-    transform: scale(1) rotateX(0);
-    -webkit-transform: scale(1) rotateX(0);
-    -moz-transform: scale(1) rotateX(0);
-    -o-transform: scale(1) rotateX(0);
-    -ms-transform: scale(1) rotateX(0);
+    transform: translate3d(0, 0, 0) scale(.9) rotateX(1deg);
+    -webkit-transform: translate3d(0, 0, 0) scale(.9) rotateX(1deg);
+    -moz-transform: translate3d(0, 0, 0) scale(.9) rotateX(1deg);
+    -o-transform: translate3d(0, 0, 0) scale(.9) rotateX(1deg);
+    -ms-transform: translate3d(0, 0, 0) scale(.9) rotateX(1deg);
 }
 header ul.slides li div#homepageFork section.repo a {
     display:block;
