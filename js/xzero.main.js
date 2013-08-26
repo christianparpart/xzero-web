@@ -105,10 +105,10 @@ var Core = {
               
               // Hide also boxes
               if(type == 'alert') {
-                jQuery('section#MLAlert div').hide();
+                jQuery('section#MLAlert div').hide().removeClass('showScale');
               }
                     
-            }, 1200);
+            }, 1000);
         }
     }
 };
@@ -219,7 +219,9 @@ jQuery(document).ready(function() {
                 Core.pageHandler.load('alert', function() {
                     setTimeout(function() {
                         jQuery('section#MLAlert, section#MLAlert div.uiDocumentation').show();
-                        jQuery('section#MLAlert div.uiDocumentation').addClass('animated bounceInDown');
+                        setTimeout(function() {                        
+                            jQuery('section#MLAlert div.uiDocumentation').addClass('showScale');
+                        }, 20);
                     }, 10);
                 });
             });
@@ -228,7 +230,9 @@ jQuery(document).ready(function() {
                 Core.pageHandler.load('alert', function() {
                     setTimeout(function() {
                         jQuery('section#MLAlert, section#MLAlert div.uiPlugins').show();
-                        jQuery('section#MLAlert div.uiPlugins').addClass('animated bounceInDown');
+                        setTimeout(function() {
+                            jQuery('section#MLAlert div.uiPlugins').addClass('showScale');
+                        }, 20);
                     }, 10);
                 });
             });
@@ -237,7 +241,9 @@ jQuery(document).ready(function() {
                 Core.pageHandler.load('alert', function() {
                     setTimeout(function() {
                         jQuery('section#MLAlert, section#MLAlert div.uiBoards').show();
-                        jQuery('section#MLAlert div.uiBoards').addClass('animated bounceInDown');
+                        setTimeout(function() {
+                            jQuery('section#MLAlert div.uiBoards').addClass('showScale');
+                        }, 20);
                     }, 10);
                 });
             });
@@ -248,7 +254,7 @@ jQuery(document).ready(function() {
                 Core.pageHandler.load('transition', function() {
                     setTimeout(function() {
                         Core.pageHandler.finish('transition');
-                    }, 4000);
+                    }, 3000);
                 });
             });
             
