@@ -689,6 +689,22 @@ nav.download div button {
     
     color:#fff;
     
+    /* Fix: Disable user selection */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -khtml-user-drag: none;
+    -webkit-user-drag: none;
+    -o-user-drag: none;
+    -ms-user-drag: none;
+    user-drag: none;
+    
     background:url('../images/menus.jpg') #0d091f bottom left no-repeat;
     
     text-shadow: 0 0 10px rgba(0,0,0,.6);
@@ -1233,7 +1249,24 @@ header .slides { zoom: 1; }
 .carousel li { margin-right: 5px; }
 
 /* Control Nav */
-.flex-control-nav {width: 100%; position: absolute; bottom: 0px; text-align: center;}
+.flex-control-nav {width: 100%; position: absolute; bottom: 0px; text-align: center;
+
+    /* Fix: Disable user selection */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -khtml-user-drag: none;
+    -webkit-user-drag: none;
+    -o-user-drag: none;
+    -ms-user-drag: none;
+    user-drag: none;
+}
 .flex-control-nav li {margin: 0 4px; display: inline-block; zoom: 1; *display: inline;}
 .flex-control-paging li a {
     width: 11px;
