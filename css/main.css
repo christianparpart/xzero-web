@@ -246,10 +246,10 @@ section#MLAlert {
 }
 section#MLAlert div {
     
-    transition:all .2s ease-in-out;
-    -webkit-transition:all .2s ease-in-out;
-    -moz-transition:all .2s ease-in-out;
-    -o-transition:all .2s ease-in-out;
+    transition:all .2s cubic-bezier(.54,.59,1,.73);
+    -webkit-transition:all .2s cubic-bezier(.54,.59,1,.73);
+    -moz-transition:all .2s cubic-bezier(.54,.59,1,.73);
+    -o-transition:all .2s cubic-bezier(.54,.59,1,.73);
     
     opacity:0;
     
