@@ -63,12 +63,13 @@ var Core = {
           // Work around a strange bug
           // "Uncaught SecurityError: An attempt was made to break through the security policy of the user agent."
           jQuery('header ul.slides li div#homepageFork ul li').hide();
-        
-          jQuery('html, body').animate({ scrollTop: 0 }, 'slow', function() {
+            
+            // Show invisible overlay
+            jQuery('section#MLOverlay').show();
+            jQuery('html, body').css({ scrollTop: 0 });
+
+            //jQuery('html, body').animate({ scrollTop: 0 }, 'fast', function() {
               
-              // Show invisible overlay
-              jQuery('section#MLOverlay').show();
-                      
               window.html2canvas([document.body], {
                 background: '#141414',
                 allowTaint: true,
@@ -76,24 +77,26 @@ var Core = {
                 letterRendering: false,
                 onrendered: function(canvas) {
 
-                 // Set screenshot
-                 jQuery('section#MLOverlay').css({
-                     'background-image': 'url('+canvas.toDataURL('image/jpeg', 1)+')'
-                 });
-                    
-                setTimeout(function() {
-                    jQuery('header ul.slides li div#homepageFork ul li').show();
-                },50);
-                    
-                 // Execute callback
-                 if(callback !== undefined) {
-                    callback();
-                 }
-                    
-                 Core.deepMemory['section#MLOverlay']['isAvailable'] = true;
+                    setTimeout(function() {
+                        
+                        jQuery('header ul.slides li div#homepageFork ul li').show();
+                        
+                         // Set screenshot
+                         jQuery('section#MLOverlay').css({
+                             'background-image': 'url('+canvas.toDataURL('image/jpeg', .9)+')'
+                         });
+                        
+                         // Execute callback
+                         if(callback !== undefined) {
+                            callback();
+                         }
+                            
+                         Core.deepMemory['section#MLOverlay']['isAvailable'] = true;
+                        
+                    }, 50);
                 }
               });
-          });
+          //});
         },
         
         finish: function(type) {
