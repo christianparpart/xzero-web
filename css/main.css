@@ -586,95 +586,6 @@ header ul.slides li div#homepageFork section.repo a {
 header ul.slides li div#homepageFork aside.shadow {
     padding-top:10px;
 }
-header ul.slides li div#homepageFork ul {
-    height:74px;
-    
-    width:300px;
-    margin:0 auto;
-    
-    margin-bottom:48px;
-    
-    list-style:none;
-}
-header ul.slides li div#homepageFork ul li {
-    display:block;
-    float:left;
-    
-    height:74px;
-    
-    margin-left:15px;
-}
-header ul.slides li div#homepageFork ul li.a {
-    -webkit-border-radius: 72px;
-    -moz-border-radius: 72px;
-    border-radius: 72px;
-            
-    background:rgba(255,255,255,.15);
-}
-header ul.slides li div#homepageFork ul li.t,
-header ul.slides li div#homepageFork ul li.l {
-    line-height:72px;
-    text-transform:uppercase;
-    font-size:12px;
-}
-header ul.slides li div#homepageFork ul li.t {
-    font-size:16px;
-    color:rgba(255,255,255,.8);
-}
-header ul.slides li div#homepageFork ul li.l a {
-    text-decoration:none;
-    color:rgba(255,255,255,.5);
-    
-    -webkit-transition:color .2s ease-in-out;
-    -moz-transition:color .2s ease-in-out;
-    -o-transition:color .2s ease-in-out;
-    transition:color .2s ease-in-out;
-    
-    -webkit-text-shadow:  0px 2px 5px rgba(0,0,0,.4);
-    text-shadow: 0px 2px 5px rgba(0,0,0,.4);
-}
-header ul.slides li div#homepageFork ul li.l a:hover {
-    color:rgba(255,255,255,.8);
-}
-header ul.slides li div#homepageFork ul li.a span {
-    display:block;
-    
-    width:72px;
-    height:72px;
-    
-    margin:1px 1px;
-    
-    -webkit-border-radius: 72px;
-    -moz-border-radius: 72px;
-    border-radius: 72px;
-    
-    background:#141414;
-}
-
-header ul.slides li div#homepageFork ul li.a span a {
-    -webkit-border-radius: 72px;
-    -moz-border-radius: 72px;
-    border-radius: 72px;
-    
-    -webkit-transition: 0.35s ease all;
-    -moz-transition: 0.35s ease all;
-    -o-transition: 0.35s ease all;
-    transition: 0.35s ease all;
-    
-    opacity:0;
-    
-    display:block;
-    
-    width:72px;
-    height:72px;
-}
-header ul.slides li div#homepageFork ul li.a span a.active {
-    opacity:.8;
-}
-header ul.slides li div#homepageFork ul li span a:hover,
-header ul.slides li div#homepageFork ul li span a.active:hover {
-    opacity:1;
-}
 
 nav.warning {
     width:100%;
@@ -1144,7 +1055,7 @@ section.features div h3 {
     white-space:nowrap;            /* because only the first line is indented */
 
     height:60px;
-    width:417px;
+    width:407px;
     margin:0 auto;
 }
 section.features div article {
@@ -1200,7 +1111,9 @@ section.features div article ul.principal {
     
     clear:both;
 }
-section.features div article ul.principal li {    
+section.features div article ul.principal li {
+    display:block;
+    
     padding:0;
     float: left;
     margin-right:20px;
@@ -1329,6 +1242,7 @@ footer.webApp {
 }
 footer.webApp div {
     padding:15px;
+    padding-bottom:0;
     width:960px;
     margin:0 auto;
 }
@@ -1400,7 +1314,98 @@ footer.webApp p a, footer.webApp p a:active {
 footer.webApp p a:hover {
     color:#c5c5c5;
 }
+footer.webApp ul {
+    height:30px;
+    width:67px;
+    
+    margin:0;
+    padding:0;
+    margin:0 auto;
+        
+    list-style:none;
+    
+    padding-bottom:10px;
 
+    overflow:hidden;
+    clear:both;
+}
+footer.webApp ul li {
+    display:block;
+    float:left;
+    
+    height:26px;
+    
+    margin-left:15px;
+}
+footer.webApp ul li:first-child {
+    margin-left:0;
+}
+footer.webApp ul li.a {
+    -webkit-border-radius: 24px;
+    -moz-border-radius: 24px;
+    border-radius: 24px;
+            
+    background:rgba(255,255,255,.03);
+}
+footer.webApp ul li.t {
+    font-size:16px;
+    color:rgba(255,255,255,.8);
+}
+footer.webApp ul li.l a {
+    text-decoration:none;
+    color:rgba(255,255,255,.5);
+    
+    -webkit-transition:color .2s ease-in-out;
+    -moz-transition:color .2s ease-in-out;
+    -o-transition:color .2s ease-in-out;
+    transition:color .2s ease-in-out;
+    
+    -webkit-text-shadow:  0px 2px 5px rgba(0,0,0,.4);
+    text-shadow: 0px 2px 5px rgba(0,0,0,.4);
+}
+footer.webApp ul li.l a:hover {
+    color:rgba(255,255,255,.8);
+}
+footer.webApp ul li.a span {
+    display:block;
+    
+    width:24px;
+    height:24px;
+    
+    margin:1px 1px;
+    
+    -webkit-border-radius: 24px;
+    -moz-border-radius: 24px;
+    border-radius: 24px;
+    
+    background:#141414;
+}
+footer.webApp ul li.a span a {
+    -webkit-border-radius: 24px;
+    -moz-border-radius: 24px;
+    border-radius: 24px;
+    
+    background-repeat:no-repeat;
+    
+    -webkit-transition: 0.35s ease all;
+    -moz-transition: 0.35s ease all;
+    -o-transition: 0.35s ease all;
+    transition: 0.35s ease all;
+    
+    opacity:0;
+    
+    display:block;
+    
+    width:24px;
+    height:24px;
+}
+footer.webApp ul li.a span a.active {
+    opacity:.8;
+}
+footer.webApp ul li span a:hover,
+footer.webApp ul li span a.active:hover {
+    opacity:1;
+}
 /* FlexSlider Necessary Styles
 *********************************/
 header .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
@@ -1445,7 +1450,7 @@ header .slides { zoom: 1; }
     user-drag: none;
 }
 body.canvasRendering .flex-control-nav {
-    display:none;
+    visibility:hidden;
 }
 .flex-control-nav li {margin: 0 4px; display: inline-block; zoom: 1; *display: inline;}
 .flex-control-paging li a {

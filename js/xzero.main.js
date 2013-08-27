@@ -45,6 +45,28 @@ var Core = {
         }
     },
     
+    showTeam: function() {
+
+        var timeOutConfig = 300;
+        var timeOut = 100;
+        var gravatarSize = 24;
+        
+        var jqueryEachSelect = [];
+        jQuery.each(jQuery('footer.webApp ul li.a span a'), function(index) {
+            jqueryEachSelect[index] = jQuery(this);
+            setTimeout(function() {
+                jQuery.cacheImage(jqueryEachSelect[index].attr('data-img') + '&s='+gravatarSize, {
+                    // Complete callback is called on load, error and abort
+                    complete: function(e) {
+                        jqueryEachSelect[index].css({'background-image': 'url(' + jqueryEachSelect[index].attr('data-img') + '&s=' + gravatarSize + ')'}).addClass('active');
+                    }
+                });
+            }, timeOut);
+            
+            timeOut = timeOut + timeOutConfig;
+        });
+    },
+    
     // Experimental: "ScrollMeToPage"
     pageHandler: {
         isAvailable: true,
@@ -297,7 +319,11 @@ jQuery(document).ready(function() {
             jQuery(document).on('scroll', function() {
                var st = $(this).scrollTop();
                // Downscroll detection
-               if (st > lastScrollTop && lastScrollTop > 0){
+               if (st > lastScrollTop && lastScrollTop > 0) {
+                   
+                   // Destroy listener for better performance
+                   jQuery(document).off('scroll');
+                   
                    var timeOutConfig = 500;
                    var timeOut = 200;
                    jqueryEachSelect = [];
@@ -316,8 +342,8 @@ jQuery(document).ready(function() {
                        jQuery('section.features div article ul.others').addClass('animated fadeIn');
                    }, timeOut);
                    
-                   // Job finished (destroy listener for better performance)
-                   jQuery(document).off('scroll');
+                   // Show team
+                   Core.showTeam();
                }
                lastScrollTop = st;
             });
@@ -352,11 +378,8 @@ jQuery(document).ready(function() {
                 }
             });
             
-            // Fade out background
-            
-            // Toggle spinner
+            // Fade out background and toggle spinner
             Core.spinnerMgr.destroy();
-                
             jQuery('section#MLSpinner').addClass('animated fadeOut');
             setTimeout(function() {
                 jQuery('section#MLSpinner').hide();
