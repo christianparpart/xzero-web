@@ -497,13 +497,21 @@ header ul.slides li div#homepageFork {
     
     overflow:hidden;
     
-    background:url('../images/header.jpg') no-repeat bottom center;
+    background:url('../images/header.jpg') no-repeat center -512px;
+    
+    -webkit-transition: .8s ease all;
+    -moz-transition: .8s ease all;
+    -o-transition: .8s ease all;
+    transition: .8s ease all;
     
     -webkit-perspective:150; /* Safari and Chrome */
     -moz-perspective:150;
     -o-perspective:150;
     -ms-perspective:150;
     perspective:150;
+}
+header ul.slides li div#homepageFork.next {
+    background-position:center -340px;
 }
 body.canvasRendering header ul.slides li div#homepageFork aside.shadow {
     visibility:hidden;
