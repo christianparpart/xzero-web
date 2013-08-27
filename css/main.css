@@ -1329,6 +1329,9 @@ footer.webApp ul {
     overflow:hidden;
     clear:both;
 }
+body.canvasRendering footer.webApp ul {
+    visibility:hidden;
+}
 footer.webApp ul li {
     display:block;
     float:left;
