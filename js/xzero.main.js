@@ -17,6 +17,8 @@ var spriteHandler = {
 var Core = {
     
     backgroundImages: x0Map.backgroundImages,
+    getThumbnail: x0Map.avatar,
+    twitterText: x0Map.twitterText,
     deepMemory: {
         'header': { 'animatingTo': 0 },
         'header ul.slides li div#homepageLogo span': { 'isAvailable': true },
@@ -94,6 +96,9 @@ var Core = {
             
             // Prevent some css bugs while rendering
             jQuery('body').addClass('canvasRendering');
+            
+            // Pause the slider
+            jQuery('header').flexslider('pause');
 
             // Freeze logo sprite
             if(Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable']) {
@@ -117,7 +122,7 @@ var Core = {
                          jQuery('section#MLOverlay').css({
                              'background-image': 'url('+canvas.toDataURL('image/jpeg', .9)+')'
                          });
-                        
+                                                
                          // Execute callback
                          if(callback !== undefined) {
                             callback();
@@ -128,7 +133,6 @@ var Core = {
                     }, 50);
                 }
               });
-          //});
         },
         
         finish: function(type) {
@@ -144,9 +148,13 @@ var Core = {
               jQuery('html, body, nav.header div a').removeClass('cssLoading');
               jQuery('section#MLOverlay' + (type == 'alert' ? ', section#MLAlert' : '')).hide().css({'right': 0, 'background-image': 'none'});
               
-              // Hide also boxes
+                
+              // Restart the slider
+              jQuery('header').flexslider('play');
+                
+              // Then hide also alert boxes
               if(type == 'alert') {
-                jQuery('section#MLAlert div').hide().removeClass('showScale');
+                jQuery('section#MLAlert section').hide().removeClass('showScale');
               }
 
             }, 1000);
@@ -195,8 +203,6 @@ jQuery(document).ready(function() {
                     
                     // Slider custom events
                     switch(slider.animatingTo) {
-                        case 1:
-                        break;
                             
                         // Toggle Motio on logo
                         case 0:
@@ -219,32 +225,15 @@ jQuery(document).ready(function() {
                             jQuery('header ul.slides li div#homepageFork span.bigText').addClass('active');
                             
                             setTimeout(function() {
-                                jQuery('header ul.slides li div#homepageFork span.bigText.active, header ul.slides li div#homepageFork section.repo').addClass('next');
+                                jQuery('header ul.slides li div#homepageFork span.bigText.active, header ul.slides li div#homepageFork section.repo, header ul.slides li div#homepageFork').addClass('next');
                             }, 1000);
-                          /* var timeOutConfig = 300;
-                           var timeOut = 100;
-                           jqueryEachSelect = [];
-                           
-                           // Show staff
-                           jQuery.each(jQuery('header ul.slides li div#homepageFork ul li.a span a'), function(index) {
-                               jqueryEachSelect[index] = jQuery(this);
-                               setTimeout(function() {
-                                    jQuery.cacheImage(jqueryEachSelect[index].attr('data-img') + '&s=72', {
-                                        // Complete callback is called on load, error and abort
-                                        complete: function(e) {
-                                            jqueryEachSelect[index].css({'background-image': 'url(' + jqueryEachSelect[index].attr('data-img') + '&s=72' + ')'}).addClass('active');
-                                        }
-                                    });
-                               }, timeOut);
-                               timeOut = timeOut + timeOutConfig;
-                           });*/
                         break;
                             
                         // First slide
                         case 0:
                         
                         // Reset 2nd slide
-                        jQuery('header ul.slides li div#homepageFork span.bigText, header ul.slides li div#homepageFork section.repo').removeClass('active next');
+                        jQuery('header ul.slides li div#homepageFork span.bigText, header ul.slides li div#homepageFork section.repo, header ul.slides li div#homepageFork').removeClass('active next');
                         
                         // Stop motio sprite
                         spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
@@ -268,9 +257,9 @@ jQuery(document).ready(function() {
                 e.preventDefault();
                 Core.pageHandler.load('alert', function() {
                     setTimeout(function() {
-                        jQuery('section#MLAlert, section#MLAlert div.uiDocumentation').show();
+                        jQuery('section#MLAlert, section#MLAlert section.uiDocumentation').show();
                         setTimeout(function() {                        
-                            jQuery('section#MLAlert div.uiDocumentation').addClass('showScale');
+                            jQuery('section#MLAlert section.uiDocumentation').addClass('showScale');
                         }, 20);
                     }, 10);
                 });
@@ -279,9 +268,9 @@ jQuery(document).ready(function() {
                 e.preventDefault();
                 Core.pageHandler.load('alert', function() {
                     setTimeout(function() {
-                        jQuery('section#MLAlert, section#MLAlert div.uiPlugins').show();
+                        jQuery('section#MLAlert, section#MLAlert section.uiPlugins').show();
                         setTimeout(function() {
-                            jQuery('section#MLAlert div.uiPlugins').addClass('showScale');
+                            jQuery('section#MLAlert section.uiPlugins').addClass('showScale');
                         }, 20);
                     }, 10);
                 });
@@ -290,9 +279,9 @@ jQuery(document).ready(function() {
                 e.preventDefault();
                 Core.pageHandler.load('alert', function() {
                     setTimeout(function() {
-                        jQuery('section#MLAlert, section#MLAlert div.uiBoards').show();
+                        jQuery('section#MLAlert, section#MLAlert section.uiBoards').show();
                         setTimeout(function() {
-                            jQuery('section#MLAlert div.uiBoards').addClass('showScale');
+                            jQuery('section#MLAlert section.uiBoards').addClass('showScale');
                         }, 20);
                     }, 10);
                 });
@@ -309,7 +298,7 @@ jQuery(document).ready(function() {
             });
             
             // Exit button close
-            jQuery('section#MLAlert div button.close').on('click', function(e) {
+            jQuery('section#MLAlert section button.close').on('click', function(e) {
                 e.preventDefault();
                 Core.pageHandler.finish('alert');
             });
@@ -376,6 +365,65 @@ jQuery(document).ready(function() {
                     spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
                     Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = true;
                 }
+            });
+            
+            // Warning when user try to download beta version
+            jQuery('nav.download div button span.d a').on('click', function(e) {
+                //e.preventDefault();
+                Core.pageHandler.load('alert', function() {
+                    setTimeout(function() {
+                        jQuery('section#MLAlert, section#MLAlert section.uiDownload').show();
+                        
+                        setTimeout(function() {
+                            jQuery('section#MLAlert section.uiDownload').addClass('showScale');
+                        }, 20);
+                    }, 10);
+                });
+                
+                return true;
+            });
+            
+            // Share xzero buttons
+            jQuery('section#MLAlert section ul.sharingHandler li a').on('click', function(e) {
+                // tests: e.preventDefault();
+                
+                // Adding another overlay
+                jQuery('body').prepend('<section id="MLOverlayD"></section>');
+                
+                // http://stackoverflow.com/questions/3291712/is-it-possible-to-open-a-popup-with-javascript-and-then-detect-when-the-user-clo
+                switch(jQuery(this).attr('class')) {
+                        
+                    case 'entypo-facebook-squared': // Facebook
+                    var win = window.open('https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodeURIComponent(location.href)+
+                                '&p[images][0]='+encodeURIComponent(Core.getThumbnail)+
+                                '&p[title]='+encodeURIComponent(document.title)+
+                                '&p[summary]='+encodeURIComponent(jQuery('meta[name=description]').attr('content')),
+                            'facebook-share-dialog',
+                            'width=626,height=436');
+                    var pollTimer = window.setInterval(function() {
+                        if (win.closed !== false) { // !== is required for compatibility with Opera
+                            window.clearInterval(pollTimer);
+                            jQuery('body section#MLOverlayD').remove();
+                            return true;
+                        }
+                    }, 200);
+                    break;
+                        
+                    case 'entypo-twitter': // Twitter
+                    var win = window.open('http://twitter.com/home?status='+encodeURIComponent(Core.twitterText),
+                            'twitter-share-dialog',
+                            'width=626,height=436');
+                    var pollTimer = window.setInterval(function() {
+                        if (win.closed !== false) { // !== is required for compatibility with Opera
+                            window.clearInterval(pollTimer);
+                            jQuery('body section#MLOverlayD').remove();
+                            return true;
+                        }
+                    }, 200);
+                    break;
+                }
+
+                return true;
             });
             
             // Fade out background and toggle spinner

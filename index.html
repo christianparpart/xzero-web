@@ -11,8 +11,8 @@
         <title>x0 Server &mdash; Home</title>
 
         <meta name="Author" content="Christian Parpart and Sabri Haddouche" />
-        <meta property="og:description" content="x0 is a low-latency, open source, scalable HTTP web server and web service framework written in C++">
-        <meta property="og:site_name" content="">
+        <meta property="og:description" content="x0 is a low-latency, open source, scalable HTTP web server and web service framework written in C++" />
+        <meta property="og:site_name" content="xzero.io" />
         <meta name="description" content="x0 is a low-latency, open source, scalable HTTP web server and web service framework written in C++" />
         <meta name="keywords" content="x0, xzero, xzer0, low-latency, scalable, api, framework web server, server, web, http, https, ssl, c++, service, deamon, free, open-source, open source" />
 
@@ -32,6 +32,8 @@
             Static: 'static.xzero.dev'
         };
         var x0Map = {
+            twitterText: 'I just downloaded #xzero, a low-latency, open source and scalable HTTP web server in C++ http://xzero.io #x0',
+            avatar: 'https://1.gravatar.com/avatar/c3a098acd2b70f502ebe1b5ae10b236f?d=https%3A%2F%2Fidenticons.github.com%2F562afe8dd672bc55c6275c9ff19dbc0c.png&s=229',
             backgroundImages: [
                 './images/header.jpg',
                 './images/terminalSprite.png',
@@ -69,26 +71,38 @@
         
         <!-- Overlay -->
         <section id="MLAlert">
-            <div class="uiDocumentation">
+            <section class="uiDocumentation">
                 <p class="title font OpenSans bold">Sorry, documentation is not available yet.</p>
                 <p class="text font OpenSans light">We’re working hard on that !<br /> Please come back later.</p>
                 <hr />
                 <button class="close font OpenSans bold"><span>Okay</span></button>
-            </div>
+            </section>
             
-            <div class="uiPlugins">
+            <section class="uiPlugins">
                 <p class="title font OpenSans bold">Sorry, Plugins Center is not available yet.</p>
                 <p class="text font OpenSans light">We’re working hard on that !<br /> Please come back later.</p>
                 <hr />
                 <button class="close font OpenSans bold"><span>Okay</span></button>
-            </div>
+            </section>
             
-            <div class="uiBoards">
+            <section class="uiBoards">
                 <p class="title font OpenSans bold">Sorry, the board is not available yet.</p>
                 <p class="text font OpenSans light">We’re working hard on that !<br /> Please come back later.</p>
                 <hr />
                 <button class="close font OpenSans bold"><span>Okay</span></button>
-            </div>
+            </section>
+            
+            <section class="uiDownload">
+                <p class="title font OpenSans bold">Download has started.</p>
+                <p class="text font OpenSans light">Thanks for downloading. Don’t forget to spread the word !</p>
+                
+                <ul class="sharingHandler">
+                    <li><a class="entypo-facebook-squared" href="javascript: //"></a></li>
+                    <li><a class="entypo-twitter" href="javascript: //"></a></li>
+                </ul>
+                <hr />
+                <button class="close font OpenSans bold"><span>Close</span></button>
+            </section>
         </section>
         <section id="MLOverlay"><aside class="shadow"></aside></section>
         
@@ -121,11 +135,13 @@
                 </li>
                 <li>
                     <div id="homepageFork">
-                        <aside class="shadow">
-                            <span class="bigText"></span>
-                            <section class="repo">
-                                <a target="_blank" href="https://github.com/xzero/x0"></a>
-                            </section>
+                        <aside class="backgroundPerspective">
+                            <aside class="shadow">
+                                <span class="bigText"></span>
+                                <section class="repo">
+                                    <a target="_blank" href="https://github.com/xzero/x0"></a>
+                                </section>
+                            </aside>
                         </aside>
                     </div>
                 </li>
@@ -152,14 +168,6 @@
                         </span>
                         <span class="c">space invader <span class="i">stable 0.7.0</span></span>
                     </button>
-                    
-                    <!--<button class="font OpenSans right">
-                        <span class="d">
-                            <a href="https://github.com/xzero/x0/zipball/master">zip</a> &middot;
-                            <a href="https://github.com/xzero/x0/tarball/master">tar.gz</a>
-                        </span>
-                        <span class="c">waterfall <span class="i">stable 0.6.0</span></span>
-                    </button>-->
                 </div>
             </aside>
         </nav>
