@@ -370,15 +370,19 @@ jQuery(document).ready(function() {
             // Warning when user try to download beta version
             jQuery('nav.download div button span.d a').on('click', function(e) {
                 //e.preventDefault();
-                Core.pageHandler.load('alert', function() {
-                    setTimeout(function() {
-                        jQuery('section#MLAlert, section#MLAlert section.uiDownload').show();
-                        
+                
+                // Start alert box in 700ms
+                setTimeout(function() {
+                    Core.pageHandler.load('alert', function() {
                         setTimeout(function() {
-                            jQuery('section#MLAlert section.uiDownload').addClass('showScale');
-                        }, 20);
-                    }, 10);
-                });
+                            jQuery('section#MLAlert, section#MLAlert section.uiDownload').show();
+                            
+                            setTimeout(function() {
+                                jQuery('section#MLAlert section.uiDownload').addClass('showScale');
+                            }, 20);
+                        }, 10);
+                    });
+                }, 700);
                 
                 return true;
             });
