@@ -22,7 +22,7 @@ var Core = {
     deepMemory: {
         'header': { 'animatingTo': 0 },
         'header ul.slides li div#homepageLogo span': { 'isAvailable': true },
-        'nav.download div button span.d a': { 'jqueryObject': false },
+        'nav.download div aside span.d a': { 'jqueryObject': false },
         'section#MLOverlay': { 'isAvailable': true },
         'cacheImg': { 'countNumbers': 0 }
     },
@@ -38,12 +38,14 @@ var Core = {
                 vertical: 1,
                 reverse: false
             });
+            
             return true;
         },
         
         destroy: function() {
             spriteHandler.animationContainer[Core.spinnerMgr.targetId].toggle();
             jQuery(Core.spinnerMgr.targetId).removeClass('animated bounceIn').addClass('animated bounceOut');
+            
             return true;
         }
     },
@@ -72,6 +74,7 @@ var Core = {
     
     // Experimental: "ScrollMeToPage"
     pageHandler: {
+        
         isAvailable: true,
         
         load: function(type, callback) {
@@ -146,10 +149,10 @@ var Core = {
             Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = true;
             
             setTimeout(function() {
+                
               jQuery('html, body, nav.header div a').removeClass('cssLoading');
               jQuery('section#MLOverlay' + (type == 'alert' ? ', section#MLAlert' : '')).hide().css({'right': 0, 'background-image': 'none'});
               
-                
               // Restart the slider
               jQuery('header').flexslider('play');
                 
@@ -180,9 +183,8 @@ jQuery(document).ready(function() {
             }
                                     
             // Download package menus listener
-            jQuery('nav.download div button.right').on('click', function() {
-                jQuery(this).addClass('active');                
-                jQuery(this).on('mouseleave', function() {
+            jQuery('nav.download div aside').on('click', function() {
+                jQuery(this).addClass('active').on('mouseleave', function() {
                     jQuery(this).removeClass('active');
                 });
             });
@@ -246,12 +248,6 @@ jQuery(document).ready(function() {
                 }
                 //slideshow: false
             });
-                
-            // Add effect for welcome section
-            jQuery('section.welcome div aside:first-child').addClass('active animated bounceInLeft');
-            setTimeout(function() {
-                jQuery('section.welcome div aside:last-child').addClass('active animated fadeIn');
-            }, 800);
             
             // Test loader
             jQuery('nav.header div a:nth-child(2)').on('click', function(e) {
@@ -338,26 +334,6 @@ jQuery(document).ready(function() {
                lastScrollTop = st;
             });
             
-            // Sprites
-            setTimeout(function() {
-                
-                // Sprite Transitions
-                spriteHandler.animationStart('header ul.slides li div#homepageLogo span', {
-                    fps: 7,
-                    frames: 7,
-                    vertical: 1,
-                    reverse: false
-                });
-                
-                spriteHandler.animationStart('section.welcome div aside.terminal', {
-                    fps: 2.5,
-                    frames: 4,
-                    vertical: 1,
-                    reverse: true
-                });
-                
-            }, 500);
-            
             // x0 Logo: Motio toggle listener
             Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = true;
             jQuery('header ul.slides li div#homepageLogo span').on('click', function(e) {
@@ -368,8 +344,8 @@ jQuery(document).ready(function() {
                 }
             });
             
-            // Warning when user try to download beta version
-            jQuery('nav.download div button span.d a').on('click', function(e) {
+            // Thanks and sharing box
+            jQuery('nav.download div aside span.d a').on('click', function(e) {
                 e.preventDefault();
                                 
                 // Start alert box in 700ms
@@ -383,10 +359,10 @@ jQuery(document).ready(function() {
                     }, 10);
                 });
                 
-                Core.deepMemory['nav.download div button span.d a']['jqueryObject'] = jQuery(this);
+                Core.deepMemory['nav.download div aside span.d a']['jqueryObject'] = jQuery(this);
                 setTimeout(function() {
-                    document.location.href = Core.deepMemory['nav.download div button span.d a']['jqueryObject'].attr('href');
-                    Core.deepMemory['nav.download div button span.d a']['jqueryObject'] = false;
+                    document.location.href = Core.deepMemory['nav.download div aside span.d a']['jqueryObject'].attr('href');
+                    Core.deepMemory['nav.download div aside span.d a']['jqueryObject'] = false;
                 }, 200);
                 
                 return true;
@@ -441,6 +417,32 @@ jQuery(document).ready(function() {
             setTimeout(function() {
                 jQuery('section#MLSpinner').hide();
             }, 500);
+            
+            // Sprites
+            setTimeout(function() {
+                
+                // Sprite Transitions
+                spriteHandler.animationStart('header ul.slides li div#homepageLogo span', {
+                    fps: 7,
+                    frames: 7,
+                    vertical: 1,
+                    reverse: false
+                });
+                
+                spriteHandler.animationStart('section.welcome div aside.terminal', {
+                    fps: 2.5,
+                    frames: 4,
+                    vertical: 1,
+                    reverse: true
+                });
+                
+            }, 500);
+            
+            // Add effect for welcome section
+            jQuery('section.welcome div aside:first-child').addClass('active animated bounceInLeft');
+            setTimeout(function() {
+                jQuery('section.welcome div aside:last-child').addClass('active animated fadeIn');
+            }, 800);
         }
     });
 });

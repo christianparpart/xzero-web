@@ -846,19 +846,27 @@ nav.download div h4 {
 nav.download div h4.active {
     opacity:1;
 }
-nav.download div button {
+nav.download div aside {
     
+    display:block;
+    float:right;
     overflow: hidden;
-	position:relative;
+    
+    padding:0;
 	border:0;
 	margin:0;
-    margin-right:10px;
-    margin-top:.5rem;
-	cursor:pointer;
+    
+    margin-left:10px;
+    margin-top:7px;
+    padding:4px 1.2rem 4px 1.2rem;
+    
+    max-height:36px;
+    height:36px;
+    
+    cursor:pointer;
 	font-size:.85rem;
 	font-weight:600;
 	border-radius:.25rem;
-    height: 3.3em;
     outline:0;
     
     color:#fff;
@@ -901,28 +909,19 @@ nav.download div button {
     -webkit-box-shadow: inset 0px 0px 40px 5px rgba(0,0,0,.3), inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
     box-shadow: inset 0px 0px 40px 5px rgba(0,0,0,.3), inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
     
-    text-transform:uppercase;
+    text-transform:uppercase;    
 }
-nav.download div button:nth-child(2) {
+nav.download div aside:nth-child(2) {
      background-position:bottom right;
 }
-nav.download div button.right {
-    float:right;
-    margin-left:10px;
-    margin-right:0px;
-    padding:.4rem 1.2rem;
-    min-width:130px;
-    
-    text-transform:none;
-}
-nav.download div button span.i {
+nav.download div aside span.i {
     display:block;
     text-transform:uppercase;
     font-size:0.7rem;
 	font-weight:400;
 }
 
-nav.download div button.active {
+nav.download div aside.active {
     background-position:top left;
     cursor:default;
     color:#fff;
@@ -933,11 +932,11 @@ nav.download div button.active {
     
     border:1px solid rgba(0,0,0,.6);
 }
-nav.download div button.active:nth-child(2) {
+nav.download div aside.active:nth-child(2) {
     background-position:top right;
 }
-nav.download div button span.c,
-nav.download div button span.d {
+nav.download div aside span.c,
+nav.download div aside span.d {
     display:block;
     overflow:hidden;
             
@@ -954,29 +953,31 @@ nav.download div button span.d {
     transform: translate3d(0, 0, 0);
     
     text-transform:uppercase;
+    
+    text-align:center;
 }
-nav.download div button span.c {
+nav.download div aside span.c {
     padding-top:10px;
     opacity:.7;
 }
-nav.download div button:hover {
+nav.download div aside:hover {
     border:1px solid rgba(0,0,0,.5);
     
     -moz-box-shadow: inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
     -webkit-box-shadow: inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
     box-shadow: inset 0 -1px 0 rgba(105,60,255, .3), inset -1px -1px 0 rgba(105,60,255, .3), inset 1px -1px 0 rgba(105,60,255, .3);
 }
-nav.download div button.active:hover,
-nav.download div button.active {
+nav.download div aside.active:hover,
+nav.download div aside.active {
     -moz-box-shadow: inset 0 -1px 0 rgba(105,60,255, .1), inset -1px -1px 0 rgba(105,60,255, .1), inset 1px -1px 0 rgba(105,60,255, .1);
     -webkit-box-shadow: inset 0 -1px 0 rgba(105,60,255, .1), inset -1px -1px 0 rgba(105,60,255, .1), inset 1px -1px 0 rgba(105,60,255, .1);
     box-shadow: inset 0 -1px 0 rgba(105,60,255, .1), inset -1px -1px 0 rgba(105,60,255, .1), inset 1px -1px 0 rgba(105,60,255, .1);
 }
-nav.download div button:hover span.c {
+nav.download div aside:hover span.c {
     opacity:.9;
     text-shadow: 0 0 10px #000;
 }
-nav.download div button span.d {
+nav.download div aside span.d {
     width:100%;
     text-align:center;
     margin-top:-27px;
@@ -987,16 +988,16 @@ nav.download div button span.d {
   -o-transition: 0.35s ease all, 0.6 ease color;
   transition: 0.35s ease all, 0.6 ease color;
 }
-nav.download div button.active span.c {
+nav.download div aside.active span.c {
     padding-top:50px;
 }
-nav.download div button.active span.d {
+nav.download div aside.active span.d {
     text-shadow: 0 0 10px rgba(0,0,0,.9);
 
     margin-top:5px;
     color:#fff;
 }
-nav.download div button span.d a {
+nav.download div aside span.d a {    
     text-decoration:none;
     color:inherit;
     text-transform:uppercase;
