@@ -22,6 +22,7 @@ var Core = {
     deepMemory: {
         'header': { 'animatingTo': 0 },
         'header ul.slides li div#homepageLogo span': { 'isAvailable': true },
+        'nav.download div button span.d a': { 'jqueryObject': false },
         'section#MLOverlay': { 'isAvailable': true },
         'cacheImg': { 'countNumbers': 0 }
     },
@@ -369,20 +370,24 @@ jQuery(document).ready(function() {
             
             // Warning when user try to download beta version
             jQuery('nav.download div button span.d a').on('click', function(e) {
-                //e.preventDefault();
-                
+                e.preventDefault();
+                                
                 // Start alert box in 700ms
-                setTimeout(function() {
-                    Core.pageHandler.load('alert', function() {
-                        setTimeout(function() {
-                            jQuery('section#MLAlert, section#MLAlert section.uiDownload').show();
+                Core.pageHandler.load('alert', function() {
+                    setTimeout(function() {
+                        jQuery('section#MLAlert, section#MLAlert section.uiDownload').show();
                             
-                            setTimeout(function() {
-                                jQuery('section#MLAlert section.uiDownload').addClass('showScale');
-                            }, 20);
-                        }, 10);
-                    });
-                }, 700);
+                        setTimeout(function() {
+                            jQuery('section#MLAlert section.uiDownload').addClass('showScale');
+                        }, 20);
+                    }, 10);
+                });
+                
+                Core.deepMemory['nav.download div button span.d a']['jqueryObject'] = jQuery(this);
+                setTimeout(function() {
+                    document.location.href = Core.deepMemory['nav.download div button span.d a']['jqueryObject'].attr('href');
+                    Core.deepMemory['nav.download div button span.d a']['jqueryObject'] = false;
+                }, 200);
                 
                 return true;
             });
