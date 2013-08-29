@@ -1086,17 +1086,19 @@ section.welcome div aside.presentation p {
     
     display:block;
 }
+section.welcome div aside.presentation p a,
+section.welcome div aside.presentation p a:hover {
+    color:rgb(226, 226, 226);
+    font-weight:600;
+    text-decoration:none;
+}
 section.welcome div aside.presentation p.big {
     font-size:16px;
     margin-bottom:15px;
 }
 section.welcome div aside.presentation h2 {
     font-weight:700;
-    color:#c7c7c3;
-
-    background: -webkit-linear-gradient(#c7c7c3, #bab8be);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color:#bab8be;
         
     text-transform:uppercase;
     font-size:16px;

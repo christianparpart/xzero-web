@@ -78,7 +78,6 @@ var Core = {
         
         isAvailable: true,
         
-        
         mainPage: '/index.html',
         currentPage: '',
         
@@ -144,21 +143,27 @@ var Core = {
                     jQuery('a[rel=x0-history]').on('click', function(e) {
                         e.preventDefault();
                         
-                        var link = Core.pageHandler.removeQuery(jQuery(this).attr('href'));
+                        var linkOrigin = jQuery.trim(jQuery(this).attr('href'));
+                        var link = Core.pageHandler.removeQuery(linkOrigin);
                         
                         if(typeof Pages[link] !== 'undefined') {
+                            Core.pageHandler.load('transition', function() {
                             
-                            // Page 
-                            History.pushState(null, Core.webTitle + ' — ' + Pages[link].title, link);
-                            return true;
+                                setTimeout(function() {
+                                    
+                                    // Push page
+                                    if(History.pushState(null, Core.webTitle + ' — ' + Pages[link].title, linkOrigin)) {
+                                        Core.pageHandler.finish('transition');
+                                    }
+                                    
+                                    return true;
+                                }, 20);
+                            });
                         }
                         
                         // 404
                         Core.pageHandler.error(404);
                         return false;
-                        /*Core.pageHandler.load('transition', function() {
-                            Core.pageHandler.finish('transition');
-                        });*/
                     });
         
                     // Bind to StateChange Event
@@ -172,6 +177,8 @@ var Core = {
                             // Set current page
                             Core.pageHandler.currentPage = Core.pageHandler.removeQuery(History.getState().hash);
                             
+                            // Do ajax request here
+                            
                             Pages[Core.pageHandler.currentPage].before();
                             
                             return true;
@@ -183,7 +190,7 @@ var Core = {
                     });
                     
                     // Check if hash is not empty
-                    if(History.getState().hash === '/') {
+                    if(Core.pageHandler.removeQuery(History.getState().hash) === '/') {
                         // Set current page
                         Core.pageHandler.currentPage = Core.pageHandler.mainPage;
                         
@@ -223,10 +230,6 @@ var Core = {
             jQuery('html, body').addClass('cssLoading');
           }
             
-          // Work around a strange bug
-          // "Uncaught SecurityError: An attempt was made to break through the security policy of the user agent."
-          //jQuery('header.slds ul.slides li div#homepageFork ul li').hide();
-            
             // Show invisible overlay
             jQuery('section#MLOverlay').show();
             jQuery('html, body').css({ scrollTop: 0 });
@@ -236,14 +239,9 @@ var Core = {
             // Prevent some css bugs while rendering
             jQuery('body').addClass('canvasRendering');
             
-            // Pause the slider
-            jQuery('header.slds').flexslider('pause');
-
-            // Freeze logo sprite
-            if(Core.deepMemory['header.slds ul.slides li div#homepageLogo span']['isAvailable']) {
-                Core.deepMemory['header.slds ul.slides li div#homepageLogo span']['isAvailable'] = false;
-                spriteHandler.animationContainer['header.slds ul.slides li div#homepageLogo span'].toggle();
-                spriteHandler.animationContainer['section.welcome div aside.terminal'].toggle();
+            // Reset page
+            if(type == 'alert' && typeof Pages[Core.pageHandler.currentPage] !== 'undefined') {
+                Pages[Core.pageHandler.currentPage].after();
             }
             
             window.html2canvas([document.body], {
@@ -281,18 +279,20 @@ var Core = {
             jQuery('section#MLOverlay' + (type == 'alert' ? ', section#MLAlert' : '')).css({'right': jQuery(window).width()+300});
             
             // Re-enable logo sprite
-            spriteHandler.animationContainer['header.slds ul.slides li div#homepageLogo span'].toggle();
+            /*spriteHandler.animationContainer['header.slds ul.slides li div#homepageLogo span'].toggle();
             spriteHandler.animationContainer['section.welcome div aside.terminal'].toggle();
-            Core.deepMemory['header.slds ul.slides li div#homepageLogo span']['isAvailable'] = true;
+            Core.deepMemory['header.slds ul.slides li div#homepageLogo span']['isAvailable'] = true;*/
             
             setTimeout(function() {
                 
               jQuery('html, body, nav.header div a').removeClass('cssLoading');
               jQuery('section#MLOverlay' + (type == 'alert' ? ', section#MLAlert' : '')).hide().css({'right': 0, 'background-image': 'none'});
               
-              // Restart the slider
-              jQuery('header.slds').flexslider('play');
-                
+              // Restart the page
+              if(type == 'alert' && typeof Pages[Core.pageHandler.currentPage] !== 'undefined') {
+                Pages[Core.pageHandler.currentPage].before();
+              }
+
               // Then hide also alert boxes
               if(type == 'alert') {
                 jQuery('section#MLAlert section').hide().removeClass('showScale');
