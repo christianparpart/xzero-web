@@ -276,11 +276,11 @@ section#MLAlert section {
     -ms-filter: blur(1px);
     filter: blur(1px);
     
-    -webkit-transform: scale(1.3);
-    -moz-transform: scale(1.3);
-    -o-transform: scale(1.3);
-    -ms-transform: scale(1.3);
-    transform: scale(1.3);
+    -webkit-transform: translate3d(0, 0, 0) scale(1.3);
+    -moz-transform: translate3d(0, 0, 0) scale(1.3);
+    -o-transform: translate3d(0, 0, 0) scale(1.3);
+    -ms-transform: translate3d(0, 0, 0) scale(1.3);
+    transform: translate3d(0, 0, 0) scale(1.3);
 }
 section#MLAlert section.showScale {
     opacity:.95;
@@ -291,11 +291,11 @@ section#MLAlert section.showScale {
     -ms-filter: blur(0px);
     filter: blur(0px);
     
-    transform: scale(1);
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -o-transform: scale(1);
-    -ms-transform: scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+    -moz-transform: translate3d(0, 0, 0) scale(1);
+    -o-transform: translate3d(0, 0, 0) scale(1);
+    -ms-transform: translate3d(0, 0, 0) scale(1);
 }
 section#MLAlert section hr {
     margin:0;
@@ -497,7 +497,7 @@ section#MLAlert section button:active span {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-header {
+header.slds {
     width:100%;
     height:auto;
     
@@ -505,11 +505,11 @@ header {
     
     border-bottom:1px solid #000;
 }
-header, header li, header ul, header ol {
+header.slds, header.slds li, header.slds ul, header.slds ol {
     margin:0;
     padding:0;
 }
-header li, header ul {
+header.slds li, header.slds ul {
     border:0;
 }
 
@@ -534,17 +534,17 @@ aside.shadow.vertical {
     background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 80%,rgba(0,0,0,1) 100%);
     background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 80%,rgba(0,0,0,1) 100%);
 }
-header ul.slides li aside.shadow {
+header.slds ul.slides li aside.shadow {
     padding-top:21px;
 }
-header ul.slides li div#homepageLogo {
+header.slds ul.slides li div#homepageLogo {
     width:100%;
     
     height:340px;
     
     background:url('../images/header.jpg') no-repeat top center;
 }
-header ul.slides li div#homepageLogo span {
+header.slds ul.slides li div#homepageLogo span {
     text-decoration:none;
     font-size:0;
     display:block;
@@ -562,7 +562,7 @@ header ul.slides li div#homepageLogo span {
     
     opacity:1;
 }
-header ul.slides li div#homepageFork {
+header.slds ul.slides li div#homepageFork {
     width:100%;
     height:340px;
     
@@ -574,7 +574,7 @@ header ul.slides li div#homepageFork {
     -ms-perspective:150;
     perspective:150;
 }
-header ul.slides li div#homepageFork aside.backgroundPerspective {
+header.slds ul.slides li div#homepageFork aside.backgroundPerspective {
     display:block;
     
     width:100%;
@@ -590,7 +590,7 @@ header ul.slides li div#homepageFork aside.backgroundPerspective {
     transform: translate3d(0, 0, 0) scale(1.1);
     -webkit-transform: translate3d(0, 0, 0) scale(1.1);
 }
-header ul.slides li div#homepageFork.next aside.backgroundPerspective {
+header.slds ul.slides li div#homepageFork.next aside.backgroundPerspective {
     background-position:center -340px;
     
     transform: translate3d(0, 0, 0) scale(1);
@@ -600,7 +600,7 @@ header ul.slides li div#homepageFork.next aside.backgroundPerspective {
 body.canvasRendering header ul.slides li div#homepageFork aside.shadow {
     visibility:hidden;
 }
-header ul.slides li div#homepageFork span.bigText {
+header.slds ul.slides li div#homepageFork span.bigText {
 
     display:block;
 
@@ -623,10 +623,10 @@ header ul.slides li div#homepageFork span.bigText {
     
     opacity:0;
 }
-header ul.slides li div#homepageFork span.bigText.active {
+header.slds ul.slides li div#homepageFork span.bigText.active {
     opacity:.8;
 }
-header ul.slides li div#homepageFork span.bigText.active.next {
+header.slds ul.slides li div#homepageFork span.bigText.active.next {
     
     transform: translate3d(0, 0, 0) scale(.7);
     -webkit-transform: translate3d(0, 0, 0) scale(.7);
@@ -638,7 +638,7 @@ header ul.slides li div#homepageFork span.bigText.active.next {
     
     opacity:1;
 }
-header ul.slides li div#homepageFork section.repo {
+header.slds ul.slides li div#homepageFork section.repo {
     outline:0;
     border:0;
     padding:0;
@@ -663,14 +663,14 @@ header ul.slides li div#homepageFork section.repo {
     height:209px;
     width:100%;
 }
-header ul.slides li div#homepageFork section.repo.next {
+header.slds ul.slides li div#homepageFork section.repo.next {
     transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
     -webkit-transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
     -moz-transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
     -o-transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
     -ms-transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
 }
-header ul.slides li div#homepageFork section.repo a {
+header.slds ul.slides li div#homepageFork section.repo a {
     display:block;
     
     outline:0;
@@ -681,7 +681,7 @@ header ul.slides li div#homepageFork section.repo a {
     width:100%;
     height:100%;
 }
-header ul.slides li div#homepageFork aside.shadow {
+header.slds ul.slides li div#homepageFork aside.shadow {
     padding-top:10px;
 }
 
@@ -1510,8 +1510,8 @@ footer.webApp ul li span a.active:hover {
 }
 /* FlexSlider Necessary Styles
 *********************************/
-header .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
-header .slides img { margin:0 auto; position:relative; display: block;}
+header.slds .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+header.slds .slides img { margin:0 auto; position:relative; display: block;}
 
 .flex-pauseplay span {text-transform: capitalize;}
 
@@ -1525,11 +1525,11 @@ html[xmlns] .slides {display: block;}
  * include js that eliminates this class on page load */
 .no-js .slides > li:first-child {display: block;}
 
-header { position: relative; -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2); -moz-box-shadow: 0 1px 4px rgba(0,0,0,.2); -o-box-shadow: 0 1px 4px rgba(0,0,0,.2); box-shadow: 0 1px 4px rgba(0,0,0,.2); zoom: 1; }
+header.slds { position: relative; -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2); -moz-box-shadow: 0 1px 4px rgba(0,0,0,.2); -o-box-shadow: 0 1px 4px rgba(0,0,0,.2); box-shadow: 0 1px 4px rgba(0,0,0,.2); zoom: 1; }
 /*.flex-viewport { max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; }*/
 .flex-viewport { float:none; height: 340px !important; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease;  }
 .loading .flex-viewport { max-height: 300px; }
-header .slides { zoom: 1; }
+header.slds .slides { zoom: 1; }
 .carousel li { margin-right: 5px; }
 
 /* Control Nav */
@@ -1554,8 +1554,19 @@ header .slides { zoom: 1; }
 body.canvasRendering .flex-control-nav {
     visibility:hidden;
 }
-.flex-control-nav li {margin: 0 4px; display: inline-block; zoom: 1; *display: inline;}
+.flex-control-nav li {
+    margin:0;
+    padding:0;
+    width: 18px;
+    height: 11px;
+    
+    display: inline-block;
+    zoom: 1;
+}
 .flex-control-paging li a {
+    padding:0;
+    margin:0;
+    
     width: 11px;
     height: 11px;
     

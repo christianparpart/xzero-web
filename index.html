@@ -19,19 +19,32 @@
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
         <!-- Minify required -->
-        <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Ubuntu:400,500,700" />
         <link type="text/css" rel="stylesheet" href="css/normalize.css" />
         <link type="text/css" rel="stylesheet" href="css/main.css" />
-        <link type="text/css" rel="stylesheet" href="css/animate.min.css" />
         
         <!-- Minify required -->
         <script src="js/modernizr-2.6.2.min.js"></script>
         <script type="text/javascript">
+        // Call Gauges Analytics
+        var _gauges = _gauges || [];
+        (function() {
+            var t   = document.createElement('script');
+            t.type  = 'text/javascript';
+            t.async = true;
+            t.id    = 'gauges-tracker';
+            t.setAttribute('data-site-id', '521bc483f5a1f542380000aa');
+            t.src = '//secure.gaug.es/track.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(t, s);
+        })();
+            
+        // Main JS config
         var x0Path = {
             Default: 'xzero.dev',
             Static: 'static.xzero.dev'
         };
         var x0Map = {
+            webTitle: 'x0 Server',
             twitterText: 'I just downloaded #xzero, a low-latency, open source and scalable HTTP web server in C++ http://xzero.io #x0',
             avatar: 'https://1.gravatar.com/avatar/c3a098acd2b70f502ebe1b5ae10b236f?d=https%3A%2F%2Fidenticons.github.com%2F562afe8dd672bc55c6275c9ff19dbc0c.png&s=229',
             backgroundImages: [
@@ -44,26 +57,32 @@
                 './images/windowSprite.png',
             ]
         };
-        </script>
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/xzero.dependencies.min.js"></script>
-        <script src="js/xzero.main.js"></script>
-        <script type="text/javascript">
-          var _gauges = _gauges || [];
-          (function() {
-            var t   = document.createElement('script');
-            t.type  = 'text/javascript';
-            t.async = true;
-            t.id    = 'gauges-tracker';
-            t.setAttribute('data-site-id', '521bc483f5a1f542380000aa');
-            t.src = '//secure.gaug.es/track.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(t, s);
-          })();
+
+        // Run page
+        ModernizrExtends.start([
+            // CSS
+            '//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Ubuntu:400,500,700',
+            'css/animate.min.css',
+                
+            // JS
+            'js/jquery-1.10.2.min.js',
+            'js/xzero.dependencies.min.js',
+            'js/xzero.main.js',
+            'js/xzero.pages.js'
+          ],
+        
+          function() {
+            
+            // When document is ready
+            jQuery(document).ready(function() {
+                Core.pageHandler.start();
+            });
+          }
+        );
         </script>
     </head>
+
     <body>
-                
         <!-- Spinner -->
         <section id="MLSpinner">
             <div class="animated bounceIn spinnerLoad"></div>
@@ -85,9 +104,9 @@
                 <button class="close font OpenSans bold"><span>Okay</span></button>
             </section>
             
-            <section class="uiBoards">
-                <p class="title font OpenSans bold">Sorry, the board is not available yet.</p>
-                <p class="text font OpenSans light">We’re working hard on that !<br /> Please come back later.</p>
+            <section class="uiErrors">
+                <p class="title font OpenSans bold">An error occured.</p>
+                <p class="text font OpenSans light">Sorry, this page does not exist.</p>
                 <hr />
                 <button class="close font OpenSans bold"><span>Okay</span></button>
             </section>
@@ -115,16 +134,15 @@
         <nav class="header">
             <aside class="shadow">
                 <div class="font Ubuntu">
-                    <a href="/home" class="active">Home</a>
-                    <a href="/docs">Documentation</a>
+                    <a href="/home" target="_self" rel="x0-history" class="active">Home</a>
+                    <a href="/docs" target="_self" rel="x0-history">Documentation</a>
                     <a href="/plugins">Plugins</a>
-                    <a href="/community">Community</a>
                     <a href="http://blog.xzero.io">Blog</a>
                 </div>
             </aside>
         </nav>
         
-        <header>
+        <header class="slds">
             <ul class="slides">
                 <li>
                     <div id="homepageLogo">

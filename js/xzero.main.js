@@ -16,12 +16,14 @@ var spriteHandler = {
 
 var Core = {
     
+    webTitle: x0Map.webTitle,
     backgroundImages: x0Map.backgroundImages,
     getThumbnail: x0Map.avatar,
     twitterText: x0Map.twitterText,
+    
     deepMemory: {
-        'header': { 'animatingTo': 0 },
-        'header ul.slides li div#homepageLogo span': { 'isAvailable': true },
+        'header.slds': { 'animatingTo': 0 },
+        'header.slds ul.slides li div#homepageLogo span': { 'isAvailable': true },
         'nav.download div aside span.d a': { 'jqueryObject': false },
         'section#MLOverlay': { 'isAvailable': true },
         'cacheImg': { 'countNumbers': 0 }
@@ -71,13 +73,146 @@ var Core = {
             timeOut = timeOut + timeOutConfig;
         });
     },
-    
-    // Experimental: "ScrollMeToPage"
+
     pageHandler: {
         
         isAvailable: true,
         
+        
+        mainPage: '/index.html',
+        currentPage: '',
+        
+        removeQuery: function(value) {
+            return (value.indexOf('?') == '-1' ? value : value.substring(0, value.indexOf('?')));
+        },
+        
+        error: function(code) {
+            switch(code) {
+                case 404:
+                // Oops... 404.
+                // Todo: Make alert 404
+                Core.pageHandler.load('alert', function() {
+                    setTimeout(function() {
+                        jQuery('section#MLAlert, section#MLAlert section.uiErrors').show();
+                        setTimeout(function() {
+                            jQuery('section#MLAlert section.uiErrors').addClass('showScale');
+                        }, 20);
+                    }, 10);
+                });
+                break;
+            };
+        },
+
+        start: function() {
+            
+            // Activate spinner
+            Core.spinnerMgr.set();
+                
+            // Remove spinner once all images are loaded
+            jQuery.cacheImage(Core.backgroundImages, {
+                    
+                // Complete callback is called on load, error and abort
+                complete: function(e) {
+                    
+                    Core.deepMemory['cacheImg']['countNumbers'] = Core.deepMemory['cacheImg']['countNumbers'] + 1;
+                    if(Core.deepMemory['cacheImg']['countNumbers'] != Core.backgroundImages.length) {
+                        return false;
+                    }
+        
+                    // Fade out background and toggle spinner
+                    Core.spinnerMgr.destroy();
+                    jQuery('section#MLSpinner').addClass('animated fadeOut');
+                    setTimeout(function() {
+                        jQuery('section#MLSpinner').hide();
+                    }, 500);
+                    
+                    // Prepare
+                    var History = window.History; // We are using a capital H instead of a lower h
+                    if (!History.enabled) {
+                         // History.js is disabled for this browser.
+                         // This is because we can optionally choose to support HTML4 browsers or not.
+                        return false;
+                    }
+                    
+                    // Exit button close
+                    jQuery('section#MLAlert section button.close').on('click', function(e) {
+                        e.preventDefault();
+                        Core.pageHandler.finish('alert');
+                    });
+        
+                    // Handle <a> links
+                    jQuery('a[rel=x0-history]').on('click', function(e) {
+                        e.preventDefault();
+                        
+                        var link = Core.pageHandler.removeQuery(jQuery(this).attr('href'));
+                        
+                        if(typeof Pages[link] !== 'undefined') {
+                            
+                            // Page 
+                            History.pushState(null, Core.webTitle + ' — ' + Pages[link].title, link);
+                            return true;
+                        }
+                        
+                        // 404
+                        Core.pageHandler.error(404);
+                        return false;
+                        /*Core.pageHandler.load('transition', function() {
+                            Core.pageHandler.finish('transition');
+                        });*/
+                    });
+        
+                    // Bind to StateChange Event
+                    History.Adapter.bind(window, 'statechange', function() { // We are using statechange instead of popstate
+                        
+                        // Execute this page
+                        //console.log('State changed');
+                        if(typeof Pages[Core.pageHandler.removeQuery(History.getState().hash)] !== 'undefined') {
+                            Pages[Core.pageHandler.currentPage].after();
+                            
+                            // Set current page
+                            Core.pageHandler.currentPage = Core.pageHandler.removeQuery(History.getState().hash);
+                            
+                            Pages[Core.pageHandler.currentPage].before();
+                            
+                            return true;
+                        }
+                        
+                        // 404
+                        Core.pageHandler.error(404);
+                        return false;
+                    });
+                    
+                    // Check if hash is not empty
+                    if(History.getState().hash === '/') {
+                        // Set current page
+                        Core.pageHandler.currentPage = Core.pageHandler.mainPage;
+                        
+                        Pages[Core.pageHandler.currentPage].before();
+                        
+                        return true;
+                    }
+                    
+                    // Execute this page
+                    if(typeof Pages[Core.pageHandler.removeQuery(History.getState().hash)] !== 'undefined') {
+                        // Set current page
+                        Core.pageHandler.currentPage = Core.pageHandler.removeQuery(History.getState().hash);
+                        
+                        Pages[Core.pageHandler.currentPage].before();
+                        
+                        return true;
+                    }
+                    
+                    // 404
+                    Core.pageHandler.error(404);
+                    return false;
+                }
+            });
+            
+            return true;
+        },
+        
         load: function(type, callback) {
+                    
           if(!Core.deepMemory['section#MLOverlay']['isAvailable']) {
             return false;
           }
@@ -90,7 +225,7 @@ var Core = {
             
           // Work around a strange bug
           // "Uncaught SecurityError: An attempt was made to break through the security policy of the user agent."
-          //jQuery('header ul.slides li div#homepageFork ul li').hide();
+          //jQuery('header.slds ul.slides li div#homepageFork ul li').hide();
             
             // Show invisible overlay
             jQuery('section#MLOverlay').show();
@@ -102,20 +237,22 @@ var Core = {
             jQuery('body').addClass('canvasRendering');
             
             // Pause the slider
-            jQuery('header').flexslider('pause');
+            jQuery('header.slds').flexslider('pause');
 
             // Freeze logo sprite
-            if(Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable']) {
-                Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = false;
-                spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
+            if(Core.deepMemory['header.slds ul.slides li div#homepageLogo span']['isAvailable']) {
+                Core.deepMemory['header.slds ul.slides li div#homepageLogo span']['isAvailable'] = false;
+                spriteHandler.animationContainer['header.slds ul.slides li div#homepageLogo span'].toggle();
                 spriteHandler.animationContainer['section.welcome div aside.terminal'].toggle();
             }
             
             window.html2canvas([document.body], {
+                
                 background: '#141414',
                 allowTaint: true,
                 taintTest: false,
                 letterRendering: false,
+                
                 onrendered: function(canvas) {
 
                     setTimeout(function() {
@@ -144,9 +281,9 @@ var Core = {
             jQuery('section#MLOverlay' + (type == 'alert' ? ', section#MLAlert' : '')).css({'right': jQuery(window).width()+300});
             
             // Re-enable logo sprite
-            spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
+            spriteHandler.animationContainer['header.slds ul.slides li div#homepageLogo span'].toggle();
             spriteHandler.animationContainer['section.welcome div aside.terminal'].toggle();
-            Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = true;
+            Core.deepMemory['header.slds ul.slides li div#homepageLogo span']['isAvailable'] = true;
             
             setTimeout(function() {
                 
@@ -154,7 +291,7 @@ var Core = {
               jQuery('section#MLOverlay' + (type == 'alert' ? ', section#MLAlert' : '')).hide().css({'right': 0, 'background-image': 'none'});
               
               // Restart the slider
-              jQuery('header').flexslider('play');
+              jQuery('header.slds').flexslider('play');
                 
               // Then hide also alert boxes
               if(type == 'alert') {
@@ -165,284 +302,3 @@ var Core = {
         }
     }
 };
-
-jQuery(document).ready(function() {
-    
-    // Activate spinner
-    Core.spinnerMgr.set();
-    
-    // Remove spinner once all images loaded
-    jQuery.cacheImage(Core.backgroundImages, {
-        
-        // Complete callback is called on load, error and abort
-        complete: function(e) {
-        
-            Core.deepMemory['cacheImg']['countNumbers'] = Core.deepMemory['cacheImg']['countNumbers'] + 1;
-            if(Core.deepMemory['cacheImg']['countNumbers'] != Core.backgroundImages.length) {
-                return false;
-            }
-                                    
-            // Download package menus listener
-            jQuery('nav.download div aside').on('click', function() {
-                jQuery(this).addClass('active').on('mouseleave', function() {
-                    jQuery(this).removeClass('active');
-                });
-            });
-            
-            // Slider
-            jQuery('header').flexslider({
-                
-                animation: 'slide',
-                direction: 'vertical',
-                directionNav: false,
-                pauseOnHover: false,
-                slideshowSpeed: 6500,
-                //Callback: function(slider) - Fires after each slider animation completes
-                before: function(slider) {
-                    
-                    if(Core.deepMemory['header']['animatingTo'] == slider.animatingTo) {
-                        return false;
-                    }
-                    
-                    // Slider custom events
-                    switch(slider.animatingTo) {
-                            
-                        // Toggle Motio on logo
-                        case 0:
-                        spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
-                        break;
-                    }
-                    
-                    return true;
-                },
-                after: function(slider) {
-                    
-                    if(Core.deepMemory['header']['animatingTo'] == slider.animatingTo) {
-                        return false;
-                    }
-                    
-                    // Slider custom events
-                    switch(slider.animatingTo) {
-                        // Avatars animations
-                        case 1:
-                            jQuery('header ul.slides li div#homepageFork span.bigText').addClass('active');
-                            
-                            setTimeout(function() {
-                                jQuery('header ul.slides li div#homepageFork span.bigText.active, header ul.slides li div#homepageFork section.repo, header ul.slides li div#homepageFork').addClass('next');
-                            }, 1000);
-                        break;
-                            
-                        // First slide
-                        case 0:
-                        
-                        // Reset 2nd slide
-                        jQuery('header ul.slides li div#homepageFork span.bigText, header ul.slides li div#homepageFork section.repo, header ul.slides li div#homepageFork').removeClass('active next');
-                        
-                        // Stop motio sprite
-                        spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
-                        break;
-                    }
-                    
-                    Core.deepMemory['header']['animatingTo'] = slider.animatingTo;
-                    return true;
-                }
-                //slideshow: false
-            });
-            
-            // Test loader
-            jQuery('nav.header div a:nth-child(2)').on('click', function(e) {
-                e.preventDefault();
-                Core.pageHandler.load('alert', function() {
-                    setTimeout(function() {
-                        jQuery('section#MLAlert, section#MLAlert section.uiDocumentation').show();
-                        setTimeout(function() {                        
-                            jQuery('section#MLAlert section.uiDocumentation').addClass('showScale');
-                        }, 20);
-                    }, 10);
-                });
-            });
-            jQuery('nav.header div a:nth-child(3)').on('click', function(e) {
-                e.preventDefault();
-                Core.pageHandler.load('alert', function() {
-                    setTimeout(function() {
-                        jQuery('section#MLAlert, section#MLAlert section.uiPlugins').show();
-                        setTimeout(function() {
-                            jQuery('section#MLAlert section.uiPlugins').addClass('showScale');
-                        }, 20);
-                    }, 10);
-                });
-            });
-            jQuery('nav.header div a:nth-child(4)').on('click', function(e) {
-                e.preventDefault();
-                Core.pageHandler.load('alert', function() {
-                    setTimeout(function() {
-                        jQuery('section#MLAlert, section#MLAlert section.uiBoards').show();
-                        setTimeout(function() {
-                            jQuery('section#MLAlert section.uiBoards').addClass('showScale');
-                        }, 20);
-                    }, 10);
-                });
-            });
-            
-            // Handle <a> links
-            jQuery('a[rel=x0-history]').on('click', function(e) {
-                e.preventDefault();
-                Core.pageHandler.load('transition', function() {
-                    setTimeout(function() {
-                        Core.pageHandler.finish('transition');
-                    }, 3000);
-                });
-            });
-            
-            // Exit button close
-            jQuery('section#MLAlert section button.close').on('click', function(e) {
-                e.preventDefault();
-                Core.pageHandler.finish('alert');
-            });
-        
-            // Adding scroll detection for features animations
-            var lastScrollTop = 0;
-            jQuery(document).on('scroll', function() {
-               var st = $(this).scrollTop();
-               // Downscroll detection
-               if (st > lastScrollTop && lastScrollTop > 0) {
-                   
-                   // Destroy listener for better performance
-                   jQuery(document).off('scroll');
-                   
-                   var timeOutConfig = 500;
-                   var timeOut = 200;
-                   jqueryEachSelect = [];
-                   
-                   // Show prominent features
-                   jQuery.each(jQuery('section.features div article ul.principal li'), function(index) {
-                       jqueryEachSelect[index] = jQuery(this);
-                       setTimeout(function() {
-                           jqueryEachSelect[index].addClass('active');
-                       }, timeOut);
-                       timeOut = timeOut + timeOutConfig;
-                   });
-                   
-                   // Show non prominent features
-                   setTimeout(function() {
-                       jQuery('section.features div article ul.others').addClass('animated fadeIn');
-                   }, timeOut);
-                   
-                   // Show team
-                   Core.showTeam();
-               }
-               lastScrollTop = st;
-            });
-            
-            // x0 Logo: Motio toggle listener
-            Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = true;
-            jQuery('header ul.slides li div#homepageLogo span').on('click', function(e) {
-                if(Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable']) {
-                    Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = false;
-                    spriteHandler.animationContainer['header ul.slides li div#homepageLogo span'].toggle();
-                    Core.deepMemory['header ul.slides li div#homepageLogo span']['isAvailable'] = true;
-                }
-            });
-            
-            // Thanks and sharing box
-            jQuery('nav.download div aside span.d a').on('click', function(e) {
-                e.preventDefault();
-                                
-                // Start alert box in 700ms
-                Core.pageHandler.load('alert', function() {
-                    setTimeout(function() {
-                        jQuery('section#MLAlert, section#MLAlert section.uiDownload').show();
-                            
-                        setTimeout(function() {
-                            jQuery('section#MLAlert section.uiDownload').addClass('showScale');
-                        }, 20);
-                    }, 10);
-                });
-                
-                Core.deepMemory['nav.download div aside span.d a']['jqueryObject'] = jQuery(this);
-                setTimeout(function() {
-                    document.location.href = Core.deepMemory['nav.download div aside span.d a']['jqueryObject'].attr('href');
-                    Core.deepMemory['nav.download div aside span.d a']['jqueryObject'] = false;
-                }, 200);
-                
-                return true;
-            });
-            
-            // Share xzero buttons
-            jQuery('section#MLAlert section ul.sharingHandler li a').on('click', function(e) {
-                // tests: e.preventDefault();
-                
-                // Adding another overlay
-                jQuery('body').prepend('<section id="MLOverlayD"></section>');
-                
-                // http://stackoverflow.com/questions/3291712/is-it-possible-to-open-a-popup-with-javascript-and-then-detect-when-the-user-clo
-                switch(jQuery(this).attr('class')) {
-                        
-                    case 'entypo-facebook-squared': // Facebook
-                    var win = window.open('https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodeURIComponent(location.href)+
-                                '&p[images][0]='+encodeURIComponent(Core.getThumbnail)+
-                                '&p[title]='+encodeURIComponent(document.title)+
-                                '&p[summary]='+encodeURIComponent(jQuery('meta[name=description]').attr('content')),
-                            'facebook-share-dialog',
-                            'width=626,height=436');
-                    var pollTimer = window.setInterval(function() {
-                        if (win.closed !== false) { // !== is required for compatibility with Opera
-                            window.clearInterval(pollTimer);
-                            jQuery('body section#MLOverlayD').remove();
-                            return true;
-                        }
-                    }, 200);
-                    break;
-                        
-                    case 'entypo-twitter': // Twitter
-                    var win = window.open('http://twitter.com/home?status='+encodeURIComponent(Core.twitterText),
-                            'twitter-share-dialog',
-                            'width=626,height=436');
-                    var pollTimer = window.setInterval(function() {
-                        if (win.closed !== false) { // !== is required for compatibility with Opera
-                            window.clearInterval(pollTimer);
-                            jQuery('body section#MLOverlayD').remove();
-                            return true;
-                        }
-                    }, 200);
-                    break;
-                }
-
-                return true;
-            });
-            
-            // Fade out background and toggle spinner
-            Core.spinnerMgr.destroy();
-            jQuery('section#MLSpinner').addClass('animated fadeOut');
-            setTimeout(function() {
-                jQuery('section#MLSpinner').hide();
-            }, 500);
-            
-            // Sprites
-            setTimeout(function() {
-                
-                // Sprite Transitions
-                spriteHandler.animationStart('header ul.slides li div#homepageLogo span', {
-                    fps: 7,
-                    frames: 7,
-                    vertical: 1,
-                    reverse: false
-                });
-                
-                spriteHandler.animationStart('section.welcome div aside.terminal', {
-                    fps: 2.5,
-                    frames: 4,
-                    vertical: 1,
-                    reverse: true
-                });
-                
-            }, 500);
-            
-            // Add effect for welcome section
-            jQuery('section.welcome div aside:first-child').addClass('active animated bounceInLeft');
-            setTimeout(function() {
-                jQuery('section.welcome div aside:last-child').addClass('active animated fadeIn');
-            }, 800);
-        }
-    });
-});
