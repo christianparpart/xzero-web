@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+        <title>x0 Server &mdash; Home</title>
+
+        <meta name="Author" content="Christian Parpart and Sabri Haddouche" />
+        <meta property="og:description" content="x0 is a low-latency, open source, scalable HTTP web server and web service framework written in C++" />
+        <meta property="og:site_name" content="xzero.io" />
+        <meta name="description" content="x0 is a low-latency, open source, scalable HTTP web server and web service framework written in C++" />
+        <meta name="keywords" content="x0, xzero, xzer0, low-latency, scalable, api, framework web server, server, web, http, https, ssl, c++, service, deamon, free, open-source, open source" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+
+        <!-- Minify required -->
+        <link type="text/css" rel="stylesheet" href="css/normalize.css" />
+        <link type="text/css" rel="stylesheet" href="css/main.css" />
+        
+        <!-- Minify required -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+        <script type="text/javascript">
+        // Call Gauges Analytics
+        var _gauges = _gauges || [];
+        (function() {
+            var t   = document.createElement('script');
+            t.type  = 'text/javascript';
+            t.async = true;
+            t.id    = 'gauges-tracker';
+            t.setAttribute('data-site-id', '521bc483f5a1f542380000aa');
+            t.src = '//secure.gaug.es/track.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(t, s);
+        })();
+            
+        // Main JS config
+        var x0Path = {
+            Default: 'xzero.dev',
+            Static: 'static.xzero.dev'
+        };
+        var x0Map = {
+            webTitle: 'x0 Server',
+            twitterText: 'I just downloaded #xzero, a low-latency, open source and scalable HTTP web server in C++ http://xzero.io #x0',
+            avatar: 'https://1.gravatar.com/avatar/c3a098acd2b70f502ebe1b5ae10b236f?d=https%3A%2F%2Fidenticons.github.com%2F562afe8dd672bc55c6275c9ff19dbc0c.png&s=229',
+            backgroundImages: [
+                './images/header.jpg',
+                './images/terminalSprite.png',
+                './images/logoSprite.png',
+                './images/spinnerSprite.png',
+                './images/textSprite.png',
+                './images/menus.jpg',
+                './images/windowSprite.png',
+            ]
+        };
+
+        // Run page
+        ModernizrExtends.start([
+            // CSS
+            '//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Ubuntu:400,500,700',
+            'css/animate.min.css',
+                
+            // JS
+            'js/jquery-1.10.2.min.js',
+            'js/xzero.dependencies.min.js',
+            'js/xzero.main.js',
+            'js/xzero.pages.js'
+          ],
+        
+          function() {
+            
+            // When document is ready
+            jQuery(document).ready(function() {
+                Core.pageHandler.start();
+            });
+          }
+        );
+        </script>
+    </head>
+
+    <body>
+        <!-- Spinner -->
+        <section id="MLSpinner">
+            <div class="animated bounceIn spinnerLoad"></div>
+        </section>
+        
+        <!-- Overlay -->
+        <section id="MLAlert">
+            <section class="uiDocumentation">
+                <p class="title font OpenSans bold">Sorry, documentation is not available yet.</p>
+                <p class="text font OpenSans light">We’re working hard on that !<br /> Please come back later.</p>
+                <hr />
+                <button class="close font OpenSans bold"><span>Okay</span></button>
+            </section>
+            
+            <section class="uiPlugins">
+                <p class="title font OpenSans bold">Sorry, Plugins Center is not available yet.</p>
+                <p class="text font OpenSans light">We’re working hard on that !<br /> Please come back later.</p>
+                <hr />
+                <button class="close font OpenSans bold"><span>Okay</span></button>
+            </section>
+            
+            <section class="uiErrors">
+                <p class="title font OpenSans bold">An error occured.</p>
+                <p class="text font OpenSans light">Sorry, this page does not exist.</p>
+                <hr />
+                <button class="close font OpenSans bold"><span>Okay</span></button>
+            </section>
+            
+            <section class="uiDownload">
+                <p class="title font OpenSans bold">Download has started.</p>
+                <p class="text font OpenSans light">Thanks for downloading. Don’t forget to spread the word !</p>
+                
+                <ul class="sharingHandler">
+                    <li><a class="entypo-facebook-squared" href="javascript: //"></a></li>
+                    <li><a class="entypo-twitter" href="javascript: //"></a></li>
+                </ul>
+                <hr />
+                <button class="close font OpenSans bold"><span>Close</span></button>
+            </section>
+        </section>
+        <section id="MLOverlay"><aside class="shadow"></aside></section>
+        
+        <section id="MLAjaxReceiver">

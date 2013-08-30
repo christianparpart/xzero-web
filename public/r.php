@@ -66,6 +66,7 @@ try {
         ]);
         
         return $router;
+        
     }, true);
     
     //Setting up the view component
@@ -85,5 +86,5 @@ try {
     echo $application->handle()->getContent();
 
 } catch(\Phalcon\Exception $e) {
-     echo "PhalconException: ", $e->getMessage();
+     echo 'PhalconException: ', $e->getMessage();
 }

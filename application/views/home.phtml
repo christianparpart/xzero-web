@@ -1,2 +1,134 @@
-<?php
-echo 'test';
+<?php $this->partial('shared/header') ?>
+
+        <nav class="font OpenSans warning">
+            <aside class="shadow">
+                <h6>The website is in beta, we recommend using the latest version of your browser. If you find any bug <a target="_blank" href="https://github.com/xzero/xzero-web/issues">please let us know.</a></h6>
+            </aside>
+        </nav>
+        
+        <nav class="header">
+            <aside class="shadow">
+                <div class="font Ubuntu">
+                    <a href="/home" target="_self" rel="x0-history" class="active">Home</a>
+                    <a href="/docs" target="_self" rel="x0-history">Documentation</a>
+                    <a href="/plugins">Plugins</a>
+                    <a href="http://blog.xzero.io">Blog</a>
+                </div>
+            </aside>
+        </nav>
+        
+        <header class="slds">
+            <ul class="slides">
+                <li>
+                    <div id="homepageLogo">
+                        <aside class="shadow">
+                            <span></span>
+                        </aside>
+                    </div>
+                </li>
+                <li>
+                    <div id="homepageFork">
+                        <aside class="backgroundPerspective">
+                            <aside class="shadow">
+                                <span class="bigText"></span>
+                                <section class="repo">
+                                    <a target="_blank" href="https://github.com/xzero/x0"></a>
+                                </section>
+                            </aside>
+                        </aside>
+                    </div>
+                </li>
+            </ul>
+        </header>
+        
+        <nav class="download">
+            <aside class="shadow">
+                <div class="font Ubuntu">
+                    <h4>Download x0 (xZero) now for free !</h4>
+    
+                    <aside class="right font Ubuntu">
+                        <span class="d">
+                            <a href="https://github.com/xzero/x0/archive/master.zip">zip</a> &middot;
+                            <a href="https://github.com/xzero/x0/archive/master.tar.gz">tar.gz</a>
+                        </span>
+                        <span class="c">lucky star <span class="i">beta 0.8.0</span></span>
+                    </aside>
+                    
+                    <aside class="right font Ubuntu">
+                        <span class="d">
+                            <a href="https://github.com/xzero/x0/archive/master.zip">zip</a> &middot;
+                            <a href="https://github.com/xzero/x0/archive/master.tar.gz">tar.gz</a>
+                        </span>
+                        <span class="c">space invader <span class="i">stable 0.7.0</span></span>
+                    </aside>
+                </div>
+            </aside>
+        </nav>
+        
+        <section class="welcome">
+            <aside class="shadow">
+                <div>
+                    <aside class="terminal"></aside>
+                    
+                    <aside class="presentation">
+                        <h1>Welcome on xZero Official Website !</h1>
+                        
+                        <p class="font OpenSans big regular">x0 is a <strong>low-latency</strong>, <strong>open source</strong>, <strong>scalable HTTP web server and web service framework</strong> written in <strong class="font extrabold">C++</strong></p>
+                        
+                        <input class="font System bold" type="text" value="git clone https://github.com/xzero/x0.git" readonly="readonly" />
+                        
+                        <h2 class="font OpenSans">Getting Started</h2>
+                        <p class="font OpenSans regular">
+                            Follow <a href="/docs" target="_self" rel="x0-history">these steps</a> to know how to build and use x0
+                        </p>
+                        
+                        <h2 class="font OpenSans">Need to learn more ?</h2>
+                        <p class="font OpenSans regular">
+                            Look below or check out our beautiful documentation.
+                        </p>
+                    </aside>
+                </div>
+            </aside>
+        </section>
+        
+        <section class="features">
+            <div>
+                    <h3>Why you'll love xZero</h3>
+                    <article>
+                        <ul class="font Ubuntu bold principal">
+                            <li>Highly multi-threading scalable</li>
+                            <li>Fast dynamic configuration language</li>
+                            <li>Advanced load balancing</li>
+                        </ul>
+                        
+                        <ul class="font OpenSans regular others">
+                            <li>HTTP/1.1 including pipelining compliance</li>
+                            <li>Thin and clean Core API</li>
+                            <li>Instant-mode, configurationless deamon</li>
+                        </ul>
+                        
+                        <ul class="font OpenSans regular others">
+                            <li>Dynamic content compression</li>
+                            <li>SSL Support</li>
+                            <li>SSL with SNI</li>
+                            <li>Basic auth</li>
+                        </ul>
+                        
+                        <ul class="font OpenSans regular others">
+                            <li>User directory support</li>
+                            <li>Directory listing support</li>
+                            <li>Custom error pages</li>
+                            <li>zero-copy networking optimization</li>
+                        </ul>
+                        
+                        <ul class="font OpenSans regular others">
+                            <li>FastCGI / CGI support</li>
+                            <li>apache-style access log</li>
+                            <li>browser match support</li>
+                            <li><a href="https://github.com/xzero/x0#features" target="_blank">and many more…</a></li>
+                        </ul>
+                    </article>
+            </div>
+        </section>
+
+<?php $this->partial('shared/footer') ?>

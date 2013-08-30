@@ -34,6 +34,7 @@ var Core = {
         targetId: 'section#MLSpinner div.spinnerLoad',
         
         set: function() {
+            
             spriteHandler.animationStart(Core.spinnerMgr.targetId, {
                 fps: 11,
                 frames: 12,
@@ -78,7 +79,7 @@ var Core = {
         
         isAvailable: true,
         
-        mainPage: '/index.html',
+        mainPage: '/home',
         currentPage: '',
         
         removeQuery: function(value) {
