@@ -61,8 +61,14 @@ try {
         
         // Homepage
         $router->add('/home', [
-            'controller' => 'home',
-            'action' => 'index'
+            'controller' => 'index',
+            'action' => 'home'
+        ]);
+        
+        // Documentation
+        $router->add('/docs', [
+            'controller' => 'index',
+            'action' => 'docs'
         ]);
         
         return $router;

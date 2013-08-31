@@ -53,7 +53,7 @@ Pages[Core.pageHandler.mainPage] = {
         jQuery('header.slds').flexslider('pause');
         
         // Destroy: Test loader listener
-        jQuery('nav.header div a').off('click');
+        //jQuery('nav.header div a').off('click');
         
         // x0 Logo: Motio toggle listener listener
         jQuery('header.slds ul.slides li div#homepageLogo span').off('click');

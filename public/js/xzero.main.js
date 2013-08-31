@@ -82,6 +82,8 @@ var Core = {
         mainPage: '/home',
         currentPage: '',
         
+        container: 'section#MLAjaxReceiver',
+        
         removeQuery: function(value) {
             return (value.indexOf('?') == '-1' ? value : value.substring(0, value.indexOf('?')));
         },
@@ -100,13 +102,24 @@ var Core = {
                     }, 10);
                 });
                 break;
+                    
+                case 403:
+                    alert(403 + '!!!');
+                break;
             };
         },
-
+        
         start: function() {
             
             // Activate spinner
             Core.spinnerMgr.set();
+            
+            // Add :local expression
+            var isLocal = new RegExp('^(' + location.protocol + '\/\/' + location.host + '|\\.|\\/|[A-Z0-9_#])', 'i');
+            jQuery.expr[':'].local = function(el) {
+                if(!el.attributes.href) return false;
+                return isLocal.test(el.attributes.href.value);
+            };
                 
             // Remove spinner once all images are loaded
             jQuery.cacheImage(Core.backgroundImages, {
@@ -141,19 +154,20 @@ var Core = {
                     });
         
                     // Handle <a> links
-                    jQuery('a[rel=x0-history]').on('click', function(e) {
+                    jQuery('a:local').on('click', function(e) {
                         e.preventDefault();
                         
                         var linkOrigin = jQuery.trim(jQuery(this).attr('href'));
                         var link = Core.pageHandler.removeQuery(linkOrigin);
                         
                         if(typeof Pages[link] !== 'undefined') {
+                            
                             Core.pageHandler.load('transition', function() {
                             
                                 setTimeout(function() {
                                     
                                     // Push page
-                                    if(History.pushState(null, Core.webTitle + ' — ' + Pages[link].title, linkOrigin)) {
+                                    if(History.pushState(null, 'Loading…', linkOrigin)) {
                                         Core.pageHandler.finish('transition');
                                     }
                                     
@@ -173,15 +187,39 @@ var Core = {
                         // Execute this page
                         //console.log('State changed');
                         if(typeof Pages[Core.pageHandler.removeQuery(History.getState().hash)] !== 'undefined') {
+                            
+                            // Remove js from old page
                             Pages[Core.pageHandler.currentPage].after();
                             
                             // Set current page
                             Core.pageHandler.currentPage = Core.pageHandler.removeQuery(History.getState().hash);
                             
                             // Do ajax request here
+                            jQuery.ajax({
+                              type: 'GET',
+                              url: History.getState().hash,
+                              //data: options.data,
+                              timeout: 5000,
+                              error: function(xhr, status) {
+                                Core.pageHandler.error(403);
+                              },
+                              beforeSend: function(xhr) {
+                                xhr.setRequestHeader('X-PJAX', 'true');
+                              },
+                              success: function(response) {
+
+                                // Set new document title
+                                document.title = /<title>((.|\n\r])*)<\/title>/im.exec(response)[1];
+                                  
+                                // Replace old pages
+                                var body = jQuery(response).filter(Core.pageHandler.container).html();
+                                jQuery(Core.pageHandler.container).html(body);
                             
-                            Pages[Core.pageHandler.currentPage].before();
-                            
+                                // Run js for this page
+                                Pages[Core.pageHandler.currentPage].before();
+                              }
+                            });
+                                                        
                             return true;
                         }
                         
@@ -193,10 +231,9 @@ var Core = {
                     // Check if hash is not empty
                     if(Core.pageHandler.removeQuery(History.getState().hash) === '/') {
                         // Set current page
-                        Core.pageHandler.currentPage = Core.pageHandler.mainPage;
-                        
-                        Pages[Core.pageHandler.currentPage].before();
-                        
+                        //Core.pageHandler.currentPage = Core.pageHandler.mainPage;
+                        //Pages[Core.pageHandler.currentPage].before();
+                        document.location.href=Core.pageHandler.mainPage;
                         return true;
                     }
                     

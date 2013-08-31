@@ -8,14 +8,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>x0 Server &mdash; Home</title>
-
+        <title><?php echo $this->view->title . ' – ' . $this->view->subtitle; ?> </title>
+        <?php if(!$this->view->isAjax) { ?>
+        
         <meta name="Author" content="Christian Parpart and Sabri Haddouche" />
         <meta property="og:description" content="x0 is a low-latency, open source, scalable HTTP web server and web service framework written in C++" />
         <meta property="og:site_name" content="xzero.io" />
         <meta name="description" content="x0 is a low-latency, open source, scalable HTTP web server and web service framework written in C++" />
         <meta name="keywords" content="x0, xzero, xzer0, low-latency, scalable, api, framework web server, server, web, http, https, ssl, c++, service, deamon, free, open-source, open source" />
-
+        
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
         <!-- Minify required -->
@@ -80,9 +81,14 @@
           }
         );
         </script>
+        
+        <?php } ?>
+        
     </head>
 
     <body>
+        <?php if(!$this->view->isAjax) { ?>
+
         <!-- Spinner -->
         <section id="MLSpinner">
             <div class="animated bounceIn spinnerLoad"></div>
@@ -124,5 +130,6 @@
             </section>
         </section>
         <section id="MLOverlay"><aside class="shadow"></aside></section>
+        <?php } ?>
         
         <section id="MLAjaxReceiver">
