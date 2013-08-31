@@ -109,6 +109,39 @@ var Core = {
             };
         },
         
+        setLinks: function() {
+            
+            // Handle <a> links
+            jQuery('a:local').on('click', function(e) {
+                e.preventDefault();
+                
+                var linkOrigin = jQuery.trim(jQuery(this).attr('href'));
+                var link = Core.pageHandler.removeQuery(linkOrigin);
+                
+                if(typeof Pages[link] !== 'undefined') {
+                    
+                    Core.pageHandler.load('transition', function() {
+                    
+                        setTimeout(function() {
+                            
+                            // Push page
+                            if(History.pushState(null, 'Loading…', linkOrigin)) {
+                                Core.pageHandler.finish('transition');
+                            }
+                            
+                            return true;
+                        }, 20);
+                    });
+                    
+                    return true;
+                }
+                
+                // 404
+                Core.pageHandler.error(404);
+                return false;
+            });
+        },
+        
         start: function() {
             
             // Activate spinner
@@ -154,32 +187,7 @@ var Core = {
                     });
         
                     // Handle <a> links
-                    jQuery('a:local').on('click', function(e) {
-                        e.preventDefault();
-                        
-                        var linkOrigin = jQuery.trim(jQuery(this).attr('href'));
-                        var link = Core.pageHandler.removeQuery(linkOrigin);
-                        
-                        if(typeof Pages[link] !== 'undefined') {
-                            
-                            Core.pageHandler.load('transition', function() {
-                            
-                                setTimeout(function() {
-                                    
-                                    // Push page
-                                    if(History.pushState(null, 'Loading…', linkOrigin)) {
-                                        Core.pageHandler.finish('transition');
-                                    }
-                                    
-                                    return true;
-                                }, 20);
-                            });
-                        }
-                        
-                        // 404
-                        Core.pageHandler.error(404);
-                        return false;
-                    });
+                    Core.pageHandler.setLinks();
         
                     // Bind to StateChange Event
                     History.Adapter.bind(window, 'statechange', function() { // We are using statechange instead of popstate
@@ -203,23 +211,38 @@ var Core = {
                               error: function(xhr, status) {
                                 Core.pageHandler.error(403);
                               },
-                              beforeSend: function(xhr) {
+                              /*beforeSend: function(xhr) {
                                 xhr.setRequestHeader('X-PJAX', 'true');
-                              },
+                              },*/
                               success: function(response) {
-
-                                // Set new document title
-                                document.title = /<title>((.|\n\r])*)<\/title>/im.exec(response)[1];
-                                  
-                                // Replace old pages
+                                
+                                // Get only wanted content
                                 var body = jQuery(response).filter(Core.pageHandler.container).html();
-                                jQuery(Core.pageHandler.container).html(body);
-                            
-                                // Run js for this page
-                                Pages[Core.pageHandler.currentPage].before();
+                                
+                                if(typeof body !== 'undefined') {
+                                    
+                                    // Change old by new content
+                                    jQuery(Core.pageHandler.container).html(body);
+                                    
+                                    // Set new document title
+                                    document.title = /<title>((.|\n\r])*)<\/title>/im.exec(response)[1];
+                                
+                                    // Run js for this page
+                                    Pages[Core.pageHandler.currentPage].before();
+                                    
+                                    // Handle <a> links
+                                    Core.pageHandler.setLinks();
+                                    
+                                    return true;
+                                }
+                                  
+                                // Error I guess
+                                // Restore old page
+                                  
+                                return false;
                               }
                             });
-                                                        
+                            
                             return true;
                         }
                         
