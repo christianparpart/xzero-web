@@ -226,12 +226,12 @@ var Core = {
                                     
                                     // Set new document title
                                     document.title = /<title>((.|\n\r])*)<\/title>/im.exec(response)[1];
-                                
-                                    // Run js for this page
-                                    Pages[Core.pageHandler.currentPage].before();
                                     
                                     // Handle <a> links
                                     Core.pageHandler.setLinks();
+                                    
+                                    // Run js for this page
+                                    Pages[Core.pageHandler.currentPage].before();
                                     
                                     return true;
                                 }

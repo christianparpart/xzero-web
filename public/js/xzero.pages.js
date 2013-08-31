@@ -16,11 +16,11 @@ Pages['/docs'] = {
     title: 'Documentation',
     
     after: function() {
-        alert('page destroyed');
+        //alert('page destroyed');
     },
     
     before: function() {
-        alert('page called');
+        //alert('page called');
     }
 };
 
@@ -143,6 +143,7 @@ Pages[Core.pageHandler.mainPage] = {
         // Test loader
         jQuery('nav.header div a:nth-child(3)').on('click', function(e) {
             e.preventDefault();
+            
             Core.pageHandler.load('alert', function() {
                 setTimeout(function() {
                     jQuery('section#MLAlert, section#MLAlert section.uiPlugins').show();
@@ -157,6 +158,7 @@ Pages[Core.pageHandler.mainPage] = {
         var lastScrollTop = 0;
         jQuery(document).on('scroll', function() {
            var st = jQuery(this).scrollTop();
+            
            // Downscroll detection
            if (st > lastScrollTop && lastScrollTop > 0) {
                

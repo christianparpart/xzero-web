@@ -11,6 +11,7 @@ class IndexController extends \Phalcon\Mvc\Controller {
         // Render homepage
         $request = new Phalcon\Http\Request();
         $this->view->setVars([
+            'currentPage' => 'home',
             'title' => 'x0 Server',
             'subtitle' => 'Home',
             'isAjax' => ($request->isAjax() ? true : false)
@@ -23,6 +24,7 @@ class IndexController extends \Phalcon\Mvc\Controller {
         // Render homepage
         $request = new Phalcon\Http\Request();
         $this->view->setVars([
+            'currentPage' => 'docs',
             'title' => 'x0 Server',
             'subtitle' => 'Documentation',
             'isAjax' => ($request->isAjax() ? true : false)
