@@ -1,4 +1,4 @@
-        <footer class="webApp font OpenSans regular">
+        <footer class="webApp font OpenSans regular<?php if($this->view->currentPage == 'home') { ?> center<?php } ?>">
             <aside class="shadow">
                 <div>
                     <aside>
@@ -13,7 +13,7 @@
                     <?php if($this->view->currentPage == 'home') { ?>
                     <span class="credits"><p>project by <a target="_blank" href="https://github.com/trapni">Christian Parpart</a> <span>&nbsp;</span> design by <a target="_blank" href="https://github.com/pwnsdx">Sabri Haddouche</a></p></span>
                     <?php } else { ?>
-                    <span class="credits"><p class="font OpenSans extrabold"><a data-pajax="true" href="/home">Back to home</a></p></span>
+                    <span class="credits"><p class="font OpenSans extrabold"><a data-pajax="true" href="/home">« Back to home</a></p></span>
                     <?php } ?>
                 </div>
                 <?php if($this->view->currentPage == 'home') { ?>

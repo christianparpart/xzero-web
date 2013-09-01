@@ -1425,9 +1425,7 @@ footer.webApp {
     width:100%;
 
     color:#fff;
-    
-    text-align:center;
-    
+        
     opacity:.8;
 
     /* Enable 3D Acceleration */
@@ -1436,6 +1434,9 @@ footer.webApp {
     -o-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+}
+footer.webApp.center {
+    text-align:center;
 }
 footer.webApp div {
     padding:15px;
