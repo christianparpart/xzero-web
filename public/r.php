@@ -42,6 +42,13 @@ try {
     // Register the configuration itself as a service
     $di->set('config', $config);
     
+    //Start the session the first time when some component request the session service
+    $di->setShared('session', function() {
+        $session = new Phalcon\Session\Adapter\Files();
+        $session->start();
+        return $session;
+    });
+    
     //Specify routes for modules
     $di->set('router', function() {
         
@@ -108,7 +115,7 @@ try {
     
         // File settings
         return new \Phalcon\Cache\Backend\File($frontCache, array(
-            'cacheDir' => __DIR__ . '/../application/cache/views/',
+            'cacheDir' => __DIR__ . $config->application->cacheDir,
             'prefix' => 'cache-'
         ));
     });
@@ -121,6 +128,13 @@ try {
     
         return $security;
     }, true);
+    
+    $di->set('url', function() {
+        $url = new Phalcon\Mvc\Url();
+        $url->setBaseUri('/');
+        
+        return $url;
+    });
     
     //Handle the request
     $application = new \Phalcon\Mvc\Application($di);

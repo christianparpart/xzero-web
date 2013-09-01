@@ -119,12 +119,13 @@ class IndexController extends \Phalcon\Mvc\Controller {
         
         //Add some local JS resources
         $this->assets->collection('jsPreLibs')
+            ->setSourcePath($this->config->application->assetsDir)
             //The name of the final output
             ->setTargetPath($this->config->application->assetsGeneratedDir . hash('sha256', 'jsPreLibs') . '.js')
             //The script tag is generated with this URI
             ->setTargetUri($this->config->application->assetsGeneratedDir . hash('sha256', 'jsPreLibs') . '.js')
             //These are local resources that must be filtered
-            ->addJs($this->config->application->assetsDir . 'js/xzero.modernizr.min.js')
+            ->addJs('js/xzero.modernizr.min.js')
             //Join all the resources in a single file
             ->join(true)
             //Use the built-in Jsmin filter
@@ -132,15 +133,16 @@ class IndexController extends \Phalcon\Mvc\Controller {
         
         //Add some local JS resources
         $this->assets->collection('jsLibs')
+            ->setSourcePath($this->config->application->assetsDir)
             //The name of the final output
             ->setTargetPath($this->config->application->assetsGeneratedDir . hash('sha256', 'jsLibs') . '.js')
             //The script tag is generated with this URI
             ->setTargetUri($this->config->application->assetsGeneratedDir . hash('sha256', 'jsLibs') . '.js')
             //These are local resources that must be filtered
-            ->addJs($this->config->application->assetsDir . 'js/jquery-1.10.2.min.js')
-            ->addJs($this->config->application->assetsDir . 'js/xzero.dependencies.min.js')
-            ->addJs($this->config->application->assetsDir . 'js/xzero.main.js')
-            ->addJs($this->config->application->assetsDir . 'js/xzero.pages.js')
+            ->addJs('js/jquery-1.10.2.min.js')
+            ->addJs('js/xzero.dependencies.min.js')
+            ->addJs('js/xzero.main.js')
+            ->addJs('js/xzero.pages.js')
             //Join all the resources in a single file
             ->join(true)
             //Use the built-in Jsmin filter
@@ -148,14 +150,15 @@ class IndexController extends \Phalcon\Mvc\Controller {
         
         //Add some local CSS resources
         $this->assets->collection('cssLibs')
+            ->setSourcePath($this->config->application->assetsDir)
             //The name of the final output
             ->setTargetPath($this->config->application->assetsGeneratedDir . hash('sha256', 'cssLibs') . '.css')
             //The script tag is generated with this URI
             ->setTargetUri($this->config->application->assetsGeneratedDir . hash('sha256', 'cssLibs') . '.css')
             //These are local resources that must be filtered
-            ->addCss($this->config->application->assetsDir . 'css/normalize.css')
-            ->addCss($this->config->application->assetsDir . 'css/animate.min.css')
-            ->addCss($this->config->application->assetsDir . 'css/main.css')
+            ->addCss('css/normalize.css')
+            ->addCss('css/animate.min.css')
+            ->addCss('css/main.css')
             //Join all the resources in a single file
             ->join(true)
             //Use the built-in Jsmin filter

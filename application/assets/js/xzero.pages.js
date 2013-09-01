@@ -152,20 +152,6 @@ Pages[Core.pageHandler.mainPage] = {
             //slideshow: false
         });
         
-        // Test loader
-        jQuery('nav.header div a:nth-child(3)').on('click', function(e) {
-            e.preventDefault();
-            
-            Core.pageHandler.load('alert', function() {
-                setTimeout(function() {
-                    jQuery('section#MLAlert, section#MLAlert section.uiPlugins').show();
-                    setTimeout(function() {
-                        jQuery('section#MLAlert section.uiPlugins').addClass('showScale');
-                    }, 20);
-                }, 10);
-            });
-        });
-        
         // Adding scroll detection for features animations
         var lastScrollTop = 0;
         jQuery(document).on('scroll', function() {

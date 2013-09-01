@@ -33,7 +33,6 @@ var Core = {
     // Spinner management
     spinnerMgr: {
         targetId: 'spinnerLoad',
-        
         /*set: function() {
             
             spriteHandler.animationStart(Core.spinnerMgr.targetId, {
@@ -109,12 +108,12 @@ var Core = {
                 alert(403 + '!!!');
                 break;
                     
-                case false:
-                // Use alert
+                case false: // Use alert
                 alert('Unknown error, try again later please.');
-                return true;
                 break;
             };
+            
+            return true;
         },
         
         setLinks: function() {
@@ -147,6 +146,20 @@ var Core = {
                 // 404
                 Core.pageHandler.error(404);
                 return false;
+            });
+            
+            // Plugin Center not available
+            jQuery('nav.header div a:nth-child(3)').on('click', function(e) {
+                e.preventDefault();
+                
+                Core.pageHandler.load('alert', function() {
+                    setTimeout(function() {
+                        jQuery('section#MLAlert, section#MLAlert section.uiPlugins').show();
+                        setTimeout(function() {
+                            jQuery('section#MLAlert section.uiPlugins').addClass('showScale');
+                        }, 20);
+                    }, 10);
+                });
             });
         },
         
@@ -201,7 +214,6 @@ var Core = {
                     History.Adapter.bind(window, 'statechange', function() { // We are using statechange instead of popstate
                         
                         // Execute this page
-                        //console.log('State changed');
                         if(typeof Pages[Core.pageHandler.removeQuery(History.getState().hash)] !== 'undefined') {
                             
                             // Do ajax request here
