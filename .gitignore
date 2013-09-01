@@ -1,2 +1,4 @@
-
 application/public.log
+application/cache/views/cache-*
+public/cache/*.js
+public/cache/*.css

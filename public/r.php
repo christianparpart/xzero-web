@@ -99,11 +99,11 @@ try {
     });
     
     // View cache
-    $di->set('viewCache', function() {
-    
+    $di->set('viewCache', function() use ($config) {
+        
         //Cache data for one day by default
         $frontCache = new \Phalcon\Cache\Frontend\Output(array(
-            'lifetime' => 2592000
+            'lifetime' => ($config->application->production ? 2592000 : 1)
         ));
     
         // File settings
