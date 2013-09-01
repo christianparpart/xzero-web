@@ -27,11 +27,10 @@ class IndexController extends \Phalcon\Mvc\Controller {
             
             $this->viewCache->save();
         
-        } else {
-            
-            echo $isCached;
+            return true;
         }
-        
+            
+        echo $isCached;
         return true;
     }
     
@@ -55,11 +54,10 @@ class IndexController extends \Phalcon\Mvc\Controller {
             
             $this->viewCache->save();
         
-        } else {
-            
-            echo $isCached;
+            return true;
         }
-        
+            
+        echo $isCached;
         return true;
     }
     
@@ -83,12 +81,10 @@ class IndexController extends \Phalcon\Mvc\Controller {
             
             $this->viewCache->save();
         
-        } else {
-            
-            echo $isCached;
+            return true;
         }
-        
-        echo $this->view->render('help/privacy');
+            
+        echo $isCached;
         return true;
     }
     
@@ -107,19 +103,18 @@ class IndexController extends \Phalcon\Mvc\Controller {
         $isCached = $this->viewCache->start('help-donate');
 
         if($isCached === null) {
-            
+
             // Call libs
             $this->callLibs();
             
             echo $this->view->render('help/donate');
             
             $this->viewCache->save();
-        
-        } else {
             
-            echo $isCached;
+            return true;
         }
-        
+            
+        echo $isCached;
         return true;
     }
     
