@@ -19,13 +19,12 @@
         
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
-        <!-- Minify required -->
-        <link type="text/css" rel="stylesheet" href="/css/normalize.css" />
-        <link type="text/css" rel="stylesheet" href="/css/main.css" />
+        <!-- CSS -->
+        <?php $this->assets->outputCss('cssLibs'); ?>
         
-        <!-- Minify required -->
-        <script src="/js/xzero.modernizr.min.js"></script>
-        <script type="text/javascript">            
+        <!-- JS -->
+        <?php $this->assets->outputJs('jsPreLibs'); ?>
+        <script type="text/javascript">
         // Main JS config
         var x0Path = {
             Default: 'xzero.dev',

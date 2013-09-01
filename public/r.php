@@ -39,6 +39,9 @@ try {
     //Create a DI
     $di = new Phalcon\DI\FactoryDefault();
     
+    // Register the configuration itself as a service
+    $di->set('config', $config);
+    
     //Specify routes for modules
     $di->set('router', function() {
         
@@ -87,13 +90,37 @@ try {
         
     }, true);
     
-    //Setting up the view component
+    // Setting up the view component
     $di->set('view', function() use ($config) {
         $view = new Phalcon\Mvc\View\Simple();
         $view->setViewsDir(__DIR__ . $config->application->viewsDir);
         
         return $view;
     });
+    
+    // View cache
+    $di->set('viewCache', function() {
+    
+        //Cache data for one day by default
+        $frontCache = new \Phalcon\Cache\Frontend\Output(array(
+            'lifetime' => 2592000
+        ));
+    
+        // File settings
+        return new \Phalcon\Cache\Backend\File($frontCache, array(
+            'cacheDir' => __DIR__ . '/../application/cache/views/',
+            'prefix' => 'cache-'
+        ));
+    });
+    
+    $di->set('security', function() {
+        $security = new Phalcon\Security();
+    
+        //Set the password hashing factor to 12 rounds
+        $security->setWorkFactor(12);
+    
+        return $security;
+    }, true);
     
     //Handle the request
     $application = new \Phalcon\Mvc\Application($di);
@@ -104,6 +131,6 @@ try {
     echo $application->handle()->getContent();
 
 } catch(\Phalcon\Exception $e) {
-    echo 'An unknown error occured, please try again later.';
-    //echo 'PhalconException: ', $e->getMessage();
+    //echo 'An unknown error occured, please try again later.';
+    echo 'PhalconException: ', $e->getMessage();
 }
