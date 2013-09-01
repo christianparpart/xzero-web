@@ -734,6 +734,8 @@ nav.warning {
     min-width:1024px;
     height:25px;
     overflow:hidden;
+    
+    border-bottom:1px solid #000;
 }
 nav.warning h6 {
     
@@ -779,7 +781,6 @@ nav.header {
     height:62px;
     
     border-bottom:1px solid #000;
-    border-top:1px solid #000;
 }
 nav.header div {
     width:960px;

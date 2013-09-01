@@ -216,6 +216,12 @@ var Core = {
                         // Execute this page
                         if(typeof Pages[Core.pageHandler.removeQuery(History.getState().hash)] !== 'undefined') {
                             
+                            // Remove js from old page
+                            Pages[Core.pageHandler.currentPage].after();
+                                    
+                            // Set new page as current page
+                            Core.pageHandler.currentPage = Core.pageHandler.removeQuery(History.getState().hash);
+                            
                             // Do ajax request here
                             jQuery.ajax({
                               type: 'GET',
@@ -235,12 +241,6 @@ var Core = {
                                 
                                 if(typeof body !== 'undefined') {
                                     
-                                    // Remove js from old page
-                                    Pages[Core.pageHandler.currentPage].after();
-                                    
-                                    // Set current page
-                                    Core.pageHandler.currentPage = Core.pageHandler.removeQuery(History.getState().hash);
-                                    
                                     // Change old by new content
                                     jQuery(Core.pageHandler.container).html(body);
                                     
@@ -257,7 +257,7 @@ var Core = {
                                 }
                                   
                                 // Error I guess
-                                Core.pageHandler.error(false);
+                                document.location.href = History.getState().hash;
                                 return false;
                               }
                             });
