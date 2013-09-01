@@ -21,12 +21,10 @@ use Phalcon\Events\Manager as EventsManager,
 
 try {
 
-	/**
-	 * Read the configuration
-	 */
-	$config = new Phalcon\Config\Adapter\Ini(__DIR__ . '/../application/configs/application.ini');
+    // Read the configuration
+    $config = new Phalcon\Config\Adapter\Ini(__DIR__ . '/../application/configs/application.ini');
     
-    //Register an autoloader
+    // Register an autoloader
     $loader = new \Phalcon\Loader();
     
     $loader->registerDirs([
@@ -36,20 +34,20 @@ try {
         __DIR__ . $config->application->modelsDir,
     ])->register();
     
-    //Create a DI
+    // Create a DI
     $di = new Phalcon\DI\FactoryDefault();
     
     // Register the configuration itself as a service
     $di->set('config', $config);
     
-    //Start the session the first time when some component request the session service
+    // Start the session the first time when some component request the session service
     $di->setShared('session', function() {
         $session = new Phalcon\Session\Adapter\Files();
         $session->start();
         return $session;
     });
     
-    //Specify routes for modules
+    // Specify routes for modules
     $di->set('router', function() {
         
         $router = new \Phalcon\Mvc\Router(false);
@@ -136,7 +134,7 @@ try {
         return $url;
     });
     
-    //Handle the request
+    // Handle the request
     $application = new \Phalcon\Mvc\Application($di);
     
     // Use simple views
@@ -145,6 +143,6 @@ try {
     echo $application->handle()->getContent();
 
 } catch(\Phalcon\Exception $e) {
-    //echo 'An unknown error occured, please try again later.';
-    echo 'PhalconException: ', $e->getMessage();
+    echo 'An unknown error occured, please try again later.';
+    //echo 'PhalconException: ', $e->getMessage();
 }
