@@ -158,6 +158,7 @@ class IndexController extends \Phalcon\Mvc\Controller {
             //These are local resources that must be filtered
             ->addCss('css/normalize.css')
             ->addCss('css/animate.min.css')
+            ->addCss('css/socialIconsLight.css')
             ->addCss('css/main.css')
             //Join all the resources in a single file
             ->join(true)

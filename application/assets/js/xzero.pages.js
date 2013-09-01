@@ -222,16 +222,15 @@ Pages[Core.pageHandler.mainPage] = {
         });
         
         // Share xZero buttons
-        jQuery('section#MLAlert section ul.sharingHandler li a').on('click', function(e) {
-            // tests: e.preventDefault();
+        jQuery('section#MLAlert section ul.sharingHandler li a span').on('click', function(e) {
             
             // Adding another overlay
             jQuery('body').prepend('<section id="MLOverlayD"></section>');
-            
+                        
             // http://stackoverflow.com/questions/3291712/is-it-possible-to-open-a-popup-with-javascript-and-then-detect-when-the-user-clo
-            switch(jQuery(this).attr('class')) {
+            switch(jQuery(this).parent().attr('class')) {
                     
-                case 'entypo-facebook-squared': // Facebook
+                case 'facebook_light': // Facebook
                 var win = window.open('https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodeURIComponent(location.href)+
                             '&p[images][0]='+encodeURIComponent(Core.getThumbnail)+
                             '&p[title]='+encodeURIComponent(document.title)+
@@ -247,7 +246,7 @@ Pages[Core.pageHandler.mainPage] = {
                 }, 200);
                 break;
                     
-                case 'entypo-twitter': // Twitter
+                case 'twitter_light': // Twitter
                 var win = window.open('http://twitter.com/home?status='+encodeURIComponent(Core.twitterText),
                         'twitter-share-dialog',
                         'width=626,height=436');
