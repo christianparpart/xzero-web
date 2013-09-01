@@ -1,18 +1,19 @@
-var spriteHandler = {
-        
-    animationContainer: [],
-    animationStart: function(selectorUI, options) {                    
-        spriteHandler.animationContainer[selectorUI] = new Motio(jQuery(selectorUI)[0], options);
-        
-        if(options.reverse) {
-            spriteHandler.animationContainer[selectorUI].play(true);
-            return true;
-        }
-        
-        spriteHandler.animationContainer[selectorUI].play();
-        return true;
-    },
-};
+/*
+ * Copyright (C) 2010-2013 x0 Server <http://xzero.io/>
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 var Core = {
     
@@ -31,9 +32,9 @@ var Core = {
     
     // Spinner management
     spinnerMgr: {
-        targetId: 'section#MLSpinner div.spinnerLoad',
+        targetId: 'spinnerLoad',
         
-        set: function() {
+        /*set: function() {
             
             spriteHandler.animationStart(Core.spinnerMgr.targetId, {
                 fps: 11,
@@ -43,11 +44,11 @@ var Core = {
             });
             
             return true;
-        },
+        },*/
         
         destroy: function() {
             spriteHandler.animationContainer[Core.spinnerMgr.targetId].toggle();
-            jQuery(Core.spinnerMgr.targetId).removeClass('animated bounceIn').addClass('animated bounceOut');
+            jQuery('section#MLSpinner div#'+Core.spinnerMgr.targetId).addClass('animated bounceOut');
             
             return true;
         }
@@ -89,6 +90,7 @@ var Core = {
         },
         
         error: function(code) {
+            
             switch(code) {
                 case 404:
                 // Oops... 404.
@@ -104,7 +106,13 @@ var Core = {
                 break;
                     
                 case 403:
-                    alert(403 + '!!!');
+                alert(403 + '!!!');
+                break;
+                    
+                case false:
+                // Use alert
+                alert('Unknown error, try again later please.');
+                return true;
                 break;
             };
         },
@@ -112,7 +120,7 @@ var Core = {
         setLinks: function() {
             
             // Handle <a> links
-            jQuery('a:local').on('click', function(e) {
+            jQuery('a[data-pajax=true]:local').on('click', function(e) {
                 e.preventDefault();
                 
                 var linkOrigin = jQuery.trim(jQuery(this).attr('href'));
@@ -144,15 +152,15 @@ var Core = {
         
         start: function() {
             
-            // Activate spinner
-            Core.spinnerMgr.set();
-            
             // Add :local expression
             var isLocal = new RegExp('^(' + location.protocol + '\/\/' + location.host + '|\\.|\\/|[A-Z0-9_#])', 'i');
             jQuery.expr[':'].local = function(el) {
                 if(!el.attributes.href) return false;
                 return isLocal.test(el.attributes.href.value);
             };
+            
+            // Activate spinner
+            //Core.spinnerMgr.set();
                 
             // Remove spinner once all images are loaded
             jQuery.cacheImage(Core.backgroundImages, {
@@ -196,12 +204,6 @@ var Core = {
                         //console.log('State changed');
                         if(typeof Pages[Core.pageHandler.removeQuery(History.getState().hash)] !== 'undefined') {
                             
-                            // Remove js from old page
-                            Pages[Core.pageHandler.currentPage].after();
-                            
-                            // Set current page
-                            Core.pageHandler.currentPage = Core.pageHandler.removeQuery(History.getState().hash);
-                            
                             // Do ajax request here
                             jQuery.ajax({
                               type: 'GET',
@@ -209,7 +211,7 @@ var Core = {
                               //data: options.data,
                               timeout: 5000,
                               error: function(xhr, status) {
-                                Core.pageHandler.error(403);
+                                Core.pageHandler.error(false);
                               },
                               /*beforeSend: function(xhr) {
                                 xhr.setRequestHeader('X-PJAX', 'true');
@@ -220,6 +222,12 @@ var Core = {
                                 var body = jQuery(response).filter(Core.pageHandler.container).html();
                                 
                                 if(typeof body !== 'undefined') {
+                                    
+                                    // Remove js from old page
+                                    Pages[Core.pageHandler.currentPage].after();
+                                    
+                                    // Set current page
+                                    Core.pageHandler.currentPage = Core.pageHandler.removeQuery(History.getState().hash);
                                     
                                     // Change old by new content
                                     jQuery(Core.pageHandler.container).html(body);
@@ -237,8 +245,7 @@ var Core = {
                                 }
                                   
                                 // Error I guess
-                                // Restore old page
-                                  
+                                Core.pageHandler.error(false);
                                 return false;
                               }
                             });

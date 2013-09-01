@@ -20,25 +20,12 @@
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
         <!-- Minify required -->
-        <link type="text/css" rel="stylesheet" href="css/normalize.css" />
-        <link type="text/css" rel="stylesheet" href="css/main.css" />
+        <link type="text/css" rel="stylesheet" href="/css/normalize.css" />
+        <link type="text/css" rel="stylesheet" href="/css/main.css" />
         
         <!-- Minify required -->
-        <script src="js/modernizr-2.6.2.min.js"></script>
-        <script type="text/javascript">
-        // Call Gauges Analytics
-        var _gauges = _gauges || [];
-        (function() {
-            var t   = document.createElement('script');
-            t.type  = 'text/javascript';
-            t.async = true;
-            t.id    = 'gauges-tracker';
-            t.setAttribute('data-site-id', '521bc483f5a1f542380000aa');
-            t.src = '//secure.gaug.es/track.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(t, s);
-        })();
-            
+        <script src="/js/xzero.modernizr.min.js"></script>
+        <script type="text/javascript">            
         // Main JS config
         var x0Path = {
             Default: 'xzero.dev',
@@ -49,49 +36,25 @@
             twitterText: 'I just downloaded #xzero, a low-latency, open source and scalable HTTP web server in C++ http://xzero.io #x0',
             avatar: 'https://1.gravatar.com/avatar/c3a098acd2b70f502ebe1b5ae10b236f?d=https%3A%2F%2Fidenticons.github.com%2F562afe8dd672bc55c6275c9ff19dbc0c.png&s=229',
             backgroundImages: [
-                './images/header.jpg',
-                './images/terminalSprite.png',
-                './images/logoSprite.png',
-                './images/spinnerSprite.png',
-                './images/textSprite.png',
-                './images/menus.jpg',
-                './images/windowSprite.png',
+                '/images/header.jpg',
+                '/images/terminalSprite.png',
+                '/images/logoSprite.png',
+                '/images/spinnerSprite.png',
+                '/images/textSprite.png',
+                '/images/menus.jpg',
+                '/images/windowSprite.png',
             ]
         };
-
-        // Run page
-        ModernizrExtends.start([
-            // CSS
-            '//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Ubuntu:400,500,700',
-            'css/animate.min.css',
-                
-            // JS
-            'js/jquery-1.10.2.min.js',
-            'js/xzero.dependencies.min.js',
-            'js/xzero.main.js',
-            'js/xzero.pages.js'
-          ],
-        
-          function() {
-            
-            // When document is ready
-            jQuery(document).ready(function() {
-                Core.pageHandler.start();
-            });
-          }
-        );
         </script>
-        
         <?php } ?>
         
     </head>
 
-    <body>
-        <?php if(!$this->view->isAjax) { ?>
+    <body><?php if(!$this->view->isAjax) { ?>
 
         <!-- Spinner -->
         <section id="MLSpinner">
-            <div class="animated bounceIn spinnerLoad"></div>
+            <div id="spinnerLoad" class="spinnerLoad"></div>
         </section>
         
         <!-- Overlay -->

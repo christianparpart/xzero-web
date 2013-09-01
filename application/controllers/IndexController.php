@@ -8,7 +8,6 @@ class IndexController extends \Phalcon\Mvc\Controller {
 	}
     
     public function homeAction() {
-        // Render homepage
         $request = new Phalcon\Http\Request();
         $this->view->setVars([
             'currentPage' => 'home',
@@ -21,7 +20,6 @@ class IndexController extends \Phalcon\Mvc\Controller {
     }
     
     public function docsAction() {
-        // Render homepage
         $request = new Phalcon\Http\Request();
         $this->view->setVars([
             'currentPage' => 'docs',
@@ -30,6 +28,30 @@ class IndexController extends \Phalcon\Mvc\Controller {
             'isAjax' => ($request->isAjax() ? true : false)
         ]);
         echo $this->view->render('docs');
+        return true;
+    }
+    
+    public function privacyAction() {
+        $request = new Phalcon\Http\Request();
+        $this->view->setVars([
+            'currentPage' => 'help/privacy',
+            'title' => 'x0 Server',
+            'subtitle' => 'Privacy Policy',
+            'isAjax' => ($request->isAjax() ? true : false)
+        ]);
+        echo $this->view->render('help/privacy');
+        return true;
+    }
+    
+    public function donateAction() {
+        $request = new Phalcon\Http\Request();
+        $this->view->setVars([
+            'currentPage' => 'help/donate',
+            'title' => 'x0 Server',
+            'subtitle' => 'Donate !',
+            'isAjax' => ($request->isAjax() ? true : false)
+        ]);
+        echo $this->view->render('help/donate');
         return true;
     }
 }

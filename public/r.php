@@ -71,6 +71,18 @@ try {
             'action' => 'docs'
         ]);
         
+        // Privacy Policy
+        $router->add('/help/privacy', [
+            'controller' => 'index',
+            'action' => 'privacy'
+        ]);
+        
+        // Donations page
+        $router->add('/help/donate', [
+            'controller' => 'index',
+            'action' => 'donate'
+        ]);
+        
         return $router;
         
     }, true);
@@ -92,5 +104,6 @@ try {
     echo $application->handle()->getContent();
 
 } catch(\Phalcon\Exception $e) {
-     echo 'PhalconException: ', $e->getMessage();
+    echo 'An unknown error occured, please try again later.';
+    //echo 'PhalconException: ', $e->getMessage();
 }

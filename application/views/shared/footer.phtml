@@ -1,26 +1,78 @@
+        <footer class="webApp font OpenSans regular">
+            <aside class="shadow">
+                <div>
+                    <aside>
+                        <p>
+                            Copyright &copy; 2013 xZero &middot;
+                            <a <?php if($this->view->currentPage != 'help/privacy') { ?>data-pajax="true" href="/help/privacy"<?php } else { ?>href="javascript: //" class="active"<?php } ?>>Privacy Policy</a> &middot;
+                            <a <?php if($this->view->currentPage != 'help/donate') { ?>data-pajax="true" href="/help/donate"<?php } else { ?>href="javascript: //" class="active"<?php } ?>>Donate</a> &middot;
+                            <a target="_blank" href="https://github.com/xzero/x0">GitHub Repository</a> &middot;
+                            <a target="_blank" href="https://github.com/xzero/x0/issues">Issues</a>
+                        </p>
+                    </aside>
+                    <?php if($this->view->currentPage == 'home') { ?>
+                    <span class="credits"><p>project by <a target="_blank" href="https://github.com/trapni">Christian Parpart</a> <span>&nbsp;</span> design by <a target="_blank" href="https://github.com/pwnsdx">Sabri Haddouche</a></p></span>
+                    <?php } else { ?>
+                    <span class="credits"><p class="font OpenSans extrabold"><a data-pajax="true" href="/home">Back to home</a></p></span>
+                    <?php } ?>
+                </div>
+                <?php if($this->view->currentPage == 'home') { ?>
+                <ul>
+                    <li class="a">
+                        <span>
+                            <a target="_blank" data-img="https://2.gravatar.com/avatar/3e026293f2500750b8f1e96640af6020?d=https%3A%2F%2Fidenticons.github.com%2Ffbfa1be647c4c60ece5dae662d61f322.png" title="Christian Parpart (trapni)" href="https://github.com/trapni"></a>
+                        </span>
+                    </li>
+                    <li class="a">
+                        <span>
+                            <a target="_blank" data-img="https://0.gravatar.com/avatar/4a11809a2134445a8e49cabf87145c9c?d=https%3A%2F%2Fidenticons.github.com%2F9c29e3ddd937b954f6088597082baf7c.png" title="Sabri Haddouche (pwnsdx)" href="https://github.com/pwnsdx"></a>
+                        </span>
+                    </li>
+                </ul>
+                <?php } ?>
+            </aside>
+        </footer>
+
         </section>
 
-        <footer class="webApp">
-            <div>
-                <aside>
-                    <p class="font OpenSans regular">Copyright &copy; 2013 xZero &middot; <a href="/help/privacy">Privacy Policy</a> &middot; <a href="/help/donate">Donate</a> &middot; <a target="_blank" href="https://github.com/xzero/x0">GitHub Repository</a> &middot; <a target="_blank" href="https://github.com/xzero/x0/issues">Issues</a></p>
-                </aside>
+        <script type="text/javascript">
+        // Run spinner
+        spriteHandler.startSpinner();
+
+        // Run page
+        ModernizrExtends.start([
+            // CSS
+            '//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Ubuntu:400,500,700',
+            '/css/animate.min.css',
                 
-                <span class="credits"><p class="font OpenSans regular">project by <a target="_blank" href="https://github.com/trapni">Christian Parpart</a> <span>&nbsp;</span> design by <a target="_blank" href="https://github.com/pwnsdx">Sabri Haddouche</a></p></span>
-            </div>
-            <ul>
-                <li class="a">
-                    <span>
-                        <a target="_blank" data-img="https://2.gravatar.com/avatar/3e026293f2500750b8f1e96640af6020?d=https%3A%2F%2Fidenticons.github.com%2Ffbfa1be647c4c60ece5dae662d61f322.png" title="Christian Parpart (trapni)" href="https://github.com/trapni"></a>
-                    </span>
-                </li>
-                <li class="a">
-                    <span>
-                        <a target="_blank" data-img="https://0.gravatar.com/avatar/4a11809a2134445a8e49cabf87145c9c?d=https%3A%2F%2Fidenticons.github.com%2F9c29e3ddd937b954f6088597082baf7c.png" title="Sabri Haddouche (pwnsdx)" href="https://github.com/pwnsdx"></a>
-                    </span>
-                </li>
-            </ul>
-        </footer>
-                
+            // JS
+            '/js/jquery-1.10.2.min.js',
+            '/js/xzero.dependencies.min.js',
+            '/js/xzero.main.js',
+            '/js/xzero.pages.js'
+          ],
+        
+          function() {
+            
+            // When document is ready
+            jQuery(document).ready(function() {
+                Core.pageHandler.start();
+            });
+          }
+        );
+            
+        // Call Gauges Analytics
+        var _gauges = _gauges || [];
+        (function() {
+            var t   = document.createElement('script');
+            t.type  = 'text/javascript';
+            t.async = true;
+            t.id    = 'gauges-tracker';
+            t.setAttribute('data-site-id', '521bc483f5a1f542380000aa');
+            t.src = '//secure.gaug.es/track.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(t, s);
+        })();
+        </script>
     </body>
 </html>
