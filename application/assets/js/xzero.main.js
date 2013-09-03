@@ -23,6 +23,7 @@ var Core = {
     twitterText: x0Map.twitterText,
     
     deepMemory: {
+        'whiteThemeClass': 'whiteTheme',
         'header.slds': { 'animatingTo': 0 },
         'header.slds ul.slides li div#homepageLogo span': { 'isAvailable': true },
         'nav.download div aside span.d a': { 'jqueryObject': false },
@@ -319,14 +320,18 @@ var Core = {
             // Prevent some css bugs while rendering
             jQuery('body').addClass('canvasRendering');
             
-            // Reset page
+            // Reset page if alert
             if(type == 'alert' && typeof Pages[Core.pageHandler.currentPage] !== 'undefined') {
                 Pages[Core.pageHandler.currentPage].after();
             }
             
+            //
+            jQuery('section#MLOverlay aside').removeClass().addClass('shadow'+(jQuery('body').hasClass(Core.deepMemory['whiteThemeClass']) ? ' white' : ''));
+            
+            // Generate screenshot
             window.html2canvas([document.body], {
                 
-                background: '#141414',
+                background: (jQuery('body').hasClass(Core.deepMemory['whiteThemeClass']) ? '#fcfcfc' : '#141414'),
                 allowTaint: true,
                 taintTest: false,
                 letterRendering: false,

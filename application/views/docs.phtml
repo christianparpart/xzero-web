@@ -1,14 +1,50 @@
 <?php $this->partial('shared/header'); ?>
 
-        <?php $this->partial('shared/warningBrowser'); ?>
+        <section class="documentation">
+            
+            <?php $this->partial('shared/warningBrowser'); ?>
+
         
-        <?php $this->partial('shared/menus'); ?>
-        
-        <section class="documentation font OpenSans regular">
             <aside class="shadow">
-                <div>
-                    <strong>Documentation is under construction, please try again later !</strong>
-                </div>
+                <div style="height:250px;"></div>
+                
+                <?php $this->partial('shared/menus'); ?>
+        
+                <section>
+
+                    <div id="disqus_thread"></div>
+                    <br class="clear" />
+                </section>
+        
+                <!--<section class="documentation font OpenSans regular">
+                    <aside class="shadow">
+                        <section>
+                            <nav>
+                                <ul>
+                                    <li><a href="/docs" class="active">Welcome</a></li>
+                                    <li><a data-pajax="true" href="/docs/install">Installation</a></li>
+                                    <li><a data-pajax="true" href="getting-started.html">Getting Started</a></li>
+                                    <li><a data-pajax="true" href="controllers.html">Controllers</a></li>
+                                    <li><a data-pajax="true" href="views.html">Views</a></li>
+                                    <li><a data-pajax="true" href="models.html">Models</a></li>
+                                    <li><a data-pajax="true" href="core-libraries.html">Core Libraries</a></li>
+                                    <li><a data-pajax="true" href="plugins.html">Plugins</a></li>
+                                    <li><a data-pajax="true" href="console-and-shells.html">Console and Shells</a></li>
+                                    <li><a data-pajax="true" href="development.html">Development</a></li>
+                                    <li><a data-pajax="true" href="deployment.html">Deployment</a></li>
+                                    <li><a data-pajax="true" href="tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+                                    <li><a data-pajax="true" href="contributing.html">Contributing</a></li>
+                                    <li><a data-pajax="true" href="appendices.html">Appendices</a></li>
+                                </ul>
+                            </nav>
+                            
+                            <aside>
+                            test
+                            </aside>
+                        </section>
+                        <br class="clear" />
+                    </aside>
+                </section>-->
             </aside>
         </section>
 

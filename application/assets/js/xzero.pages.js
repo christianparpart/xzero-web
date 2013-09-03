@@ -31,11 +31,22 @@ Pages['/help/privacy'] = {
 Pages['/docs'] = {
     
     after: function() {
-        //alert('page destroyed');
+        jQuery('body').removeClass('whiteTheme');
     },
     
     before: function() {
-        //alert('page called');
+        // White theme
+        jQuery('body').addClass('whiteTheme');
+        
+        // Disqus integration
+        //  <div id="disqus_thread"></div>
+        var disqus_shortname = 'xzero'; // required: replace example with your forum shortname
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+
     }
 };
 
@@ -291,9 +302,11 @@ Pages[Core.pageHandler.mainPage] = {
         }, 500);
         
         // Add effect for welcome section
-        jQuery('section.welcome div aside:first-child').addClass('active animated bounceInLeft');
         setTimeout(function() {
-            jQuery('section.welcome div aside:last-child').addClass('active animated fadeIn');
-        }, 800);
+            jQuery('section.welcome div aside:first-child').addClass('active animated bounceInLeft');
+            setTimeout(function() {
+                jQuery('section.welcome div aside:last-child').addClass('active animated fadeIn');
+            }, 800);
+        }, 400);
     }
 };
